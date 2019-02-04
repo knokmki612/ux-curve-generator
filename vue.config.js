@@ -1,3 +1,12 @@
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+
+  pluginOptions: {
+    i18n: {
+      locale: 'ja',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: false
+    }
+  }
 }
