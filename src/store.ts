@@ -10,8 +10,6 @@ export default new Vuex.Store({
   },
   mutations: {
     createUxEvent(state) {
-      console.log('a')
-      console.log(state.uxEvents)
       state.uxEvents.push({} as UxEvent)
     },
     updateUxEvent(state, payload) {
