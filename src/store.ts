@@ -14,7 +14,7 @@ export default new Vuex.Store({
       console.log(state.uxEvents)
       state.uxEvents.push({} as UxEvent)
     },
-    updateUxEvent(state, payload: Object) {
+    updateUxEvent(state, payload) {
       const { key, value } = payload
       const uxEvent: UxEvent = Object.assign(
         state.uxEvents[key],
@@ -22,7 +22,7 @@ export default new Vuex.Store({
       )
       state.uxEvents.splice(key, 1 , uxEvent)
     },
-    deleteUxEvent(state, payload: Object) {
+    deleteUxEvent(state, payload) {
       const { key } = payload
       state.uxEvents.splice(key, 1)
     }
