@@ -6,6 +6,12 @@
         :key="key"
       >
         <input
+          :value="uxEvent.date"
+          type="date"
+          @input="updateUxEvent({
+            key, value: { date: $event.target.value } })"
+        >
+        <input
           :value="uxEvent.score"
           type="number"
           min="-100"
@@ -13,12 +19,6 @@
           @input="updateUxEvent({
             key, value: { score: $event.target.value }
           })"
-        >
-        <input
-          :value="uxEvent.date"
-          type="date"
-          @input="updateUxEvent({
-            key, value: { date: $event.target.value } })"
         >
         <textarea
           :value="uxEvent.description"

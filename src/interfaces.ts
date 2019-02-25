@@ -1,5 +1,5 @@
 export interface UxEvent {
-  score: Number
   date: Date
+  score: Number
   description: String
 }

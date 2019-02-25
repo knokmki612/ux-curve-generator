@@ -4,8 +4,8 @@
       v-for="(uxEvent, key) in uxEvents"
       :key="key"
     >
-      <span>{{ uxEvent.score }}</span>
       <span>{{ uxEvent.date }}</span>
+      <span>{{ uxEvent.score }}</span>
       <span>{{ uxEvent.description }}</span>
     </li>
   </ul>
