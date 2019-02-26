@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <UxCurve />
-    <UxTimeline />
+    <div class="max-w-xl mx-auto my-4 px-4">
+      <h1 class="text-center text-4xl">
+        {{ $t("title") }}
+      </h1>
+      <UxCurve class="mt-4" />
+      <UxTimeline class="mt-4" />
+    </div>
   </div>
 </template>
 
