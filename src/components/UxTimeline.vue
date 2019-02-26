@@ -55,6 +55,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
+import { UxEvent } from '@/interfaces'
 
 @Component({
   computed: {
@@ -65,6 +66,8 @@ import { mapState, mapMutations } from 'vuex'
   }
 })
 export default class UxTimeline extends Vue {
+  uxEvents!: Array<UxEvent>
+
   get isHidden () {
     return this.uxEvents.length === 0
   }
