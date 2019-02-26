@@ -8,7 +8,7 @@
         <input
           :value="uxEvent.date"
           type="date"
-          @input="updateUxEvent({
+          @blur="updateUxEvent({
             key, value: { date: $event.target.value } })"
         >
         <input
@@ -22,7 +22,7 @@
         >
         <textarea
           :value="uxEvent.description"
-          @input="updateUxEvent({
+          @blur="updateUxEvent({
             key, value: { description: $event.target.value }
           })"
         />
