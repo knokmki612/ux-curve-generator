@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
     createUxEvent(state) {
-      state.uxEvents.push({} as UxEvent)
+      state.uxEvents.push({ score: 0 } as UxEvent)
     },
     updateUxEvent(state, payload) {
       const { key, value } = payload
