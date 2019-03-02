@@ -9,6 +9,7 @@
         :key="key"
         class="ux-event"
       >
+        <span>{{ key + 1 }}.</span>
         <input
           :value="uxEvent.date"
           type="date"
