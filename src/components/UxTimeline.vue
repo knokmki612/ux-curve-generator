@@ -68,7 +68,7 @@ import { UxEvent } from '@/interfaces'
 export default class UxTimeline extends Vue {
   uxEvents!: Array<UxEvent>
 
-  get isHidden () {
+  get isHidden (): Boolean {
     return this.uxEvents.length === 0
   }
 }
