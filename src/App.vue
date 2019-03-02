@@ -4,8 +4,10 @@
       <h1 class="text-center text-4xl">
         {{ $t("title") }}
       </h1>
-      <UxCurve class="mt-4" />
-      <UxTimeline class="mt-4" />
+      <div>
+        <UxCurve class="sticky z-10 mt-4" />
+        <UxTimeline class="mt-8" />
+      </div>
     </div>
   </div>
 </template>
@@ -24,5 +26,7 @@ import UxTimeline from './components/UxTimeline.vue'
 export default class App extends Vue {}
 </script>
 
-<style lang="scss">
+<style scoped lang="sass">
+.ux-curve
+  top: 1rem
 </style>
