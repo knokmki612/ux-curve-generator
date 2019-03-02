@@ -3,3 +3,8 @@ export interface UxEvent {
   score: Number
   description: String
 }
+
+export interface DrawableUxEvent {
+  x: Number
+  y: Number
+}
