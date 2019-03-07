@@ -34,7 +34,7 @@ import { UxEvent, DrawableUxEvent } from '@/interfaces'
 export default class UxCurve extends Vue {
   uxEvents!: Array<UxEvent>
 
-  get isHidden (): Boolean {
+  get isHidden (): boolean {
     return this.uxEvents.length === 0
   }
 
@@ -48,8 +48,8 @@ export default class UxCurve extends Vue {
   }
 
   catmulRomBezierPath (
-    points: Array<DrawableUxEvent>, alpha: Number = 1 / 2
-  ): String {
+    points: Array<DrawableUxEvent>, alpha: number = 1 / 2
+  ): string {
     if (points.length === 0) return ''
     let path = `M ${points[0].x} ${points[0].y} `
 

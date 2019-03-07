@@ -1,10 +1,10 @@
 export interface UxEvent {
   date: Date
-  score: Number
-  description: String
+  score: number
+  description: string
 }
 
 export interface DrawableUxEvent {
-  x: Number
-  y: Number
+  x: number
+  y: number
 }
