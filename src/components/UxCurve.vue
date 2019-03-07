@@ -4,17 +4,19 @@
     :class="{'-hidden': isHidden}"
   >
     <svg viewBox="0 0 400 200">
-      <g
+      <path
+        :d="catmulRomBezierPath(drawableUxEvents)"
+        fill="transparent"
+        stroke="black"
+      />
+      <circle
         v-for="(drawableUxEvent, key) in drawableUxEvents"
         :key="key"
-      >
-        <circle
-          :cx="drawableUxEvent.x"
-          :cy="drawableUxEvent.y"
-          r="2"
-          fill="black"
-        />
-      </g>
+        :cx="drawableUxEvent.x"
+        :cy="drawableUxEvent.y"
+        r="2"
+        fill="black"
+      />
     </svg>
   </div>
 </template>
@@ -43,6 +45,30 @@ export default class UxCurve extends Vue {
         y: -uxEvent.score + 100
       }
     })
+  }
+
+  catmulRomBezierPath (
+    points: Array<DrawableUxEvent>, alpha: Number = 1 / 2
+  ): String {
+    if (points.length === 0) return ''
+    let path = `M ${points[0].x} ${points[0].y} `
+
+    for (let i = 0; i < points.length - 1; i += 1) {
+      const p0 = i > 0 ? points[i - 1] : points[0]
+      const p1 = points[i]
+      const p2 = points[i + 1]
+      const p3 = i < points.length - 2 ? points[i + 2] : p2
+      const bp0 = {
+        x: p1.x + (p2.x - p0.x) / 3 * alpha,
+        y: p1.y + (p2.y - p0.y) / 3 * alpha
+      }
+      const bp1 = {
+        x: p2.x - (p3.x - p1.x) / 3 * alpha,
+        y: p2.y - (p3.y - p1.y) / 3 * alpha
+      }
+      path += `C ${bp0.x} ${bp0.y}, ${bp1.x} ${bp1.y}, ${p2.x} ${p2.y} `
+    }
+    return path
   }
 }
 </script>
