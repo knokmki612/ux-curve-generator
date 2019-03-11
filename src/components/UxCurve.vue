@@ -3,7 +3,7 @@
     class="ux-curve"
     :class="{'-hidden': isHidden}"
   >
-    <svg viewBox="0 0 400 200">
+    <svg :viewBox="`-${offset} -${offset} ${viewBox.x + offset * 2} ${viewBox.y + offset * 2}`">
       <path
         :d="catmulRomBezierPath(drawableUxEvents)"
         fill="transparent"
@@ -33,6 +33,11 @@ import { UxEvent, DrawableUxEvent } from '@/interfaces'
 })
 export default class UxCurve extends Vue {
   uxEvents!: Array<UxEvent>
+  offset!: number = 2
+  viewBox!: object = {
+    x: 400,
+    y: 200
+  }
 
   get isHidden (): boolean {
     return this.uxEvents.length === 0
