@@ -33,8 +33,8 @@ import { UxEvent, DrawableUxEvent } from '@/interfaces'
 })
 export default class UxCurve extends Vue {
   uxEvents!: Array<UxEvent>
-  offset!: number = 2
-  viewBox!: object = {
+  offset: number = 2
+  viewBox: object = {
     x: 400,
     y: 200
   }
