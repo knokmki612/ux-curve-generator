@@ -10,12 +10,11 @@ export default new Vuex.Store({
     uxEvents: [] as Array<UxEvent>
   },
   mutations: {
-    createUxEvent(state) {
-      state.uxEvents.push({
-        score: 0,
-        date: new Date(),
-        description: ''
-      } as UxEvent)
+    addUxEvent(state, payload: UxEvent) {
+      state.uxEvents.push(payload)
+      state.uxEvents.sort((a, b) => {
+        return (isAfter(a.date, b.date)) ? 1 : -1
+      })
     },
     updateUxEvent(state, payload) {
       const { key, value } = payload

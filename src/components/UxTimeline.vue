@@ -1,55 +1,83 @@
 <template>
-  <div class="ux-timeline">
-    <ul
-      class="ux-events"
+  <div>
+    <div
+      class="ux-timeline"
       :class="{ '-hidden': isHidden }"
     >
-      <li
-        v-for="(uxEvent, key) in uxEvents"
-        :key="key"
+      <ul
+        class="ux-events"
+      >
+        <li
+          v-for="(uxEvent, key) in uxEvents"
+          :key="key"
+          class="ux-event"
+        >
+          <span>{{ key + 1 }}.</span>
+          <input
+            :value="formatDate(uxEvent.date)"
+            type="date"
+            class="form -date"
+            @input="updateUxEvent({
+              key, value: { date: new Date($event.target.value) } })"
+          >
+          <input
+            :value="uxEvent.score"
+            type="number"
+            min="-100"
+            max="100"
+            class="form -score"
+            @input="updateUxEvent({
+              key, value: { score: $event.target.value }
+            })"
+          >
+          <textarea
+            :value="uxEvent.description"
+            class="form -description"
+            @blur="updateUxEvent({
+              key, value: { description: $event.target.value }
+            })"
+          />
+          <button
+            type="button"
+            class="button -red"
+            @click="deleteUxEvent({ key })"
+          >
+            {{ $t("delete") }}
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="ux-timeline mt-8">
+      <div
         class="ux-event"
       >
-        <span>{{ key + 1 }}.</span>
         <input
-          :value="formatDate(uxEvent.date)"
+          :value="formatDate(newUxEvent.date)"
           type="date"
           class="form -date"
-          @blur="updateUxEvent({
-            key, value: { date: new Date($event.target.value) } })"
+          @input="newUxEvent.date = new Date($event.target.value)"
         >
         <input
-          :value="uxEvent.score"
+          v-model="newUxEvent.score"
           type="number"
           min="-100"
           max="100"
           class="form -score"
-          @input="updateUxEvent({
-            key, value: { score: $event.target.value }
-          })"
         >
         <textarea
-          :value="uxEvent.description"
+          v-model="newUxEvent.description"
           class="form -description"
-          @blur="updateUxEvent({
-            key, value: { description: $event.target.value }
-          })"
         />
         <button
           type="button"
-          class="button -red"
-          @click="deleteUxEvent({ key })"
+          class="button -blue"
+          :disabled="!isNewUxEventReady"
+          @click="addUxEvent(newUxEvent); newUxEvent = createUxEvent()"
         >
-          {{ $t("delete") }}
+          {{ $t("add") }}
         </button>
-      </li>
-    </ul>
-    <button
-      type="button"
-      class="button -blue"
-      @click="createUxEvent"
-    >
-      {{ $t("add") }}
-    </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,25 +85,34 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { UxEvent } from '@/interfaces'
-import { format } from 'date-fns'
+import { format, isValid } from 'date-fns'
 
 @Component({
   computed: {
     ...mapState(['uxEvents'])
   },
   methods: {
-    ...mapMutations(['createUxEvent', 'updateUxEvent', 'deleteUxEvent'])
+    ...mapMutations(['addUxEvent', 'updateUxEvent', 'deleteUxEvent'])
   }
 })
 export default class UxTimeline extends Vue {
   uxEvents!: Array<UxEvent>
+  newUxEvent: UxEvent = this.createUxEvent()
 
   get isHidden (): boolean {
     return this.uxEvents.length === 0
   }
 
+  get isNewUxEventReady (): boolean {
+    return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
+  }
+
   formatDate (date: Date): string {
     return format(date, 'YYYY-MM-DD')
+  }
+
+  createUxEvent (): UxEvent {
+    return { date: {} as Date, score: 0, description: '' }
   }
 }
 </script>
@@ -84,21 +121,16 @@ export default class UxTimeline extends Vue {
 .ux-timeline
   @apply rounded shadow-lg px-6 py-4 bg-grey-light
 
-  > .ux-events:not(.-hidden) + .button
-    @apply mt-6
+  &.-hidden
+    @apply hidden
 
 .ux-events
   @apply list-reset
 
-  &.-hidden
-    @apply hidden
-
   > .ux-event ~ .ux-event
-    @apply mt-6
+    @apply border-t border-grey mt-6 pt-6
 
 .ux-event
-  @apply border-b border-grey pb-6
-
   > * ~ *
     @apply mt-2
 
