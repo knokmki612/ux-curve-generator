@@ -3,17 +3,25 @@
     class="ux-curve"
     :class="{'-hidden': isHidden}"
   >
-    <svg :viewBox="`-${offset} -${offset} ${viewBox.x + offset * 2} ${viewBox.y + offset * 2}`">
+    <svg :viewBox="`-${offset} -${offset} ${viewBox[0] + offset * 2} ${viewBox[1] + offset * 2}`">
+      <line
+        x1="0"
+        :y1="viewBox[1] / 2"
+        :x2="viewBox[0]"
+        :y2="viewBox[1] / 2"
+        stroke-width="1"
+        stroke="gray"
+      />
       <path
-        :d="catmulRomBezierPath(drawableUxEvents)"
+        :d="curve"
         fill="transparent"
         stroke="black"
       />
       <circle
         v-for="(drawableUxEvent, key) in drawableUxEvents"
         :key="key"
-        :cx="drawableUxEvent.x"
-        :cy="drawableUxEvent.y"
+        :cx="drawableUxEvent[0]"
+        :cy="drawableUxEvent[1]"
         r="2"
         fill="black"
       />
@@ -24,7 +32,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
-import { UxEvent, DrawableUxEvent } from '@/interfaces'
+import { UxEvent } from '@/interfaces'
+import { line, curveMonotoneX } from 'd3-shape'
+import { scaleLinear, scaleTime } from 'd3-scale'
 
 @Component({
   computed: {
@@ -34,46 +44,36 @@ import { UxEvent, DrawableUxEvent } from '@/interfaces'
 export default class UxCurve extends Vue {
   uxEvents!: Array<UxEvent>
   offset: number = 2
-  viewBox: object = {
-    x: 400,
-    y: 200
-  }
+  viewBox: [number, number] = [400, 200]
 
   get isHidden (): boolean {
     return this.uxEvents.length === 0
   }
 
-  get drawableUxEvents (): Array<DrawableUxEvent> {
-    return this.uxEvents.map((uxEvent, index) => {
-      return {
-        x: index * 10,
-        y: -uxEvent.score + 100
-      }
+  get drawableUxEvents (): [number, number][] {
+    if (this.uxEvents.length === 0) return []
+
+    const x = scaleTime()
+      .domain([
+        this.uxEvents[0].date,
+        this.uxEvents[this.uxEvents.length - 1].date
+      ])
+      .range([0, this.viewBox[0]])
+    const y = scaleLinear()
+      .domain([-100, 100])
+      .range([this.viewBox[1], 0])
+
+    return this.uxEvents.map(value => {
+      return [x(value.date), y(value.score)] as [number, number]
     })
   }
 
-  catmulRomBezierPath (
-    points: Array<DrawableUxEvent>, alpha: number = 1 / 2
-  ): string {
-    if (points.length === 0) return ''
-    let path = `M ${points[0].x} ${points[0].y} `
-
-    for (let i = 0; i < points.length - 1; i += 1) {
-      const p0 = i > 0 ? points[i - 1] : points[0]
-      const p1 = points[i]
-      const p2 = points[i + 1]
-      const p3 = i < points.length - 2 ? points[i + 2] : p2
-      const bp0 = {
-        x: p1.x + (p2.x - p0.x) / 3 * alpha,
-        y: p1.y + (p2.y - p0.y) / 3 * alpha
-      }
-      const bp1 = {
-        x: p2.x - (p3.x - p1.x) / 3 * alpha,
-        y: p2.y - (p3.y - p1.y) / 3 * alpha
-      }
-      path += `C ${bp0.x} ${bp0.y}, ${bp1.x} ${bp1.y}, ${p2.x} ${p2.y} `
-    }
-    return path
+  get curve (): string | null {
+    const curve = line()
+      .x(d => d[0])
+      .y(d => d[1])
+      .curve(curveMonotoneX)
+    return curve(this.drawableUxEvents)
   }
 }
 </script>

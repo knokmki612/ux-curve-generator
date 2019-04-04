@@ -11,11 +11,11 @@
       >
         <span>{{ key + 1 }}.</span>
         <input
-          :value="uxEvent.date"
+          :value="formatDate(uxEvent.date)"
           type="date"
           class="form -date"
           @blur="updateUxEvent({
-            key, value: { date: $event.target.value } })"
+            key, value: { date: new Date($event.target.value) } })"
         >
         <input
           :value="uxEvent.score"
@@ -57,6 +57,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { UxEvent } from '@/interfaces'
+import { format } from 'date-fns'
 
 @Component({
   computed: {
@@ -71,6 +72,10 @@ export default class UxTimeline extends Vue {
 
   get isHidden (): boolean {
     return this.uxEvents.length === 0
+  }
+
+  formatDate (date: Date): string {
+    return format(date, 'YYYY-MM-DD')
   }
 }
 </script>
