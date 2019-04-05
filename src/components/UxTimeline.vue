@@ -1,32 +1,46 @@
 <template>
-  <div>
-    <div class="ux-timeline">
-      <div
-        class="ux-event"
-      >
-        <span>{{ $t("expectedUx") }}</span>
-        <input
-          :value="expectedUx.score"
-          type="number"
-          min="-100"
-          max="100"
-          class="form -score"
-          @input="updateExpectedUx({ score: $event.target.value })"
-        >
-        <textarea
-          :value="expectedUx.description"
-          class="form -description"
-          @blue="updateExpectedUx({ description: $event.target.value })"
-        />
-      </div>
+  <div class="ux-timeline">
+    <div class="timeline">
+      <ul class="ux-events">
+        <li class="ux-event">
+          <span>{{ $t("expectedUx") }}</span>
+          <input
+            :value="expectedUx.score"
+            type="number"
+            min="-100"
+            max="100"
+            class="form -score"
+            @input="updateExpectedUx({ score: $event.target.value })"
+          >
+          <textarea
+            :value="expectedUx.description"
+            class="form -description"
+            @blue="updateExpectedUx({ description: $event.target.value })"
+          />
+        </li>
+        <li class="ux-event">
+          <span>{{ $t("actualUx") }}</span>
+          <input
+            :value="actualUx.score"
+            type="number"
+            min="-100"
+            max="100"
+            class="form -score"
+            @input="updateActualUx({ score: $event.target.value })"
+          >
+          <textarea
+            :value="actualUx.description"
+            class="form -description"
+            @blur="updateActualUx({ description: $event.target.value })"
+          />
+        </li>
+      </ul>
     </div>
     <div
-      class="ux-timeline"
+      class="timeline"
       :class="{ '-hidden': isHidden }"
     >
-      <ul
-        class="ux-events"
-      >
+      <ul class="ux-events">
         <li
           v-for="(uxEvent, key) in uxEvents"
           :key="key"
@@ -67,27 +81,7 @@
         </li>
       </ul>
     </div>
-    <div class="ux-timeline">
-      <div
-        class="ux-event"
-      >
-        <span>{{ $t("actualUx") }}</span>
-        <input
-          :value="actualUx.score"
-          type="number"
-          min="-100"
-          max="100"
-          class="form -score"
-          @input="updateActualUx({ score: $event.target.value })"
-        >
-        <textarea
-          :value="actualUx.description"
-          class="form -description"
-          @blur="updateActualUx({ description: $event.target.value })"
-        />
-      </div>
-    </div>
-    <div class="ux-timeline">
+    <div class="timeline">
       <div
         class="ux-event"
       >
@@ -159,13 +153,14 @@ export default class UxTimeline extends Vue {
 
 <style scoped lang="sass">
 .ux-timeline
-  @apply rounded shadow-lg px-6 py-4 bg-grey-light
+  > .timeline
+    @apply rounded shadow-lg px-6 py-4 bg-grey-light
 
-  & ~ &
-    @apply mt-8
+    &.-hidden
+      @apply hidden
 
-  &.-hidden
-    @apply hidden
+  > .timeline ~ .timeline
+    @apply mt-4
 
 .ux-events
   @apply list-reset
