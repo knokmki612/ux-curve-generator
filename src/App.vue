@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="max-w-4xl mx-auto my-4 px-4">
+    <div class="max-w-lg lg:max-w-4xl mx-auto my-4 px-4">
       <h1 class="text-center text-4xl">
         {{ $t("title") }}
       </h1>
