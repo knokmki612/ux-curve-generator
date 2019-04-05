@@ -1,5 +1,7 @@
 {
 	"title": "UXカーブジェネレーター",
 	"add": "追加",
-	"delete": "削除"
+	"delete": "削除",
+	"expectedUx": "期待",
+	"actualUx": "現在"
 }

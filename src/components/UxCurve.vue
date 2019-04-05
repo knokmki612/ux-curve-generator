@@ -1,14 +1,27 @@
 <template>
-  <div
-    class="ux-curve"
-    :class="{'-hidden': isHidden}"
-  >
-    <svg :viewBox="`-${offset} -${offset} ${viewBox[0] + offset * 2} ${viewBox[1] + offset * 2}`">
+  <div class="ux-curve">
+    <svg :viewBox="`-${offset.viewBox} -${offset.viewBox} ${viewBox[0] + offset.viewBox * 2} ${viewBox[1] + offset.viewBox * 2}`">
       <line
         x1="0"
         :y1="viewBox[1] / 2"
         :x2="viewBox[0]"
         :y2="viewBox[1] / 2"
+        stroke-width="1"
+        stroke="gray"
+      />
+      <line
+        :x1="offset.scale"
+        y1="0"
+        :x2="offset.scale"
+        :y2="viewBox[1]"
+        stroke-width="1"
+        stroke="gray"
+      />
+      <line
+        :x1="viewBox[0] - offset.scale"
+        y1="0"
+        :x2="viewBox[0] - offset.scale"
+        :y2="viewBox[1]"
         stroke-width="1"
         stroke="gray"
       />
@@ -32,40 +45,46 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
-import { UxEvent } from '@/interfaces'
+import { FixedUxEvent, UxEvent } from '@/interfaces'
 import { line, curveMonotoneX } from 'd3-shape'
 import { scaleLinear, scaleTime } from 'd3-scale'
 
 @Component({
   computed: {
-    ...mapState(['uxEvents'])
+    ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   }
 })
 export default class UxCurve extends Vue {
+  expectedUx!: FixedUxEvent
+  actualUx!: FixedUxEvent
   uxEvents!: Array<UxEvent>
-  offset: number = 2
+  offset: { viewBox: number, scale: number } = { viewBox: 2, scale: 20 }
   viewBox: [number, number] = [400, 200]
 
-  get isHidden (): boolean {
-    return this.uxEvents.length === 0
-  }
-
   get drawableUxEvents (): [number, number][] {
-    if (this.uxEvents.length === 0) return []
+    let drawableUxEvents = [] as [number, number][]
 
-    const x = scaleTime()
-      .domain([
-        this.uxEvents[0].date,
-        this.uxEvents[this.uxEvents.length - 1].date
-      ])
-      .range([0, this.viewBox[0]])
     const y = scaleLinear()
       .domain([-100, 100])
       .range([this.viewBox[1], 0])
 
-    return this.uxEvents.map(value => {
-      return [x(value.date), y(value.score)] as [number, number]
-    })
+    if (this.uxEvents.length > 0) {
+      const x = scaleTime()
+        .domain([
+          this.uxEvents[0].date,
+          this.uxEvents[this.uxEvents.length - 1].date
+        ])
+        .range([this.offset.scale, this.viewBox[0] - this.offset.scale])
+
+      drawableUxEvents = this.uxEvents.map(uxEvent => {
+        return [x(uxEvent.date), y(uxEvent.score)] as [number, number]
+      })
+    }
+
+    drawableUxEvents.splice(0, 0, [0, y(this.expectedUx.score)] as [number, number])
+    drawableUxEvents.push([this.viewBox[0], y(this.actualUx.score)] as [number, number])
+
+    return drawableUxEvents
   }
 
   get curve (): string | null {
@@ -81,7 +100,4 @@ export default class UxCurve extends Vue {
 <style scoped lang="sass">
 .ux-curve
   @apply rounded shadow-lg px-6 py-4 bg-white
-
-  &.-hidden
-    @apply hidden
 </style>

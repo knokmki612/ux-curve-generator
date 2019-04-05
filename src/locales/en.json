@@ -1,5 +1,7 @@
 {
 	"title": "UX Curve Generator",
 	"add": "Add",
-	"delete": "Delete"
+	"delete": "Delete",
+	"expectedUx": "Expected",
+	"actualUx": "Actual"
 }

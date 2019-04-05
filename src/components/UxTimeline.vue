@@ -1,5 +1,25 @@
 <template>
   <div>
+    <div class="ux-timeline">
+      <div
+        class="ux-event"
+      >
+        <span>{{ $t("expectedUx") }}</span>
+        <input
+          :value="expectedUx.score"
+          type="number"
+          min="-100"
+          max="100"
+          class="form -score"
+          @input="updateExpectedUx({ score: $event.target.value })"
+        >
+        <textarea
+          :value="expectedUx.description"
+          class="form -description"
+          @blue="updateExpectedUx({ description: $event.target.value })"
+        />
+      </div>
+    </div>
     <div
       class="ux-timeline"
       :class="{ '-hidden': isHidden }"
@@ -47,7 +67,27 @@
         </li>
       </ul>
     </div>
-    <div class="ux-timeline mt-8">
+    <div class="ux-timeline">
+      <div
+        class="ux-event"
+      >
+        <span>{{ $t("actualUx") }}</span>
+        <input
+          :value="actualUx.score"
+          type="number"
+          min="-100"
+          max="100"
+          class="form -score"
+          @input="updateActualUx({ score: $event.target.value })"
+        >
+        <textarea
+          :value="actualUx.description"
+          class="form -description"
+          @blur="updateActualUx({ description: $event.target.value })"
+        />
+      </div>
+    </div>
+    <div class="ux-timeline">
       <div
         class="ux-event"
       >
@@ -84,15 +124,15 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
-import { UxEvent } from '@/interfaces'
+import { FixedUxEvent, UxEvent } from '@/interfaces'
 import { format, isValid } from 'date-fns'
 
 @Component({
   computed: {
-    ...mapState(['uxEvents'])
+    ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   },
   methods: {
-    ...mapMutations(['addUxEvent', 'updateUxEvent', 'deleteUxEvent'])
+    ...mapMutations(['updateExpectedUx', 'updateActualUx', 'addUxEvent', 'updateUxEvent', 'deleteUxEvent'])
   }
 })
 export default class UxTimeline extends Vue {
@@ -120,6 +160,9 @@ export default class UxTimeline extends Vue {
 <style scoped lang="sass">
 .ux-timeline
   @apply rounded shadow-lg px-6 py-4 bg-grey-light
+
+  & ~ &
+    @apply mt-8
 
   &.-hidden
     @apply hidden

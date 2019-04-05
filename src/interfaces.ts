@@ -1,5 +1,8 @@
-export interface UxEvent {
-  date: Date
+export interface FixedUxEvent {
   score: number
   description: string
+}
+
+export interface UxEvent extends FixedUxEvent {
+  date: Date
 }
