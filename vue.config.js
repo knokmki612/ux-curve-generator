@@ -1,6 +1,12 @@
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 
+class TailwindExtractor {
+  static extract (content) {
+    return content.match(/[A-Za-z0-9-_:/]/g) || []
+  }
+}
+
 module.exports = {
   lintOnSave: false,
 
@@ -11,7 +17,13 @@ module.exports = {
           new PurgecssPlugin({
             paths: glob.sync([
               './src/**/*.vue'
-            ])
+            ]),
+            extractors: [
+              {
+                extractor: TailwindExtractor,
+                extensions: ['html', 'js', 'php', 'vue']
+              }
+            ]
           })
         ]
       }
