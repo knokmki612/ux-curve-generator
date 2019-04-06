@@ -30,3 +30,13 @@ export default class App extends Vue {}
 .ux-curve
   top: 1rem
 </style>
+
+<style scoped lang="scss">
+@media not all and (min-width: config('screens.lg')) {
+  @media (orientation: landscape) {
+    .ux-curve {
+      @apply relative pin-none z-auto;
+    }
+  }
+}
+</style>
