@@ -16,6 +16,7 @@ module.exports = {
         plugins: [
           new PurgecssPlugin({
             paths: glob.sync([
+              './public/*.html',
               './src/**/*.vue'
             ]),
             extractors: [
