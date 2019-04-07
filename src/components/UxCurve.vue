@@ -99,5 +99,5 @@ export default class UxCurve extends Vue {
 
 <style scoped lang="sass">
 .ux-curve
-  @apply rounded shadow-lg px-6 py-4 bg-white
+  @apply rounded shadow-md px-6 py-4 bg-white
 </style>

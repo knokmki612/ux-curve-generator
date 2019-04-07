@@ -154,7 +154,7 @@ export default class UxTimeline extends Vue {
 <style scoped lang="sass">
 .ux-timeline
   > .timeline
-    @apply rounded shadow-lg px-6 py-4 bg-grey-light
+    @apply rounded shadow-md px-6 py-4 bg-grey-light
 
     &.-hidden
       @apply hidden
