@@ -15,7 +15,7 @@
           <textarea
             :value="expectedUx.description"
             class="form -description"
-            @blue="updateExpectedUx({ description: $event.target.value })"
+            @input="updateExpectedUx({ description: $event.target.value })"
           />
         </li>
         <li class="ux-event">
@@ -31,7 +31,7 @@
           <textarea
             :value="actualUx.description"
             class="form -description"
-            @blur="updateActualUx({ description: $event.target.value })"
+            @input="updateActualUx({ description: $event.target.value })"
           />
         </li>
       </ul>
@@ -67,7 +67,7 @@
           <textarea
             :value="uxEvent.description"
             class="form -description"
-            @blur="updateUxEvent({
+            @input="updateUxEvent({
               key, value: { description: $event.target.value }
             })"
           />
