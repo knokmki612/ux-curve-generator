@@ -1,7 +1,8 @@
 {
-	"title": "UX Curve Generator",
-	"add": "Add",
-	"delete": "Delete",
-	"expectedUx": "Expected",
-	"actualUx": "Actual"
+  "title": "UX Curve Generator",
+  "add": "Add",
+  "delete": "Delete",
+  "expectedUx": "Expected",
+  "actualUx": "Actual",
+  "copyToClipboard": "Copy to clipboard"
 }
