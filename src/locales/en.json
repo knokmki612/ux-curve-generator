@@ -4,5 +4,6 @@
   "delete": "Delete",
   "expectedUx": "Expected",
   "actualUx": "Actual",
+  "embedCode": "Embed code",
   "copyToClipboard": "Copy to clipboard"
 }

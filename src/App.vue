@@ -12,11 +12,11 @@
             class="mt-4"
           />
         </div>
+        <UxTimeline class="mt-4 lg:max-w-xs" />
         <EmbedCode
           v-if="!isScreenLarge"
           class="mt-4"
         />
-        <UxTimeline class="mt-4 lg:max-w-xs" />
       </div>
     </div>
   </div>

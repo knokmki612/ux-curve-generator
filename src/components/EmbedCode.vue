@@ -1,5 +1,6 @@
 <template>
   <div class="embed-code">
+    <span>{{ $t("embedCode") }}</span>
     <textarea
       class="code"
       readonly
@@ -50,7 +51,7 @@ export default class EmbedCode extends Vue {
 
 <style scoped lang="sass">
 .embed-code
-  @apply rounded shadow-md p-6 pb-4 bg-grey-light
+  @apply rounded shadow-md px-6 py-4 bg-grey-light
 
   > * ~ *
     @apply mt-2
