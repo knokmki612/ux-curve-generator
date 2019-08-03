@@ -1,7 +1,9 @@
 {
   "title": "UXカーブジェネレーター",
   "add": "追加",
+  "create": "作成",
   "delete": "削除",
+  "cancel": "キャンセル",
   "expectedUx": "期待",
   "actualUx": "現在",
   "embedCode": "埋め込みコード",

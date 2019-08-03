@@ -1,8 +1,9 @@
 <template>
   <div class="ux-timeline">
-    <div class="timeline">
-      <ul class="ux-events">
-        <li class="ux-event">
+    <div class="line" />
+    <div class="timelines">
+      <div class="timeline">
+        <div class="ux-event">
           <span>{{ $t("expectedUx") }}</span>
           <input
             :value="expectedUx.score"
@@ -17,8 +18,58 @@
             class="form -description"
             @input="updateExpectedUx({ description: $event.target.value })"
           />
-        </li>
-        <li class="ux-event">
+        </div>
+      </div>
+      <div
+        class="timeline"
+        :class="{ '-hidden': isHidden }"
+      >
+        <ul class="ux-events">
+          <li
+            v-for="(uxEvent, key) in uxEvents"
+            :key="key"
+            class="ux-event"
+          >
+            <span>{{ key + 1 }}.</span>
+            <input
+              :value="formatDate(uxEvent.date)"
+              type="date"
+              class="form -date"
+              @input="updateUxEvent({
+                key, value: { date: new Date($event.target.value) } })"
+            >
+            <input
+              :value="uxEvent.score"
+              type="number"
+              min="-100"
+              max="100"
+              class="form -score"
+              @input="updateUxEvent({
+                key, value: { score: $event.target.value }
+              })"
+            >
+            <textarea
+              :value="uxEvent.description"
+              class="form -description"
+              @input="updateUxEvent({
+                key, value: { description: $event.target.value }
+              })"
+            />
+            <button
+              type="button"
+              class="button -red"
+              @click="deleteUxEvent({ key })"
+            >
+              {{ $t("delete") }}
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="timeline">
+        <NewUxEvent />
+      </div>
+      <div class="timeline">
+        <div class="ux-event">
           <span>{{ $t("actualUx") }}</span>
           <input
             :value="actualUx.score"
@@ -33,83 +84,7 @@
             class="form -description"
             @input="updateActualUx({ description: $event.target.value })"
           />
-        </li>
-      </ul>
-    </div>
-    <div
-      class="timeline"
-      :class="{ '-hidden': isHidden }"
-    >
-      <ul class="ux-events">
-        <li
-          v-for="(uxEvent, key) in uxEvents"
-          :key="key"
-          class="ux-event"
-        >
-          <span>{{ key + 1 }}.</span>
-          <input
-            :value="formatDate(uxEvent.date)"
-            type="date"
-            class="form -date"
-            @input="updateUxEvent({
-              key, value: { date: new Date($event.target.value) } })"
-          >
-          <input
-            :value="uxEvent.score"
-            type="number"
-            min="-100"
-            max="100"
-            class="form -score"
-            @input="updateUxEvent({
-              key, value: { score: $event.target.value }
-            })"
-          >
-          <textarea
-            :value="uxEvent.description"
-            class="form -description"
-            @input="updateUxEvent({
-              key, value: { description: $event.target.value }
-            })"
-          />
-          <button
-            type="button"
-            class="button -red"
-            @click="deleteUxEvent({ key })"
-          >
-            {{ $t("delete") }}
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="timeline">
-      <div
-        class="ux-event"
-      >
-        <input
-          :value="formatDate(newUxEvent.date)"
-          type="date"
-          class="form -date"
-          @input="newUxEvent.date = new Date($event.target.value)"
-        >
-        <input
-          v-model="newUxEvent.score"
-          type="number"
-          min="-100"
-          max="100"
-          class="form -score"
-        >
-        <textarea
-          v-model="newUxEvent.description"
-          class="form -description"
-        />
-        <button
-          type="button"
-          class="button -blue"
-          :disabled="!isNewUxEventReady"
-          @click="addUxEvent(newUxEvent); newUxEvent = createUxEvent()"
-        >
-          {{ $t("add") }}
-        </button>
+        </div>
       </div>
     </div>
   </div>
@@ -119,48 +94,51 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/interfaces'
+import NewUxEvent from './NewUxEvent.vue'
 import { format, isValid } from 'date-fns'
 
 @Component({
+  components: {
+    NewUxEvent
+  },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   },
   methods: {
-    ...mapMutations(['updateExpectedUx', 'updateActualUx', 'addUxEvent', 'updateUxEvent', 'deleteUxEvent'])
+    ...mapMutations(['updateExpectedUx', 'updateActualUx', 'updateUxEvent', 'deleteUxEvent'])
   }
 })
 export default class UxTimeline extends Vue {
   uxEvents!: Array<UxEvent>
-  newUxEvent: UxEvent = this.createUxEvent()
 
   get isHidden (): boolean {
     return this.uxEvents.length === 0
   }
 
-  get isNewUxEventReady (): boolean {
-    return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
-  }
-
   formatDate (date: Date): string {
     return format(date, 'YYYY-MM-DD')
-  }
-
-  createUxEvent (): UxEvent {
-    return { date: {} as Date, score: 0, description: '' }
   }
 }
 </script>
 
 <style scoped lang="sass">
 .ux-timeline
-  > .timeline
-    @apply rounded shadow-md px-6 py-4 bg-grey-light
+  @apply flex
 
-    &.-hidden
-      @apply hidden
+  > .line
+    @apply w-2 rounded-tl rounded-bl shadow-md bg-blue
 
-  > .timeline ~ .timeline
-    @apply mt-4
+  > .timelines
+    @apply flex-grow
+
+    > .timeline
+      @apply rounded-tr rounded-br shadow-md px-6 py-4 bg-grey-light
+
+      &.-hidden
+        @apply hidden
+
+    > .timeline ~ .timeline
+      @apply mt-10
 
 .ux-events
   @apply list-reset
