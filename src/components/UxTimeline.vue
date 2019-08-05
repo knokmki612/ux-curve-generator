@@ -1,90 +1,82 @@
 <template>
   <div class="ux-timeline">
     <div class="line" />
-    <div class="timelines">
-      <div class="timeline">
-        <div class="ux-event">
-          <span>{{ $t("expectedUx") }}</span>
-          <input
-            :value="expectedUx.score"
-            type="number"
-            min="-100"
-            max="100"
-            class="form -score"
-            @input="updateExpectedUx({ score: $event.target.value })"
-          >
-          <textarea
-            :value="expectedUx.description"
-            class="form -description"
-            @input="updateExpectedUx({ description: $event.target.value })"
-          />
-        </div>
+    <div class="timeline">
+      <div class="ux-event">
+        <span>{{ $t("expectedUx") }}</span>
+        <input
+          :value="expectedUx.score"
+          type="number"
+          min="-100"
+          max="100"
+          class="form -score"
+          @input="updateExpectedUx({ score: $event.target.value })"
+        >
+        <textarea
+          :value="expectedUx.description"
+          class="form -description"
+          @input="updateExpectedUx({ description: $event.target.value })"
+        />
       </div>
-      <div
-        class="timeline"
+      <ul
+        class="ux-events"
         :class="{ '-hidden': isHidden }"
       >
-        <ul class="ux-events">
-          <li
-            v-for="(uxEvent, key) in uxEvents"
-            :key="key"
-            class="ux-event"
-          >
-            <span>{{ key + 1 }}.</span>
-            <input
-              :value="formatDate(uxEvent.date)"
-              type="date"
-              class="form -date"
-              @input="updateUxEvent({
-                key, value: { date: new Date($event.target.value) } })"
-            >
-            <input
-              :value="uxEvent.score"
-              type="number"
-              min="-100"
-              max="100"
-              class="form -score"
-              @input="updateUxEvent({
-                key, value: { score: $event.target.value }
-              })"
-            >
-            <textarea
-              :value="uxEvent.description"
-              class="form -description"
-              @input="updateUxEvent({
-                key, value: { description: $event.target.value }
-              })"
-            />
-            <button
-              type="button"
-              class="button -red"
-              @click="deleteUxEvent({ key })"
-            >
-              {{ $t("delete") }}
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="timeline">
-        <NewUxEvent />
-      </div>
-      <div class="timeline">
-        <div class="ux-event">
-          <span>{{ $t("actualUx") }}</span>
+        <li
+          v-for="(uxEvent, key) in uxEvents"
+          :key="key"
+          class="ux-event"
+        >
+          <span>{{ key + 1 }}.</span>
           <input
-            :value="actualUx.score"
+            :value="formatDate(uxEvent.date)"
+            type="date"
+            class="form -date"
+            @input="updateUxEvent({
+              key, value: { date: new Date($event.target.value) } })"
+          >
+          <input
+            :value="uxEvent.score"
             type="number"
             min="-100"
             max="100"
             class="form -score"
-            @input="updateActualUx({ score: $event.target.value })"
+            @input="updateUxEvent({
+              key, value: { score: $event.target.value }
+            })"
           >
           <textarea
-            :value="actualUx.description"
+            :value="uxEvent.description"
             class="form -description"
-            @input="updateActualUx({ description: $event.target.value })"
+            @input="updateUxEvent({
+              key, value: { description: $event.target.value }
+            })"
           />
-        </div>
+          <button
+            type="button"
+            class="button -red"
+            @click="deleteUxEvent({ key })"
+          >
+            {{ $t("delete") }}
+          </button>
+        </li>
+      </ul>
+      <NewUxEvent />
+      <div class="ux-event">
+        <span>{{ $t("actualUx") }}</span>
+        <input
+          :value="actualUx.score"
+          type="number"
+          min="-100"
+          max="100"
+          class="form -score"
+          @input="updateActualUx({ score: $event.target.value })"
+        >
+        <textarea
+          :value="actualUx.description"
+          class="form -description"
+          @input="updateActualUx({ description: $event.target.value })"
+        />
       </div>
     </div>
   </div>
@@ -128,25 +120,24 @@ export default class UxTimeline extends Vue {
   > .line
     @apply w-2 rounded-tl rounded-bl shadow-md bg-blue
 
-  > .timelines
+  > .timeline
     @apply flex-grow
 
-    > .timeline
-      @apply rounded-tr rounded-br shadow-md px-6 py-4 bg-grey-light
-
-      &.-hidden
-        @apply hidden
-
-    > .timeline ~ .timeline
+    > * ~ *
       @apply mt-10
 
 .ux-events
   @apply list-reset
 
+  &.-hidden
+    @apply hidden
+
   > .ux-event ~ .ux-event
-    @apply border-t border-grey mt-6 pt-6
+    @apply mt-10
 
 .ux-event
+  @apply rounded-tr rounded-br shadow-md px-6 py-4 bg-grey-light
+
   > * ~ *
     @apply mt-2
 
