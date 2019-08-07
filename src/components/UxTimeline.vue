@@ -18,50 +18,62 @@
           @input="updateExpectedUx({ description: $event.target.value })"
         />
       </div>
+      <AddUxEventButton
+        v-if="isUxEventsEmpty"
+        v-bind="addUxEventButtonProps"
+        @click="showNewUxEvent"
+        @finish="hideNewUxEvent"
+      />
       <ul
+        v-else
         class="ux-events"
-        :class="{ '-hidden': isHidden }"
       >
         <li
           v-for="(uxEvent, key) in uxEvents"
           :key="key"
-          class="ux-event"
+          class="inner"
         >
-          <span>{{ key + 1 }}.</span>
-          <input
-            :value="formatDate(uxEvent.date)"
-            type="date"
-            class="form -date"
-            @input="updateUxEvent({
-              key, value: { date: new Date($event.target.value) } })"
-          >
-          <input
-            :value="uxEvent.score"
-            type="number"
-            min="-100"
-            max="100"
-            class="form -score"
-            @input="updateUxEvent({
-              key, value: { score: $event.target.value }
-            })"
-          >
-          <textarea
-            :value="uxEvent.description"
-            class="form -description"
-            @input="updateUxEvent({
-              key, value: { description: $event.target.value }
-            })"
+          <div class="ux-event">
+            <span>{{ key + 1 }}.</span>
+            <input
+              :value="formatDate(uxEvent.date)"
+              type="date"
+              class="form -date"
+              @input="updateUxEvent({
+                key, value: { date: new Date($event.target.value) } })"
+            >
+            <input
+              :value="uxEvent.score"
+              type="number"
+              min="-100"
+              max="100"
+              class="form -score"
+              @input="updateUxEvent({
+                key, value: { score: $event.target.value }
+              })"
+            >
+            <textarea
+              :value="uxEvent.description"
+              class="form -description"
+              @input="updateUxEvent({
+                key, value: { description: $event.target.value }
+              })"
+            />
+            <button
+              type="button"
+              class="button -red"
+              @click="deleteUxEvent({ key })"
+            >
+              {{ $t("delete") }}
+            </button>
+          </div>
+          <AddUxEventButton
+            v-bind="addUxEventButtonProps"
+            @click="showNewUxEvent"
+            @finish="hideNewUxEvent"
           />
-          <button
-            type="button"
-            class="button -red"
-            @click="deleteUxEvent({ key })"
-          >
-            {{ $t("delete") }}
-          </button>
         </li>
       </ul>
-      <NewUxEvent />
       <div class="ux-event">
         <span>{{ $t("actualUx") }}</span>
         <input
@@ -86,13 +98,11 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/interfaces'
-import NewUxEvent from './NewUxEvent.vue'
+import AddUxEventButton from './AddUxEventButton.vue'
 import { format, isValid } from 'date-fns'
 
 @Component({
-  components: {
-    NewUxEvent
-  },
+  components: { AddUxEventButton },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   },
@@ -102,13 +112,28 @@ import { format, isValid } from 'date-fns'
 })
 export default class UxTimeline extends Vue {
   uxEvents!: Array<UxEvent>
+  isNewUxEventShown: boolean = false
 
-  get isHidden (): boolean {
+  get isUxEventsEmpty (): boolean {
     return this.uxEvents.length === 0
+  }
+
+  get addUxEventButtonProps (): object {
+    return {
+      isButtonEnabled: !this.isNewUxEventShown
+    }
   }
 
   formatDate (date: Date): string {
     return format(date, 'YYYY-MM-DD')
+  }
+
+  showNewUxEvent (): void {
+    this.isNewUxEventShown = true
+  }
+
+  hideNewUxEvent (): void {
+    this.isNewUxEventShown = false
   }
 }
 </script>
@@ -118,25 +143,28 @@ export default class UxTimeline extends Vue {
   @apply flex
 
   > .line
-    @apply w-2 rounded-tl rounded-bl shadow-md bg-blue
+    @apply w-2 rounded-l shadow-md bg-blue
 
   > .timeline
     @apply flex-grow
 
     > * ~ *
-      @apply mt-10
+      @apply mt-5
 
 .ux-events
   @apply list-reset
 
-  &.-hidden
-    @apply hidden
-
-  > .ux-event ~ .ux-event
-    @apply mt-10
+  > .inner ~ .inner
+    @apply mt-5
 
 .ux-event
-  @apply rounded-tr rounded-br shadow-md px-6 py-4 bg-grey-light
+  @apply rounded-r shadow-md px-6 py-4 bg-grey-light
+
+  & + &
+    @apply mt-5
+
+  & + .add-ux-event-button
+    @apply mt-5
 
   > * ~ *
     @apply mt-2

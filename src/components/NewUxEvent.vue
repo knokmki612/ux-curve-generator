@@ -1,5 +1,5 @@
 <template>
-  <div class="ux-event">
+  <div class="new-ux-event">
     <input
       :value="formatDate(newUxEvent.date)"
       type="date"
@@ -21,9 +21,16 @@
       type="button"
       class="button -blue"
       :disabled="!isNewUxEventReady"
-      @click="addUxEvent(newUxEvent); newUxEvent = createUxEvent()"
+      @click="emitFinish"
     >
       {{ $t("create") }}
+    </button>
+    <button
+      type="button"
+      class="button -red"
+      @click="$emit('finish')"
+    >
+      {{ $t("cancel") }}
     </button>
   </div>
 </template>
@@ -39,8 +46,9 @@ import { format, isValid } from 'date-fns'
     ...mapMutations(['addUxEvent'])
   }
 })
-export default class UxTimeline extends Vue {
+export default class NewUxEvent extends Vue {
   newUxEvent: UxEvent = this.createUxEvent()
+  private addUxEvent!: (payload: UxEvent) => void
 
   get isNewUxEventReady (): boolean {
     return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
@@ -53,11 +61,19 @@ export default class UxTimeline extends Vue {
   createUxEvent (): UxEvent {
     return { date: {} as Date, score: 0, description: '' }
   }
+
+  emitFinish (): void {
+    this.addUxEvent(this.newUxEvent)
+    this.newUxEvent = this.createUxEvent()
+    this.$emit('finish')
+  }
 }
 </script>
 
 <style scoped lang="sass">
-.ux-event
+.new-ux-event
+  @apply rounded-r shadow-md px-6 py-4 bg-grey-light
+
   > * ~ *
     @apply mt-2
 
