@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/interfaces'
 import { format, isValid } from 'date-fns'
 

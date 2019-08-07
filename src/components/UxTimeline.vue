@@ -98,7 +98,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/interfaces'
 import AddUxEventButton from './AddUxEventButton.vue'
-import { format, isValid } from 'date-fns'
+import { format } from 'date-fns'
 
 @Component({
   components: { AddUxEventButton },
