@@ -61,8 +61,8 @@ export default class App extends Vue {
 </style>
 
 <style scoped lang="scss">
-@media not all and (min-width: config('screens.lg')) {
-  @media (orientation: landscape) and (max-height: config('screens.md')) {
+@media not all and (min-width: theme('screens.lg')) {
+  @media (orientation: landscape) and (max-height: theme('screens.md')) {
     .sticky-outer {
       @apply relative inset-0 z-auto;
     }
