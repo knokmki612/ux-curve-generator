@@ -51,7 +51,7 @@ export default class EmbedCode extends Vue {
 
 <style scoped lang="sass">
 .embed-code
-  @apply rounded shadow-md px-6 py-4 bg-grey-light
+  @apply rounded shadow-md px-6 py-4 bg-gray-300
 
   > * ~ *
     @apply mt-2

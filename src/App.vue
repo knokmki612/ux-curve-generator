@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="max-w-lg lg:max-w-4xl mx-auto my-4 px-4">
+    <div class="max-w-3xl lg:max-w-6xl mx-auto my-4 px-4">
       <h1 class="text-center text-4xl">
         {{ $t("title") }}
       </h1>
@@ -27,7 +27,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import UxCurve from './components/UxCurve.vue'
 import UxTimeline from './components/UxTimeline.vue'
 import EmbedCode from './components/EmbedCode.vue'
-import { screens } from '../tailwind.config'
+import { screens } from 'tailwindcss/defaultTheme'
 
 @Component({
   components: {
@@ -64,7 +64,7 @@ export default class App extends Vue {
 @media not all and (min-width: config('screens.lg')) {
   @media (orientation: landscape) and (max-height: config('screens.md')) {
     .sticky-outer {
-      @apply relative pin-none z-auto;
+      @apply relative inset-0 z-auto;
     }
   }
 }

@@ -72,7 +72,7 @@ export default class NewUxEvent extends Vue {
 
 <style scoped lang="sass">
 .new-ux-event
-  @apply rounded-r shadow-md px-6 py-4 bg-grey-light
+  @apply rounded-r shadow-md px-6 py-4 bg-gray-300
 
   > * ~ *
     @apply mt-2

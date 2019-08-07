@@ -1,1 +1,1 @@
-declare module '*/tailwind.config'
+declare module 'tailwindcss/*'
