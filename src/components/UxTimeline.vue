@@ -143,7 +143,7 @@ export default class UxTimeline extends Vue {
   @apply flex
 
   > .line
-    @apply w-2 rounded-l shadow-md bg-blue
+    @apply w-2 rounded-l shadow-md bg-blue-600
 
   > .timeline
     @apply flex-grow
@@ -152,13 +152,13 @@ export default class UxTimeline extends Vue {
       @apply mt-5
 
 .ux-events
-  @apply list-reset
+  @apply list-none
 
   > .inner ~ .inner
     @apply mt-5
 
 .ux-event
-  @apply rounded-r shadow-md px-6 py-4 bg-grey-light
+  @apply rounded-r shadow-md px-6 py-4 bg-gray-300
 
   & + &
     @apply mt-5
