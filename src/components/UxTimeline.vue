@@ -19,13 +19,12 @@
         />
       </div>
       <AddUxEventButton
-        v-if="isUxEventsEmpty"
         v-bind="addUxEventButtonProps"
         @click="showNewUxEvent"
         @finish="hideNewUxEvent"
       />
       <ul
-        v-else
+        v-if="!isUxEventsEmpty"
         class="ux-events"
       >
         <li
