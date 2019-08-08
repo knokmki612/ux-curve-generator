@@ -86,5 +86,8 @@ export default class NewUxEvent extends Vue {
       @apply w-full
 
   > .button
-    @apply block
+    @apply inline-block mr-2
+
+    &:last-child
+      @apply mr-0
 </style>
