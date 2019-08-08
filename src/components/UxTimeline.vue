@@ -61,6 +61,7 @@
             <button
               type="button"
               class="button -red"
+              :disabled="isNewUxEventShown"
               @click="deleteUxEvent({ key })"
             >
               {{ $t("delete") }}
