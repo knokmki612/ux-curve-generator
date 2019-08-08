@@ -150,20 +150,20 @@ export default class UxTimeline extends Vue {
     @apply flex-1
 
     > * ~ *
-      @apply mt-5
+      @apply mt-4
 
 .ux-events
   > .inner ~ .inner
-    @apply mt-5
+    @apply mt-4
 
 .ux-event
   @apply rounded-r shadow-md px-6 py-4 bg-gray-300
 
   & + &
-    @apply mt-5
+    @apply mt-4
 
   & + .add-ux-event-button
-    @apply mt-5
+    @apply mt-4
 
   > * ~ *
     @apply mt-2
