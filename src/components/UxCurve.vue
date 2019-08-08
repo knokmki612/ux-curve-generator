@@ -45,7 +45,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
-import { FixedUxEvent, UxEvent } from '@/interfaces'
+import { FixedUxEvent, UxEvent } from '@/types'
 import { line, curveMonotoneX } from 'd3-shape'
 import { scaleLinear, scaleTime } from 'd3-scale'
 

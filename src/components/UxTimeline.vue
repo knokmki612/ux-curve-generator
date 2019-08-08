@@ -96,7 +96,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
-import { FixedUxEvent, UxEvent } from '@/interfaces'
+import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from './AddUxEventButton.vue'
 import { format } from 'date-fns'
 

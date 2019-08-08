@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { FixedUxEvent, UxEvent } from '@/interfaces'
+import { FixedUxEvent, UxEvent } from '@/types'
 import NewUxEvent from './NewUxEvent.vue'
 import { format, isValid } from 'date-fns'
 

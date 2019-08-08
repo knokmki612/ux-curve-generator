@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { isAfter } from 'date-fns'
-import {  FixedUxEvent, UxEvent } from './interfaces'
+import {  FixedUxEvent, UxEvent } from './types'
 
 Vue.use(Vuex)
 
