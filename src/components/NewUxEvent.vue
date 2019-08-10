@@ -21,7 +21,7 @@
       type="button"
       class="button -blue"
       :disabled="!isNewUxEventReady"
-      @click="emitFinish"
+      @click="finish"
     >
       {{ $t("create") }}
     </button>
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import { format, isValid } from 'date-fns'
@@ -62,10 +62,10 @@ export default class NewUxEvent extends Vue {
     return { date: {} as Date, score: 0, description: '' }
   }
 
-  emitFinish (): void {
+  @Emit()
+  finish (): void {
     this.addUxEvent(this.newUxEvent)
     this.newUxEvent = this.createUxEvent()
-    this.$emit('finish')
   }
 }
 </script>

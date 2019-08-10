@@ -5,7 +5,7 @@
       type="button"
       class="add-button"
       :disabled="!isButtonEnabled"
-      @click="emitClick"
+      @click="click"
     >
       <span class="button">
         {{ $t("add") }}
@@ -13,13 +13,13 @@
     </button>
     <NewUxEvent
       v-else
-      @finish="emitFinish"
+      @finish="finish"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { FixedUxEvent, UxEvent } from '@/types'
 import NewUxEvent from './NewUxEvent.vue'
 import { format, isValid } from 'date-fns'
@@ -31,14 +31,14 @@ export default class AddUxEventButton extends Vue {
   @Prop(Boolean) readonly isButtonEnabled: boolean | undefined
   isButtonShown: boolean = true
 
-  emitClick (): void {
+  @Emit()
+  click (): void {
     this.isButtonShown = false
-    this.$emit('click')
   }
 
-  emitFinish (): void {
+  @Emit()
+  finish (): void {
     this.isButtonShown = true
-    this.$emit('finish')
   }
 }
 </script>
