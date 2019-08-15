@@ -19,7 +19,7 @@
         />
       </div>
       <AddUxEventButton
-        v-bind="addUxEventButtonProps"
+        v-bind="addUxEventButtonProps(-1)"
         @click="showNewUxEvent"
         @finish="hideNewUxEvent"
       />
@@ -68,9 +68,13 @@
             </button>
           </div>
           <AddUxEventButton
-            v-bind="addUxEventButtonProps"
+            v-bind="addUxEventButtonProps(key)"
             @click="showNewUxEvent"
             @finish="hideNewUxEvent"
+          />
+          <RelativeDateString
+            class="ml-6 inline-block"
+            v-bind="relativeDateStringProps(key)"
           />
         </li>
       </ul>
@@ -99,10 +103,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from './AddUxEventButton.vue'
+import RelativeDateString from './RelativeDateString.vue'
 import { format } from 'date-fns'
 
 @Component({
-  components: { AddUxEventButton },
+  components: { AddUxEventButton, RelativeDateString },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   },
@@ -112,20 +117,37 @@ import { format } from 'date-fns'
 })
 export default class UxTimeline extends Vue {
   uxEvents!: Array<UxEvent>
+  actualUx!: FixedUxEvent
   isNewUxEventShown: boolean = false
 
   get isUxEventsEmpty (): boolean {
     return this.uxEvents.length === 0
   }
 
-  get addUxEventButtonProps (): object {
-    return {
-      isButtonEnabled: !this.isNewUxEventShown
-    }
-  }
-
   formatDate (date: Date): string {
     return format(date, 'YYYY-MM-DD')
+  }
+
+  addUxEventButtonProps (key: number): object {
+    const props: any = {
+      isButtonEnabled: !this.isNewUxEventShown
+    }
+    if (!this.isUxEventsEmpty) {
+      props.prevUxEvent = this.uxEvents[key]
+    }
+    if (this.uxEvents.length > key + 1) {
+      props.nextUxEvent = this.uxEvents[key + 1]
+    }
+    return props
+  }
+
+  relativeDateStringProps (key: number): object {
+    return {
+      targetDate: this.uxEvents[key].date,
+      nextDate: this.uxEvents.length > key + 1
+        ? this.uxEvents[key + 1].date
+        : new Date()
+    }
   }
 
   showNewUxEvent (): void {

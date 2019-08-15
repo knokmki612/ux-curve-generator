@@ -1,5 +1,24 @@
 <template>
   <div class="new-ux-event">
+    <div>
+      <input
+        v-if="prevUxEvent"
+        type="radio"
+        name="relativeDate"
+      ><RelativeDatePicker
+        v-if="prevUxEvent"
+        is-prev
+        :date="prevUxEvent.date"
+      />
+    </div>
+    <div>
+      <input
+        type="radio"
+        name="relativeDate"
+      ><RelativeDatePicker
+        :date="nextUxEventDate"
+      />
+    </div>
     <input
       :value="formatDate(newUxEvent.date)"
       type="date"
@@ -39,16 +58,31 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
+import RelativeDatePicker from './RelativeDatePicker.vue'
 import { format, isValid } from 'date-fns'
 
 @Component({
+  components: {
+    RelativeDatePicker
+  },
   methods: {
     ...mapMutations(['addUxEvent'])
   }
 })
 export default class NewUxEvent extends Vue {
+  @Prop(Object) readonly prevUxEvent: UxEvent | undefined
+  @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   newUxEvent: UxEvent = this.createUxEvent()
   private addUxEvent!: (payload: UxEvent) => void
+
+  get nextUxEventDate (): Date {
+    const { nextUxEvent } = this
+    if (typeof nextUxEvent === 'undefined') {
+      return new Date()
+    } else {
+      return nextUxEvent.date
+    }
+  }
 
   get isNewUxEventReady (): boolean {
     return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
