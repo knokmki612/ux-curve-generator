@@ -11,7 +11,7 @@
   "spaceIfNeed": "",
   "relativeTime": "{time}間",
   "year": "{n}年",
-  "month": "{n}月",
+  "month": "{n}ヶ月",
   "day": "{n}日",
   "hour": "{n}時間",
   "minute": "{n}分"
