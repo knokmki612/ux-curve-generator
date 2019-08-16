@@ -67,15 +67,16 @@
               {{ $t("delete") }}
             </button>
           </section>
-          <RelativeTimeString
-            class="ml-6 inline-block"
-            v-bind="relativeDateStringProps(key)"
-          />
           <AddUxEventButton
             v-bind="addUxEventButtonProps(key)"
             @click="showNewUxEvent"
             @finish="hideNewUxEvent"
-          />
+          >
+            <RelativeTimeString
+              class="ml-2"
+              v-bind="relativeDateStringProps(key)"
+            />
+          </AddUxEventButton>
         </li>
       </ul>
       <section class="ux-event">

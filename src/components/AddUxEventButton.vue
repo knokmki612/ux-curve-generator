@@ -10,6 +10,7 @@
       <span class="button">
         {{ $t("add") }}
       </span>
+      <slot />
     </button>
     <NewUxEvent
       v-else
@@ -56,7 +57,7 @@ export default class AddUxEventButton extends Vue {
 
 <style scoped lang="sass">
 .add-button
-  @apply flex
+  @apply flex items-center
 
   &::before
     $button-height: (1rem * 1.25 + 0.5rem * 2) / 2
