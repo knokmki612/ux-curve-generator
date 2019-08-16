@@ -15,7 +15,7 @@
       <select class="form appearance-none text-center">
         <option>{{ $tc('minute', targetNumber, { n: '' }) }}</option>
         <option>{{ $tc('hour', targetNumber, { n: '' }) }}</option>
-        <option>{{ $tc('day', targetNumber, { n: '' }) }}</option>
+        <option selected>{{ $tc('day', targetNumber, { n: '' }) }}</option>
         <option>{{ $tc('month', targetNumber, { n: '' }) }}</option>
         <option>{{ $tc('year', targetNumber, { n: '' }) }}</option>
       </select>
