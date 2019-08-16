@@ -19,12 +19,11 @@
         :date="nextUxEventDate"
       />
     </div>
-    <input
-      :value="formatDate(newUxEvent.date)"
-      type="date"
+    <AbsoluteDateInput
+      :date="newUxEvent.date"
       class="form -date"
       @input="newUxEvent.date = new Date($event.target.value)"
-    >
+    />
     <input
       v-model="newUxEvent.score"
       type="number"
@@ -58,11 +57,13 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
+import AbsoluteDateInput from './AbsoluteDateInput.vue'
 import RelativeDateInput from './RelativeDateInput.vue'
-import { format, isValid } from 'date-fns'
+import { isValid } from 'date-fns'
 
 @Component({
   components: {
+    AbsoluteDateInput,
     RelativeDateInput
   },
   methods: {
@@ -86,10 +87,6 @@ export default class NewUxEvent extends Vue {
 
   get isNewUxEventReady (): boolean {
     return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
-  }
-
-  formatDate (date: Date): string {
-    return format(date, 'YYYY-MM-DD')
   }
 
   createUxEvent (): UxEvent {

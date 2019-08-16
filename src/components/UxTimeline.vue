@@ -34,13 +34,13 @@
         >
           <div class="ux-event">
             <span>{{ key + 1 }}.</span>
-            <input
-              :value="formatDate(uxEvent.date)"
-              type="date"
+            <AbsoluteDateInput
+              :date="uxEvent.date"
               class="form -date"
+              :disabled="isNewUxEventShown"
               @input="updateUxEvent({
                 key, value: { date: new Date($event.target.value) } })"
-            >
+            />
             <input
               :value="uxEvent.score"
               type="number"
@@ -103,11 +103,15 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from './AddUxEventButton.vue'
+import AbsoluteDateInput from './AbsoluteDateInput.vue'
 import RelativeDateString from './RelativeDateString.vue'
-import { format } from 'date-fns'
 
 @Component({
-  components: { AddUxEventButton, RelativeDateString },
+  components: {
+    AddUxEventButton,
+    AbsoluteDateInput,
+    RelativeDateString
+  },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
   },
@@ -122,10 +126,6 @@ export default class UxTimeline extends Vue {
 
   get isUxEventsEmpty (): boolean {
     return this.uxEvents.length === 0
-  }
-
-  formatDate (date: Date): string {
-    return format(date, 'YYYY-MM-DD')
   }
 
   addUxEventButtonProps (key: number): object {
