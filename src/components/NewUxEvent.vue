@@ -20,9 +20,8 @@
       />
     </div>
     <AbsoluteDateInput
-      :date="newUxEvent.date"
+      v-model="newUxEvent.date"
       class="form -date"
-      @input="newUxEvent.date = new Date($event.target.value)"
     />
     <input
       v-model="newUxEvent.score"

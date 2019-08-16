@@ -35,11 +35,11 @@
           <div class="ux-event">
             <span>{{ key + 1 }}.</span>
             <AbsoluteDateInput
-              :date="uxEvent.date"
+              :value="uxEvent.date"
               class="form -date"
               :disabled="isNewUxEventShown"
               @input="updateUxEvent({
-                key, value: { date: new Date($event.target.value) } })"
+                key, value: { date: $event } })"
             />
             <input
               :value="uxEvent.score"
