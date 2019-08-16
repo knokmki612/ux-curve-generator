@@ -3,7 +3,12 @@
     <div class="line" />
     <div class="timeline">
       <section class="ux-event">
-        <h3>{{ $t("expectedUx") }}</h3>
+        <h3 class="header">
+          {{ $t('expectedUx') }}
+        </h3>
+        <h4 class="header -small">
+          {{ $t('score') }}
+        </h4>
         <input
           :value="expectedUx.score"
           type="number"
@@ -12,6 +17,9 @@
           class="form -score"
           @input="updateExpectedUx({ score: $event.target.value })"
         >
+        <h4 class="header -small">
+          {{ $t('description') }}
+        </h4>
         <textarea
           :value="expectedUx.description"
           class="form -description"
@@ -33,7 +41,12 @@
           class="inner"
         >
           <section class="ux-event">
-            <h3>{{ key + 1 }}.</h3>
+            <h3 class="header">
+              {{ key + 1 }}.
+            </h3>
+            <h4 class="header -small">
+              {{ $t('date') }}
+            </h4>
             <DateInput
               :value="uxEvent.date"
               class="block"
@@ -41,6 +54,9 @@
               @input="updateUxEvent({
                 key, value: { date: $event } })"
             />
+            <h4 class="header -small">
+              {{ $t('score') }}
+            </h4>
             <input
               :value="uxEvent.score"
               type="number"
@@ -51,6 +67,9 @@
                 key, value: { score: $event.target.value }
               })"
             >
+            <h4 class="header -small">
+              {{ $t('description') }}
+            </h4>
             <textarea
               :value="uxEvent.description"
               class="form -description"
@@ -64,7 +83,7 @@
               :disabled="isNewUxEventShown"
               @click="deleteUxEvent({ key })"
             >
-              {{ $t("delete") }}
+              {{ $t('delete') }}
             </button>
           </section>
           <AddUxEventButton
@@ -80,7 +99,12 @@
         </li>
       </ul>
       <section class="ux-event">
-        <h3>{{ $t("actualUx") }}</h3>
+        <h3 class="header">
+          {{ $t('actualUx') }}
+        </h3>
+        <h4 class="header -small">
+          {{ $t('score') }}
+        </h4>
         <input
           :value="actualUx.score"
           type="number"
@@ -89,6 +113,9 @@
           class="form -score"
           @input="updateActualUx({ score: $event.target.value })"
         >
+        <h4 class="header -small">
+          {{ $t('description') }}
+        </h4>
         <textarea
           :value="actualUx.description"
           class="form -description"
@@ -192,10 +219,25 @@ export default class UxTimeline extends Vue {
   > * ~ *
     @apply mt-2
 
+  > * + .header
+    @apply mt-4
+
+  > .header + *:not(.header)
+    @apply mt-1
+
+  > .header
+    @apply font-bold text-lg
+
+    &.-small
+      @apply font-normal text-sm
+
   > .form
     @apply block rounded shadow p-2
     &:focus
       @apply shadow-outline
+
+    &.-score
+      @apply w-20
 
     &.-description
       @apply w-full

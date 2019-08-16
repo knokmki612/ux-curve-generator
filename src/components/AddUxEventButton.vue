@@ -8,7 +8,7 @@
       @click="click"
     >
       <span class="button">
-        {{ $t("add") }}
+        {{ $t('add') }}
       </span>
       <slot />
     </button>
