@@ -1,5 +1,11 @@
 <template>
-  <div class="new-ux-event">
+  <section class="new-ux-event">
+    <h3 class="header">
+      {{ $t('newEvent') }}
+    </h3>
+    <h4 class="header -small">
+      {{ $t('date') }}
+    </h4>
     <div
       v-if="prevUxEvent"
       class="flex"
@@ -39,6 +45,9 @@
         />
       </span>
     </div>
+    <h4 class="header -small">
+      {{ $t('score') }}
+    </h4>
     <input
       v-model="newUxEvent.score"
       type="number"
@@ -46,6 +55,9 @@
       max="100"
       class="form -score"
     >
+    <h4 class="header -small">
+      {{ $t('description') }}
+    </h4>
     <textarea
       v-model="newUxEvent.description"
       class="form -description"
@@ -56,16 +68,16 @@
       :disabled="!isNewUxEventReady"
       @click="finish"
     >
-      {{ $t("create") }}
+      {{ $t('create') }}
     </button>
     <button
       type="button"
       class="button -red"
       @click="$emit('finish')"
     >
-      {{ $t("cancel") }}
+      {{ $t('cancel') }}
     </button>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -120,6 +132,18 @@ export default class NewUxEvent extends Vue {
 
   > * ~ *
     @apply mt-2
+
+  > * + .header
+    @apply mt-4
+
+  > .header + *:not(.header)
+    @apply mt-1
+
+  > .header
+    @apply font-bold text-lg
+
+    &.-small
+      @apply font-normal text-sm
 
   > .form
     @apply block rounded shadow p-2

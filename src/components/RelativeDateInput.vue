@@ -1,10 +1,10 @@
 <template>
   <span class="relative-date-input">
     <template v-if="isPrev">
-      前のイベントから
+      前のエピソードから
     </template>
     <template v-else>
-      後のイベントより
+      次のエピソードより
     </template>
     <span class="input">
       <input
