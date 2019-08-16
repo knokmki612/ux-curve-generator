@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="max-w-3xl lg:max-w-6xl mx-auto my-4 px-4">
+    <article class="max-w-3xl lg:max-w-6xl mx-auto my-4 px-4">
       <h1 class="text-center text-4xl">
         {{ $t("title") }}
       </h1>
@@ -18,7 +18,7 @@
           class="mt-4"
         />
       </div>
-    </div>
+    </article>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="embed-code">
-    <span>{{ $t("embedCode") }}</span>
+  <section class="embed-code">
+    <h3>{{ $t("embedCode") }}</h3>
     <textarea
       class="code"
       readonly
@@ -14,7 +14,7 @@
     >
       {{ $t("copyToClipboard") }}
     </button>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

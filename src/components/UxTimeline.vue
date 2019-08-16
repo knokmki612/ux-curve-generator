@@ -2,8 +2,8 @@
   <div class="ux-timeline">
     <div class="line" />
     <div class="timeline">
-      <div class="ux-event">
-        <span>{{ $t("expectedUx") }}</span>
+      <section class="ux-event">
+        <h3>{{ $t("expectedUx") }}</h3>
         <input
           :value="expectedUx.score"
           type="number"
@@ -17,7 +17,7 @@
           class="form -description"
           @input="updateExpectedUx({ description: $event.target.value })"
         />
-      </div>
+      </section>
       <AddUxEventButton
         v-bind="addUxEventButtonProps(-1)"
         @click="showNewUxEvent"
@@ -32,8 +32,8 @@
           :key="key"
           class="inner"
         >
-          <div class="ux-event">
-            <span>{{ key + 1 }}.</span>
+          <section class="ux-event">
+            <h3>{{ key + 1 }}.</h3>
             <DateInput
               :value="uxEvent.date"
               class="form -date"
@@ -66,7 +66,7 @@
             >
               {{ $t("delete") }}
             </button>
-          </div>
+          </section>
           <RelativeTimeString
             class="ml-6 inline-block"
             v-bind="relativeDateStringProps(key)"
@@ -78,8 +78,8 @@
           />
         </li>
       </ul>
-      <div class="ux-event">
-        <span>{{ $t("actualUx") }}</span>
+      <section class="ux-event">
+        <h3>{{ $t("actualUx") }}</h3>
         <input
           :value="actualUx.score"
           type="number"
@@ -93,7 +93,7 @@
           class="form -description"
           @input="updateActualUx({ description: $event.target.value })"
         />
-      </div>
+      </section>
     </div>
   </div>
 </template>
