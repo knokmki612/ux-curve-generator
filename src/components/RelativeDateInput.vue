@@ -1,5 +1,5 @@
 <template>
-  <span class="relative-date-picker">
+  <span class="relative-date-input">
     <template v-if="isPrev">前より</template><template v-else>後より</template><input type="number"><select>
       <option>分</option>
       <option>時間</option>
@@ -15,7 +15,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { format, isValid } from 'date-fns'
 
 @Component
-export default class RelativeDatePicker extends Vue {
+export default class RelativeDateInput extends Vue {
   @Prop(Date) readonly date: Date | undefined
   @Prop(Boolean) readonly isPrev: boolean | undefined
 }
