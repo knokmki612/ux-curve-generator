@@ -1,12 +1,28 @@
 <template>
   <span class="relative-date-input">
-    <template v-if="isPrev">前より</template><template v-else>後より</template><input type="number"><select>
+    <template v-if="isPrev">
+      前より
+    </template>
+    <template v-else>
+      後より
+    </template>
+    <input
+      type="number"
+      class="form w-16"
+    >
+    <select class="form appearance-none text-center">
       <option>分</option>
       <option>時間</option>
       <option>日</option>
       <option>月</option>
       <option>年</option>
-    </select><template v-if="isPrev">後</template><template v-else>前</template>
+    </select>
+    <template v-if="isPrev">
+      後
+    </template>
+    <template v-else>
+      前
+    </template>
   </span>
 </template>
 
@@ -22,4 +38,12 @@ export default class RelativeDateInput extends Vue {
 </script>
 
 <style scoped lang="sass">
+.relative-date-input
+  > * ~ *
+    @apply ml-2
+
+  > .form
+    @apply inline-block rounded shadow p-2
+    &:focus
+      @apply shadow-outline
 </style>

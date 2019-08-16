@@ -1,12 +1,10 @@
 <template>
   <div class="new-ux-event">
-    <div>
+    <div v-if="prevUxEvent">
       <input
-        v-if="prevUxEvent"
         type="radio"
         name="relativeDate"
       ><RelativeDateInput
-        v-if="prevUxEvent"
         is-prev
         :date="prevUxEvent.date"
       />
@@ -19,7 +17,7 @@
         :date="nextUxEventDate"
       />
     </div>
-    <AbsoluteDateInput
+    <DateInput
       v-model="newUxEvent.date"
       class="form -date"
     />
@@ -56,13 +54,13 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
-import AbsoluteDateInput from './AbsoluteDateInput.vue'
+import DateInput from './DateInput.vue'
 import RelativeDateInput from './RelativeDateInput.vue'
 import { isValid } from 'date-fns'
 
 @Component({
   components: {
-    AbsoluteDateInput,
+    DateInput,
     RelativeDateInput
   },
   methods: {

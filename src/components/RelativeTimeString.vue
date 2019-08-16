@@ -1,11 +1,27 @@
 <template>
-  <span class="relative-date-string">
-    <template v-if="years">{{ years }}年</template>
-    <template v-if="months">{{ months }}ヶ月</template>
-    <template v-if="days">{{ days }}日</template>
-    <template v-if="hours && isLessThanADay">{{ hours }}時間</template>
-    <template v-if="minutes && isLessThanADay">{{ minutes }}分</template>後
-  </span>
+  <i18n
+    tag="span"
+    path="relativeTime"
+    class="relative-time-string"
+  >
+    <span place="time">
+      <template
+        v-if="years"
+      >{{ $tc('year', years) }}{{ $t('spaceIfNeed') }}</template>
+      <template
+        v-if="months"
+      >{{ $tc('month', months) }}{{ $t('spaceIfNeed') }}</template>
+      <template
+        v-if="days"
+      >{{ $tc('day', days) }}{{ $t('spaceIfNeed') }}</template>
+      <template
+        v-if="hours && isLessThanADay"
+      >{{ $tc('hour', hours) }}{{ $t('spaceIfNeed') }}</template>
+      <template
+        v-if="minutes && isLessThanADay"
+      >{{ $tc('minute', minutes) }}{{ $t('spaceIfNeed') }}</template>
+    </span>
+  </i18n>
 </template>
 
 <script lang="ts">
@@ -24,7 +40,7 @@ import {
 } from 'date-fns'
 
 @Component
-export default class RelativeDateString extends Vue {
+export default class RelativeTimeString extends Vue {
   @Prop(Date) readonly targetDate!: Date
   @Prop(Date) readonly nextDate!: Date
   years: number = 0

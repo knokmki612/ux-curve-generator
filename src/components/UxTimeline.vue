@@ -34,7 +34,7 @@
         >
           <div class="ux-event">
             <span>{{ key + 1 }}.</span>
-            <AbsoluteDateInput
+            <DateInput
               :value="uxEvent.date"
               class="form -date"
               :disabled="isNewUxEventShown"
@@ -67,14 +67,14 @@
               {{ $t("delete") }}
             </button>
           </div>
+          <RelativeTimeString
+            class="ml-6 inline-block"
+            v-bind="relativeDateStringProps(key)"
+          />
           <AddUxEventButton
             v-bind="addUxEventButtonProps(key)"
             @click="showNewUxEvent"
             @finish="hideNewUxEvent"
-          />
-          <RelativeDateString
-            class="ml-6 inline-block"
-            v-bind="relativeDateStringProps(key)"
           />
         </li>
       </ul>
@@ -103,14 +103,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from './AddUxEventButton.vue'
-import AbsoluteDateInput from './AbsoluteDateInput.vue'
-import RelativeDateString from './RelativeDateString.vue'
+import DateInput from './DateInput.vue'
+import RelativeTimeString from './RelativeTimeString.vue'
 
 @Component({
   components: {
     AddUxEventButton,
-    AbsoluteDateInput,
-    RelativeDateString
+    DateInput,
+    RelativeTimeString
   },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])

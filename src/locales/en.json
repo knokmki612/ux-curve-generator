@@ -7,5 +7,12 @@
   "expectedUx": "Expected",
   "actualUx": "Actual",
   "embedCode": "Embed code",
-  "copyToClipboard": "Copy to clipboard"
+  "copyToClipboard": "Copy to clipboard",
+  "spaceIfNeed": " ",
+  "relativeTime": "Between {time}",
+  "year": "{n} Year | {n} Years",
+  "month": "{n} Month | {n} Months",
+  "day": "{n} Day | {n} Days",
+  "hour": "{n} Hour | {n} Hours",
+  "minute": "{n} Minute | {n} Minutes"
 }
