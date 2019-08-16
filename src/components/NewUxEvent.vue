@@ -1,26 +1,44 @@
 <template>
   <div class="new-ux-event">
-    <div v-if="prevUxEvent">
+    <div
+      v-if="prevUxEvent"
+      class="flex"
+    >
       <input
         type="radio"
         name="relativeDate"
-      ><RelativeDateInput
+        class="align-middle"
+      >
+      <RelativeDateInput
         is-prev
+        class="ml-2"
         :date="prevUxEvent.date"
       />
     </div>
-    <div>
+    <div class="flex">
       <input
         type="radio"
         name="relativeDate"
-      ><RelativeDateInput
+        class="align-middle"
+      >
+      <RelativeDateInput
+        class="ml-2"
         :date="nextUxEventDate"
       />
     </div>
-    <DateInput
-      v-model="newUxEvent.date"
-      class="form -date"
-    />
+    <div class="flex">
+      <input
+        type="radio"
+        name="relativeDate"
+        class="align-middle"
+      >
+      <span class="ml-2 leading-normal">
+        直接入力
+        <DateInput
+          v-model="newUxEvent.date"
+        />
+      </span>
+    </div>
     <input
       v-model="newUxEvent.score"
       type="number"
@@ -75,11 +93,9 @@ export default class NewUxEvent extends Vue {
 
   get nextUxEventDate (): Date {
     const { nextUxEvent } = this
-    if (typeof nextUxEvent === 'undefined') {
-      return new Date()
-    } else {
-      return nextUxEvent.date
-    }
+    return typeof nextUxEvent === 'undefined'
+      ? new Date()
+      : nextUxEvent.date
   }
 
   get isNewUxEventReady (): boolean {

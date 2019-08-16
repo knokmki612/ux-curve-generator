@@ -36,7 +36,7 @@
             <h3>{{ key + 1 }}.</h3>
             <DateInput
               :value="uxEvent.date"
-              class="form -date"
+              class="block"
               :disabled="isNewUxEventShown"
               @input="updateUxEvent({
                 key, value: { date: $event } })"

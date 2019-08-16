@@ -1,10 +1,12 @@
 <template>
-  <input
-    :value="formatDate(value)"
-    type="date"
-    class="date-input"
-    @input="input"
-  >
+  <span class="date-input">
+    <input
+      :value="formatDate(value)"
+      class="form"
+      type="date"
+      @input="input"
+    >
+  </span>
 </template>
 
 <script lang="ts">
@@ -27,4 +29,13 @@ export default class DateInput extends Vue {
 </script>
 
 <style scoped lang="sass">
+.date-input
+  > * ~ *
+    @apply ml-2
+
+  > .form
+    @apply rounded shadow p-2 leading-tight
+
+    &:focus
+      @apply shadow-outline
 </style>
