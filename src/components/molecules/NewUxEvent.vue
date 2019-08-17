@@ -40,7 +40,7 @@
       >
       <span class="ml-2 leading-normal">
         直接入力
-        <DateInput
+        <AbsoluteDateInput
           v-model="newUxEvent.date"
         />
       </span>
@@ -84,13 +84,13 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
-import DateInput from 'atoms/DateInput.vue'
+import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateInput from 'atoms/RelativeDateInput.vue'
 import { isValid } from 'date-fns'
 
 @Component({
   components: {
-    DateInput,
+    AbsoluteDateInput,
     RelativeDateInput
   },
   methods: {

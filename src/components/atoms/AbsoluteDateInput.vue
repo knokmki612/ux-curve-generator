@@ -14,7 +14,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { format } from 'date-fns'
 
 @Component
-export default class DateInput extends Vue {
+export default class AbsoluteDateInput extends Vue {
   @Prop([Date, Object]) readonly value!: Date | object
 
   formatDate (date: Date): string {

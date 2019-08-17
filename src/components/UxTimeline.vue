@@ -47,7 +47,7 @@
             <h4 class="header -small">
               {{ $t('date') }}
             </h4>
-            <DateInput
+            <AbsoluteDateInput
               :value="uxEvent.date"
               class="block"
               :disabled="isNewUxEventShown"
@@ -131,13 +131,13 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from 'molecules/AddUxEventButton.vue'
-import DateInput from 'atoms/DateInput.vue'
+import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeTimeString from 'atoms/RelativeTimeString.vue'
 
 @Component({
   components: {
     AddUxEventButton,
-    DateInput,
+    AbsoluteDateInput,
     RelativeTimeString
   },
   computed: {
