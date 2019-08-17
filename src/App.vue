@@ -8,7 +8,7 @@
         <div class="sticky-outer mt-4 lg:mr-4 lg:flex-1">
           <UxCurve />
         </div>
-        <UxTimeline class="mt-4 lg:max-w-xs" />
+        <UxTimeline class="mt-4 w-full lg:max-w-xs xl:max-w-sm" />
       </div>
       <EmbedCode class="mt-4" />
     </article>
