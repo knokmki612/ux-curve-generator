@@ -84,8 +84,8 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
-import DateInput from './DateInput.vue'
-import RelativeDateInput from './RelativeDateInput.vue'
+import DateInput from 'atoms/DateInput.vue'
+import RelativeDateInput from 'atoms/RelativeDateInput.vue'
 import { isValid } from 'date-fns'
 
 @Component({

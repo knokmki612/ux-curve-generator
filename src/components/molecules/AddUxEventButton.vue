@@ -23,8 +23,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { FixedUxEvent, UxEvent } from '@/types'
-import NewUxEvent from './NewUxEvent.vue'
-import { format, isValid } from 'date-fns'
+import NewUxEvent from 'molecules/NewUxEvent.vue'
 
 @Component({
   components: { NewUxEvent }

@@ -1,5 +1,6 @@
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
+const path = require('path')
 
 class TailwindExtractor {
   static extract (content) {
@@ -29,6 +30,12 @@ module.exports = {
         ]
       }
     }
+  },
+
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('atoms', path.resolve('src/components/atoms'))
+      .set('molecules', path.resolve('src/components/molecules'))
   },
 
   pluginOptions: {

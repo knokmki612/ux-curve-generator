@@ -130,9 +130,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
-import AddUxEventButton from './AddUxEventButton.vue'
-import DateInput from './DateInput.vue'
-import RelativeTimeString from './RelativeTimeString.vue'
+import AddUxEventButton from 'molecules/AddUxEventButton.vue'
+import DateInput from 'atoms/DateInput.vue'
+import RelativeTimeString from 'atoms/RelativeTimeString.vue'
 
 @Component({
   components: {
