@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <article class="max-w-3xl lg:max-w-6xl mx-auto my-4 px-4">
+    <article class="max-w-3xl lg:max-w-8xl mx-auto my-4 px-4">
       <h1 class="text-center text-4xl">
         {{ $t("title") }}
       </h1>
       <div class="lg:flex lg:items-start lg:flex-row">
         <div class="sticky-outer mt-4 lg:mr-4 lg:flex-1">
           <UxCurve />
-          <EmbedCode
-            v-if="isScreenLarge"
-            class="mt-4"
-          />
         </div>
         <UxTimeline class="mt-4 lg:max-w-xs" />
-        <EmbedCode
-          v-if="!isScreenLarge"
-          class="mt-4"
-        />
       </div>
+      <EmbedCode class="mt-4" />
     </article>
   </div>
 </template>
@@ -27,7 +20,6 @@ import { Component, Vue } from 'vue-property-decorator'
 import UxCurve from './components/UxCurve.vue'
 import UxTimeline from './components/UxTimeline.vue'
 import EmbedCode from './components/EmbedCode.vue'
-import { screens } from 'tailwindcss/defaultTheme'
 
 @Component({
   components: {
@@ -36,22 +28,7 @@ import { screens } from 'tailwindcss/defaultTheme'
     EmbedCode
   }
 })
-export default class App extends Vue {
-  screenLarge = window.matchMedia(`(min-width: ${screens.lg})`)
-  isScreenLarge: boolean = this.screenLarge.matches
-
-  mounted () {
-    this.screenLarge.addListener(this.updateIsScreenLarge)
-  }
-
-  destroyed () {
-    this.screenLarge.removeListener(this.updateIsScreenLarge)
-  }
-
-  updateIsScreenLarge (mediaQuery: any): void {
-    this.isScreenLarge = mediaQuery.matches
-  }
-}
+export default class App extends Vue {}
 </script>
 
 <style scoped lang="sass">
