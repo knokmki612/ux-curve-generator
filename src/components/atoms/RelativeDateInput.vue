@@ -1,6 +1,6 @@
 <template>
   <span class="relative-date-input">
-    <template v-if="isPrev">
+    <template v-if="isForwardTimeJump">
       前のエピソードから
     </template>
     <template v-else>
@@ -12,14 +12,17 @@
         type="number"
         class="form w-16"
       >
-      <select class="form appearance-none text-center">
-        <option>{{ $tc('minute', targetNumber, { n: '' }) }}</option>
-        <option>{{ $tc('hour', targetNumber, { n: '' }) }}</option>
-        <option selected>{{ $tc('day', targetNumber, { n: '' }) }}</option>
-        <option>{{ $tc('month', targetNumber, { n: '' }) }}</option>
-        <option>{{ $tc('year', targetNumber, { n: '' }) }}</option>
+      <select
+        v-model="targetUnit"
+        class="form appearance-none text-center"
+      >
+        <option value="minute">{{ $tc('minute', targetNumber, { n: '' }) }}</option>
+        <option value="hour">{{ $tc('hour', targetNumber, { n: '' }) }}</option>
+        <option value="day">{{ $tc('day', targetNumber, { n: '' }) }}</option>
+        <option value="month">{{ $tc('month', targetNumber, { n: '' }) }}</option>
+        <option value="year">{{ $tc('year', targetNumber, { n: '' }) }}</option>
       </select>
-      <template v-if="isPrev">
+      <template v-if="isForwardTimeJump">
         後
       </template>
       <template v-else>
@@ -35,9 +38,11 @@ import { format, isValid } from 'date-fns'
 
 @Component
 export default class RelativeDateInput extends Vue {
-  @Prop(Date) readonly date: Date | undefined
-  @Prop(Boolean) readonly isPrev: boolean | undefined
+  @Prop(Date) readonly referenceDate: Date | undefined
+  @Prop(Boolean) readonly isForwardTimeJump: boolean | undefined
+  @Prop([Date, Object]) readonly value!: Date | object
   targetNumber: number = 1
+  targetUnit: string = 'day'
 }
 </script>
 
