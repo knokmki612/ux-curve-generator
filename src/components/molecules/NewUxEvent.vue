@@ -6,46 +6,10 @@
     <h4 class="header -small">
       {{ $t('date') }}
     </h4>
-    <div
-      v-if="prevUxEvent"
-      class="flex"
-    >
-      <input
-        type="radio"
-        name="relativeDate"
-        class="align-middle"
-      >
-      <RelativeDateInput
-        is-prev
-        class="ml-2 leading-normal"
-        :date="prevUxEvent.date"
-      />
-    </div>
-    <div class="flex">
-      <input
-        type="radio"
-        name="relativeDate"
-        class="align-middle"
-      >
-      <RelativeDateInput
-        class="ml-2 leading-normal"
-        :date="nextUxEventDate"
-      />
-    </div>
-    <div class="flex">
-      <input
-        type="radio"
-        name="relativeDate"
-        class="align-middle"
-      >
-      <span class="ml-2 leading-normal">
-        直接入力
-        <AbsoluteDateInput
-          v-model="newUxEvent.date"
-          class="leading-normal"
-        />
-      </span>
-    </div>
+    <DateInput
+      v-model="newUxEvent.date"
+      v-bind="dateInputProps"
+    />
     <h4 class="header -small">
       {{ $t('score') }}
     </h4>
@@ -85,15 +49,11 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
-import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
-import RelativeDateInput from 'atoms/RelativeDateInput.vue'
+import DateInput from 'molecules/DateInput.vue'
 import { isValid } from 'date-fns'
 
 @Component({
-  components: {
-    AbsoluteDateInput,
-    RelativeDateInput
-  },
+  components: { DateInput },
   methods: {
     ...mapMutations(['addUxEvent'])
   }
@@ -104,11 +64,12 @@ export default class NewUxEvent extends Vue {
   newUxEvent: UxEvent = this.createUxEvent()
   private addUxEvent!: (payload: UxEvent) => void
 
-  get nextUxEventDate (): Date {
-    const { nextUxEvent } = this
-    return typeof nextUxEvent === 'undefined'
-      ? new Date()
-      : nextUxEvent.date
+  get dateInputProps (): object {
+    const { prevUxEvent, nextUxEvent } = this
+    return {
+      prevUxEvent,
+      nextUxEvent
+    }
   }
 
   get isNewUxEventReady (): boolean {
