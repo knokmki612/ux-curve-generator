@@ -30,14 +30,14 @@ import NewUxEvent from 'molecules/NewUxEvent.vue'
 })
 export default class AddUxEventButton extends Vue {
   @Prop(Boolean) readonly isButtonEnabled: boolean | undefined
-  @Prop(Object) readonly prevUxEvent: UxEvent | undefined
+  @Prop(Object) readonly uxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | FixedUxEvent | undefined
   isButtonShown: boolean = true
 
   get newUxEventProps (): object {
-    const { prevUxEvent, nextUxEvent } = this
+    const { uxEvent, nextUxEvent } = this
     return {
-      prevUxEvent,
+      prevUxEvent: uxEvent,
       nextUxEvent
     }
   }

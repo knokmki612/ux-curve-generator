@@ -1,5 +1,5 @@
 <template>
-  <span class="date-input">
+  <span class="absolute-date-input">
     <input
       :value="formatDate(value)"
       class="form"
@@ -29,7 +29,7 @@ export default class AbsoluteDateInput extends Vue {
 </script>
 
 <style scoped lang="sass">
-.date-input
+.absolute-date-input
   > * ~ *
     @apply ml-2
 
