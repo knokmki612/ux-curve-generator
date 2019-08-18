@@ -41,7 +41,7 @@ export default class BaseTab extends Vue {
   @apply whitespace-no-wrap
 
   > .tab
-    @apply inline-block px-4 py-2 text-black bg-gray-400 cursor-pointer
+    @apply inline-block rounded-none px-4 py-2 text-black bg-gray-400 cursor-pointer
 
     &:hover
       @apply bg-gray-500
