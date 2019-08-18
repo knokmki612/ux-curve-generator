@@ -63,23 +63,21 @@
       v-model="newUxEvent.description"
       class="form -description"
     />
-    <div class="buttons">
-      <button
-        type="button"
-        class="button -blue"
-        :disabled="!isNewUxEventReady"
-        @click="finish"
-      >
-        {{ $t('create') }}
-      </button>
-      <button
-        type="button"
-        class="button -red"
-        @click="$emit('finish')"
-      >
-        {{ $t('cancel') }}
-      </button>
-    </div>
+    <button
+      type="button"
+      class="button -blue"
+      :disabled="!isNewUxEventReady"
+      @click="finish"
+    >
+      {{ $t('create') }}
+    </button>
+    <button
+      type="button"
+      class="button -red"
+      @click="$emit('finish')"
+    >
+      {{ $t('cancel') }}
+    </button>
   </section>
 </template>
 
