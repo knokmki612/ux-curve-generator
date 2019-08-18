@@ -77,7 +77,7 @@ export default class DateInput extends Vue {
   }
 
   @Emit()
-  input (value: Date): void {
+  input (value: Date): Date {
     return value
   }
 }
