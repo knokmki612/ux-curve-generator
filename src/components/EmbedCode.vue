@@ -1,6 +1,8 @@
 <template>
   <section class="embed-code">
-    <h3>{{ $t('embedCode') }}</h3>
+    <h3 class="header">
+      {{ $t('embedCode') }}
+    </h3>
     <textarea
       class="code"
       readonly
@@ -55,6 +57,18 @@ export default class EmbedCode extends Vue {
 
   > * ~ *
     @apply mt-2
+
+  > .header
+    @apply font-bold text-lg
+
+    & + *:not(.header)
+      @apply mt-4
+
+    &.-small
+      @apply font-normal text-sm
+
+      & + *:not(.header)
+        @apply mt-1
 
   > .code
     @apply w-full rounded shadow p-2

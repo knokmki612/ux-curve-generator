@@ -193,7 +193,7 @@ export default class UxTimeline extends Vue {
   @apply flex
 
   > .line
-    @apply rounded-l shadow-md bg-blue-600
+    @apply rounded-l bg-blue-600
     min-width: theme('width.2')
 
   > .timeline
@@ -209,39 +209,4 @@ export default class UxTimeline extends Vue {
 
     > * ~ *
       @apply mt-4
-
-.ux-event
-  @apply rounded-r shadow-md px-6 py-4 bg-gray-300
-
-  & ~ &
-    @apply mt-4
-
-  > * ~ *
-    @apply mt-2
-
-  > * + .header
-    @apply mt-4
-
-  > .header + *:not(.header)
-    @apply mt-1
-
-  > .header
-    @apply font-bold text-lg
-
-    &.-small
-      @apply font-normal text-sm
-
-  > .form
-    @apply block rounded shadow p-2
-    &:focus
-      @apply shadow-outline
-
-    &.-score
-      @apply w-20
-
-    &.-description
-      @apply w-full
-
-  > .button
-    @apply block
 </style>

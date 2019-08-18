@@ -1,5 +1,5 @@
 <template>
-  <section class="new-ux-event">
+  <section class="new-ux-event ux-event">
     <h3 class="header">
       {{ $t('newEvent') }}
     </h3>
@@ -17,7 +17,7 @@
       >
       <RelativeDateInput
         is-prev
-        class="ml-2"
+        class="ml-2 leading-normal"
         :date="prevUxEvent.date"
       />
     </div>
@@ -28,7 +28,7 @@
         class="align-middle"
       >
       <RelativeDateInput
-        class="ml-2"
+        class="ml-2 leading-normal"
         :date="nextUxEventDate"
       />
     </div>
@@ -42,6 +42,7 @@
         直接入力
         <AbsoluteDateInput
           v-model="newUxEvent.date"
+          class="leading-normal"
         />
       </span>
     </div>
@@ -62,21 +63,23 @@
       v-model="newUxEvent.description"
       class="form -description"
     />
-    <button
-      type="button"
-      class="button -blue"
-      :disabled="!isNewUxEventReady"
-      @click="finish"
-    >
-      {{ $t('create') }}
-    </button>
-    <button
-      type="button"
-      class="button -red"
-      @click="$emit('finish')"
-    >
-      {{ $t('cancel') }}
-    </button>
+    <div class="buttons">
+      <button
+        type="button"
+        class="button -blue"
+        :disabled="!isNewUxEventReady"
+        @click="finish"
+      >
+        {{ $t('create') }}
+      </button>
+      <button
+        type="button"
+        class="button -red"
+        @click="$emit('finish')"
+      >
+        {{ $t('cancel') }}
+      </button>
+    </div>
   </section>
 </template>
 
@@ -127,35 +130,4 @@ export default class NewUxEvent extends Vue {
 </script>
 
 <style scoped lang="sass">
-.new-ux-event
-  @apply rounded-r shadow-md px-6 py-4 bg-gray-300
-
-  > * ~ *
-    @apply mt-2
-
-  > * + .header
-    @apply mt-4
-
-  > .header + *:not(.header)
-    @apply mt-1
-
-  > .header
-    @apply font-bold text-lg
-
-    &.-small
-      @apply font-normal text-sm
-
-  > .form
-    @apply block rounded shadow p-2
-    &:focus
-      @apply shadow-outline
-
-    &.-description
-      @apply w-full
-
-  > .button
-    @apply inline-block mr-2
-
-    &:last-child
-      @apply mr-0
 </style>

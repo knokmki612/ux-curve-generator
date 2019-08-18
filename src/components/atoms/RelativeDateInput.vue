@@ -43,8 +43,6 @@ export default class RelativeDateInput extends Vue {
 
 <style scoped lang="sass">
 .relative-date-input
-  @apply leading-normal
-
   > .input
     @apply whitespace-no-wrap
 
@@ -52,8 +50,5 @@ export default class RelativeDateInput extends Vue {
       @apply ml-2
 
     > .form
-      @apply rounded shadow p-2 leading-tight
-
-      &:focus
-        @apply shadow-outline
+      @apply leading-tight
 </style>

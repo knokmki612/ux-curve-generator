@@ -34,8 +34,5 @@ export default class AbsoluteDateInput extends Vue {
     @apply ml-2
 
   > .form
-    @apply rounded shadow p-2 leading-tight
-
-    &:focus
-      @apply shadow-outline
+    @apply leading-tight
 </style>
