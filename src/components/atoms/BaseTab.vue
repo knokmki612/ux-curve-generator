@@ -22,8 +22,8 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 
 @Component
 export default class BaseTab extends Vue {
-  @Prop(Array) readonly tabItems: string[]
-  @Prop(Number) readonly value: number
+  @Prop(Array) readonly tabItems!: string[]
+  @Prop(Number) readonly value!: number
 
   isActive (key: number): boolean {
     return this.value === key

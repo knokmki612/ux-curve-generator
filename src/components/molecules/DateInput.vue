@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
+import { FixedUxEvent, UxEvent } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateInput from 'atoms/RelativeDateInput.vue'
@@ -69,10 +70,10 @@ export default class DateInput extends Vue {
   }
 
   get newDate (): Date {
-    return this.value
+    return this.value as Date
   }
 
-  set newDate (value: Date): void {
+  set newDate (value: Date) {
     this.input(value)
   }
 
