@@ -4,7 +4,10 @@
       v-model="inputType"
       :tab-items="['相対', '絶対']"
     />
-    <div v-if="inputType === 0">
+    <div
+      v-if="inputType === 0"
+      class="input"
+    >
       <label
         v-if="prevUxEvent"
         class="flex"
@@ -37,7 +40,7 @@
     <AbsoluteDateInput
       v-if="inputType === 1"
       v-model="newDate"
-      class="block leading-normal"
+      class="input block leading-normal"
     />
   </div>
 </template>
@@ -88,4 +91,7 @@ export default class DateInput extends Vue {
 .date-input
   > * ~ *
     @apply mt-2
+
+  > .input
+    min-height: 2.5rem
 </style>
