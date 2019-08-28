@@ -32,7 +32,4 @@ export default class AbsoluteDateInput extends Vue {
 .absolute-date-input
   > * ~ *
     @apply ml-2
-
-  > .form
-    @apply leading-tight
 </style>

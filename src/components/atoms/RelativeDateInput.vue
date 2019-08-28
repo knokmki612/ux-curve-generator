@@ -1,12 +1,9 @@
 <template>
   <span class="relative-date-input">
-    <template v-if="isForwardTimeJump">
-      前のエピソードから
-    </template>
-    <template v-else>
-      次のエピソードより
-    </template>
-    <span class="input">
+    <slot />
+    <span v-show="isJumpForward"> から </span>
+    <span v-show="!isJumpForward"> より </span>
+    <span class="whitespace-no-wrap">
       <input
         v-model="targetNumber"
         type="number"
@@ -14,7 +11,7 @@
       >
       <select
         v-model="targetUnit"
-        class="form appearance-none text-center"
+        class="ml-2 form appearance-none text-center"
       >
         <option value="minute">{{ $tc('minute', targetNumber, { n: '' }) }}</option>
         <option value="hour">{{ $tc('hour', targetNumber, { n: '' }) }}</option>
@@ -22,38 +19,64 @@
         <option value="month">{{ $tc('month', targetNumber, { n: '' }) }}</option>
         <option value="year">{{ $tc('year', targetNumber, { n: '' }) }}</option>
       </select>
-      <template v-if="isForwardTimeJump">
-        後
-      </template>
-      <template v-else>
-        前
-      </template>
+      <span v-show="isJumpForward"> 後</span>
+      <span v-show="!isJumpForward"> 前</span>
     </span>
   </span>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { format, isValid } from 'date-fns'
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
+import { FixedUxEvent, UxEvent } from '@/types'
+import {
+  addMinutes,
+  addHours,
+  addDays,
+  addMonths,
+  addYears
+} from 'date-fns'
 
 @Component
 export default class RelativeDateInput extends Vue {
-  @Prop(Date) readonly referenceDate: Date | undefined
-  @Prop(Boolean) readonly isForwardTimeJump: boolean | undefined
+  @Prop(Boolean) readonly isJumpForward!: boolean
+  @Prop(Object) readonly targetDate!: Date
   @Prop([Date, Object]) readonly value!: Date | object
   targetNumber: number = 1
   targetUnit: string = 'day'
+
+  get jumpDate (): (date: Date, amount: number) => Date {
+    const { targetUnit } = this
+    switch (targetUnit) {
+      case 'minute': return addMinutes
+      case 'hour': return addHours
+      case 'day': return addDays
+      case 'month': return addMonths
+      case 'year': return addYears
+      default: return addDays
+    }
+  }
+
+  get newDate (): Date {
+    const { isJumpForward, targetDate, targetNumber } = this
+    const sign = isJumpForward ? 1 : -1
+    return this.jumpDate(targetDate, targetNumber * sign)
+  }
+
+  mounted () {
+    this.input(this.newDate)
+  }
+
+  @Watch('newDate')
+  onNewDateUpdated (value: Date): void {
+    this.input(value)
+  }
+
+  @Emit()
+  input (value: Date): Date {
+    return value
+  }
 }
 </script>
 
 <style scoped lang="sass">
-.relative-date-input
-  > .input
-    @apply whitespace-no-wrap
-
-    > * ~ *
-      @apply ml-2
-
-    > .form
-      @apply leading-tight
 </style>

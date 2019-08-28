@@ -4,43 +4,28 @@
       v-model="inputType"
       :tab-items="['相対', '絶対']"
     />
-    <div
-      v-if="inputType === 0"
-      class="input"
-    >
-      <label
-        v-if="prevUxEvent"
-        class="flex"
-      >
-        <input
-          type="radio"
-          name="relativeDate"
-          class="align-middle"
-        >
-        <RelativeDateInput
-          v-model="newDate"
-          is-forward-time-jump
-          :reference-date="prevUxEvent.date"
-          class="ml-2 leading-normal"
-        />
-      </label>
-      <label class="flex mt-2">
-        <input
-          type="radio"
-          name="relativeDate"
-          class="align-middle"
-        >
-        <RelativeDateInput
-          v-model="newDate"
-          :reference-date="nextUxEventDate"
-          class="ml-2 leading-normal"
-        />
-      </label>
-    </div>
-    <AbsoluteDateInput
-      v-if="inputType === 1"
+    <RelativeDateInput
+      v-show="inputType === 0"
       v-model="newDate"
-      class="input block leading-normal"
+      v-bind="relativeDateInputProps"
+    >
+      <select
+        v-if="prevUxEvent"
+        v-model="targetJumpDirection"
+        class="form appearance-none"
+      >
+        <option value="forward">
+          前のエピソード
+        </option>
+        <option value="backward">
+          次のエピソード
+        </option>
+      </select>
+      <span v-else>次のエピソード</span>
+    </RelativeDateInput>
+    <AbsoluteDateInput
+      v-show="inputType === 1"
+      v-model="newDate"
     />
   </div>
 </template>
@@ -64,12 +49,25 @@ export default class DateInput extends Vue {
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop([Date, Object]) readonly value!: Date | object
   inputType: number = 0
+  targetJumpDirection: string = this.prevUxEvent === undefined
+    ? 'backward'
+    : 'forward'
 
-  get nextUxEventDate (): Date {
-    const { nextUxEvent } = this
-    return typeof nextUxEvent === 'undefined'
-      ? new Date()
-      : nextUxEvent.date
+  get isJumpForward (): boolean {
+    const { targetJumpDirection } = this
+    return targetJumpDirection === 'forward'
+  }
+
+  get relativeDateInputProps (): object {
+    const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent } = this
+    return {
+      isJumpForward,
+      targetDate: isJumpForward && isUxEvent(prevUxEvent)
+        ? prevUxEvent.date
+        : isUxEvent(nextUxEvent)
+          ? nextUxEvent.date
+          : new Date()
+    }
   }
 
   get newDate (): Date {
@@ -84,6 +82,10 @@ export default class DateInput extends Vue {
   input (value: Date): Date {
     return value
   }
+
+  isUxEvent (uxEvent: UxEvent | undefined): uxEvent is UxEvent {
+    return uxEvent !== undefined
+  }
 }
 </script>
 
@@ -92,6 +94,9 @@ export default class DateInput extends Vue {
   > * ~ *
     @apply mt-2
 
-  > .input
-    min-height: 2.5rem
+.relative-date-input,
+.absolute-date-input
+  @apply block
+
+  min-height: 2.5rem
 </style>
