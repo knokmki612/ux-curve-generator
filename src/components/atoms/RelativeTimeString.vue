@@ -4,7 +4,7 @@
     path="relativeTime"
     class="relative-time-string"
   >
-    <span place="time">
+    <span slot="time">
       <template
         v-if="years"
       >{{ $tc('year', years) }}{{ $t('spaceIfNeed') }}</template>
