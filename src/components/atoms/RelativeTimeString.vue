@@ -7,19 +7,22 @@
     <span slot="time">
       <template
         v-if="years"
-      >{{ $tc('year', years) }}{{ $t('spaceIfNeed') }}</template>
+      >{{ $tc('year', years) }}{{ $t('spaceIfNeeded') }}</template>
       <template
         v-if="months"
-      >{{ $tc('month', months) }}{{ $t('spaceIfNeed') }}</template>
+      >{{ $tc('month', months) }}{{ $t('spaceIfNeeded') }}</template>
       <template
         v-if="days"
-      >{{ $tc('day', days) }}{{ $t('spaceIfNeed') }}</template>
+      >{{ $tc('day', days) }}{{ $t('spaceIfNeeded') }}</template>
       <template
         v-if="hours && isLessThanADay"
-      >{{ $tc('hour', hours) }}{{ $t('spaceIfNeed') }}</template>
+      >{{ $tc('hour', hours) }}{{ $t('spaceIfNeeded') }}</template>
+      <template
+        v-if="hours && minutes"
+      >{{ $t('timeWith') }}</template>
       <template
         v-if="minutes && isLessThanADay"
-      >{{ $tc('minute', minutes) }}{{ $t('spaceIfNeed') }}</template>
+      >{{ $tc('minute', minutes) }}{{ $t('spaceIfNeeded') }}</template>
     </span>
   </i18n>
 </template>
