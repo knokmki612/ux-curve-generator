@@ -39,7 +39,7 @@ import {
 @Component
 export default class RelativeDateInput extends Vue {
   @Prop(Boolean) readonly isJumpForward!: boolean
-  @Prop(Object) readonly targetDate!: Date
+  @Prop(Date) readonly targetDate!: Date
   @Prop([Date, Object]) readonly value!: Date | object
   targetNumber: number = 1
   targetUnit: string = 'day'
