@@ -23,7 +23,7 @@
             type="range"
             min="-100"
             max="100"
-            class="ml-2 flex-1"
+            class="rounded ml-2 flex-1"
             @input="updateExpectedUx({ score: $event.target.value })"
           >
         </div>
@@ -83,7 +83,7 @@
                 type="range"
                 min="-100"
                 max="100"
-                class="ml-2 flex-1"
+                class="rounded ml-2 flex-1"
                 @input="updateUxEvent({
                   key, value: { score: $event.target.value }
                 })"
@@ -141,7 +141,7 @@
             type="range"
             min="-100"
             max="100"
-            class="ml-2 flex-1"
+            class="rounded ml-2 flex-1"
             @input="updateActualUx({ score: $event.target.value })"
           >
         </div>

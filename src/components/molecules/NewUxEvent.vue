@@ -26,7 +26,7 @@
         type="range"
         min="-100"
         max="100"
-        class="ml-2 flex-1"
+        class="rounded ml-2 flex-1"
       >
     </div>
     <h4 class="header -small">
