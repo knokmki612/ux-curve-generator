@@ -9,28 +9,30 @@
         <h4 class="header -small">
           {{ $t('UxEvent.score') }}
         </h4>
-        <input
-          :value="expectedUx.score"
-          type="number"
-          min="-100"
-          max="100"
-          class="form -score"
-          @input="updateExpectedUx({ score: $event.target.value })"
-        >
-        <input
-          v-model="expectedUx.score"
-          type="range"
-          min="-100"
-          max="100"
-          class="w-full"
-          @input="updateExpectedUx({ score: $event.target.value })"
-        >
+        <div class="flex">
+          <input
+            :value="expectedUx.score"
+            type="number"
+            min="-100"
+            max="100"
+            class="form w-16"
+            @input="updateExpectedUx({ score: $event.target.value })"
+          >
+          <input
+            v-model="expectedUx.score"
+            type="range"
+            min="-100"
+            max="100"
+            class="ml-2 flex-1"
+            @input="updateExpectedUx({ score: $event.target.value })"
+          >
+        </div>
         <h4 class="header -small">
           {{ $t('UxEvent.description') }}
         </h4>
         <textarea
           :value="expectedUx.description"
-          class="form -description"
+          class="form w-full"
           @input="updateExpectedUx({ description: $event.target.value })"
         />
       </section>
@@ -65,32 +67,34 @@
             <h4 class="header -small">
               {{ $t('UxEvent.score') }}
             </h4>
-            <input
-              :value="uxEvent.score"
-              type="number"
-              min="-100"
-              max="100"
-              class="form -score"
-              @input="updateUxEvent({
-                key, value: { score: $event.target.value }
-              })"
-            >
-            <input
-              v-model="uxEvent.score"
-              type="range"
-              min="-100"
-              max="100"
-              class="w-full"
-              @input="updateUxEvent({
-                key, value: { score: $event.target.value }
-              })"
-            >
+            <div class="flex">
+              <input
+                :value="uxEvent.score"
+                type="number"
+                min="-100"
+                max="100"
+                class="form w-16"
+                @input="updateUxEvent({
+                  key, value: { score: $event.target.value }
+                })"
+              >
+              <input
+                v-model="uxEvent.score"
+                type="range"
+                min="-100"
+                max="100"
+                class="ml-2 flex-1"
+                @input="updateUxEvent({
+                  key, value: { score: $event.target.value }
+                })"
+              >
+            </div>
             <h4 class="header -small">
               {{ $t('UxEvent.description') }}
             </h4>
             <textarea
               :value="uxEvent.description"
-              class="form -description"
+              class="form w-full"
               @input="updateUxEvent({
                 key, value: { description: $event.target.value }
               })"
@@ -123,28 +127,30 @@
         <h4 class="header -small">
           {{ $t('UxEvent.score') }}
         </h4>
-        <input
-          :value="actualUx.score"
-          type="number"
-          min="-100"
-          max="100"
-          class="form -score"
-          @input="updateActualUx({ score: $event.target.value })"
-        >
-        <input
-          v-model="actualUx.score"
-          type="range"
-          min="-100"
-          max="100"
-          class="w-full"
-          @input="updateActualUx({ score: $event.target.value })"
-        >
+        <div class="flex">
+          <input
+            :value="actualUx.score"
+            type="number"
+            min="-100"
+            max="100"
+            class="form w-16"
+            @input="updateActualUx({ score: $event.target.value })"
+          >
+          <input
+            v-model="actualUx.score"
+            type="range"
+            min="-100"
+            max="100"
+            class="ml-2 flex-1"
+            @input="updateActualUx({ score: $event.target.value })"
+          >
+        </div>
         <h4 class="header -small">
           {{ $t('UxEvent.description') }}
         </h4>
         <textarea
           :value="actualUx.description"
-          class="form -description"
+          class="form w-full"
           @input="updateActualUx({ description: $event.target.value })"
         />
       </section>
