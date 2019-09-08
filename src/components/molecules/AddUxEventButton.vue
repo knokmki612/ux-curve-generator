@@ -66,7 +66,7 @@ export default class AddUxEventButton extends Vue {
     border-bottom: $button-height solid transparent
 
   > .button
-    @apply rounded-l-none bg-blue-600
+    @apply rounded-l-none bg-blue-600 border-none
 
   &:hover
     &::before

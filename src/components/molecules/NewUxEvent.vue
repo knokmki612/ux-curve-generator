@@ -29,18 +29,18 @@
     />
     <button
       type="button"
+      class="button -cancel"
+      @click="$emit('finish')"
+    >
+      {{ $t('UxEvent.cancel') }}
+    </button>
+    <button
+      type="button"
       class="button -blue"
       :disabled="!isNewUxEventReady"
       @click="finish"
     >
       {{ $t('UxEvent.create') }}
-    </button>
-    <button
-      type="button"
-      class="button -red"
-      @click="$emit('finish')"
-    >
-      {{ $t('UxEvent.cancel') }}
     </button>
   </section>
 </template>
