@@ -17,14 +17,6 @@
         stroke-width="1"
         stroke="gray"
       />
-      <line
-        :x1="viewBox[0] - offset.scale"
-        y1="0"
-        :x2="viewBox[0] - offset.scale"
-        :y2="viewBox[1]"
-        stroke-width="1"
-        stroke="gray"
-      />
       <path
         :d="curve"
         fill="transparent"
@@ -72,9 +64,9 @@ export default class UxCurve extends Vue {
       const x = scaleTime()
         .domain([
           this.uxEvents[0].date,
-          this.uxEvents[this.uxEvents.length - 1].date
+          this.actualUx.date
         ])
-        .range([this.offset.scale, this.viewBox[0] - this.offset.scale])
+        .range([this.offset.scale, this.viewBox[0]])
 
       drawableUxEvents = this.uxEvents.map(uxEvent => {
         return [x(uxEvent.date), y(uxEvent.score)] as [number, number]
