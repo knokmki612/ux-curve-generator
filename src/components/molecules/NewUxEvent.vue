@@ -20,6 +20,13 @@
       max="100"
       class="form -score"
     >
+    <input
+      v-model="newUxEvent.score"
+      type="range"
+      min="-100"
+      max="100"
+      class="w-full"
+    >
     <h4 class="header -small">
       {{ $t('UxEvent.description') }}
     </h4>

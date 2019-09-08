@@ -17,6 +17,14 @@
           class="form -score"
           @input="updateExpectedUx({ score: $event.target.value })"
         >
+        <input
+          v-model="expectedUx.score"
+          type="range"
+          min="-100"
+          max="100"
+          class="w-full"
+          @input="updateExpectedUx({ score: $event.target.value })"
+        >
         <h4 class="header -small">
           {{ $t('UxEvent.description') }}
         </h4>
@@ -67,6 +75,16 @@
                 key, value: { score: $event.target.value }
               })"
             >
+            <input
+              v-model="uxEvent.score"
+              type="range"
+              min="-100"
+              max="100"
+              class="w-full"
+              @input="updateUxEvent({
+                key, value: { score: $event.target.value }
+              })"
+            >
             <h4 class="header -small">
               {{ $t('UxEvent.description') }}
             </h4>
@@ -111,6 +129,14 @@
           min="-100"
           max="100"
           class="form -score"
+          @input="updateActualUx({ score: $event.target.value })"
+        >
+        <input
+          v-model="actualUx.score"
+          type="range"
+          min="-100"
+          max="100"
+          class="w-full"
           @input="updateActualUx({ score: $event.target.value })"
         >
         <h4 class="header -small">
