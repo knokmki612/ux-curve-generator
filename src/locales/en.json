@@ -41,8 +41,8 @@
   },
   "RelativeDateString": {
     "path": "Between {time}",
-    "timeWith": "",
-    "spaceIfNeeded": " "
+    "spaceIfNeeded": " ",
+    "suffix": ""
   },
   "DateInput": {
     "relative": "Relative",

@@ -40,9 +40,9 @@
     "since": "より"
   },
   "RelativeDateString": {
-    "path": "{time}間",
-    "timeWith": "と",
-    "spaceIfNeeded": ""
+    "path": "{time}",
+    "spaceIfNeeded": "",
+    "suffix": "間"
   },
   "DateInput": {
     "relative": "相対",
