@@ -55,8 +55,8 @@ export default class DateInput extends Vue {
   targetJumpDirection: string = this.prevUxEvent === undefined
     ? 'backward'
     : 'forward'
-  absoluteDate: Date = this.value
-  relativeDate: Date = this.value
+  absoluteDate: Date = this.value as Date
+  relativeDate: Date = this.value as Date
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
