@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     expectedUx: { score: 0, description: '' } as FixedUxEvent,
-    actualUx: { score: 0, date: new Date(), description: '' } as UxEvent,
+    actualUx: { score: 0, get date() { return new Date() }, description: '' } as UxEvent,
     uxEvents: [] as Array<UxEvent>
   },
   mutations: {

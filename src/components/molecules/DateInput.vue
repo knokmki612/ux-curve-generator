@@ -35,6 +35,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
+import { mapState } from 'vuex'
 import { UxEvent } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
@@ -45,12 +46,16 @@ import RelativeDateInput from 'atoms/RelativeDateInput.vue'
     BaseTab,
     AbsoluteDateInput,
     RelativeDateInput
+  },
+  computed: {
+    ...mapState(['actualUx'])
   }
 })
 export default class DateInput extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop([Date, Object]) readonly value!: Date | object
+  actualUx!: UxEvent
   inputType: number = 0
   targetJumpDirection: string = this.prevUxEvent === undefined
     ? 'backward'
@@ -64,14 +69,14 @@ export default class DateInput extends Vue {
   }
 
   get relativeDateInputProps (): object {
-    const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent } = this
+    const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent, actualUx } = this
     return {
       isJumpForward,
       targetDate: isJumpForward && isUxEvent(prevUxEvent)
         ? prevUxEvent.date
         : isUxEvent(nextUxEvent)
           ? nextUxEvent.date
-          : new Date()
+          : actualUx.date
     }
   }
 

@@ -40,8 +40,8 @@ export default class EmbedCode extends Vue {
     const { expectedUx, actualUx, uxEvents } = this
     return JSON.stringify({
       expectedUx,
-      actualUx,
-      uxEvents
+      uxEvents,
+      actualUx
     }, null, '  ')
   }
 
