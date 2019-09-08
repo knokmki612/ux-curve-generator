@@ -2,7 +2,10 @@
   <div class="ux-timeline">
     <div class="line" />
     <div class="timeline">
-      <section class="ux-event">
+      <section
+        id="0"
+        class="ux-event"
+      >
         <h3 class="header">
           {{ $t('UxTimeline.expectedUx') }}
         </h3>
@@ -50,7 +53,10 @@
           :key="key"
           class="inner"
         >
-          <section class="ux-event">
+          <section
+            :id="key + 1"
+            class="ux-event"
+          >
             <h3 class="header">
               {{ key + 1 }}.
             </h3>
@@ -120,7 +126,10 @@
           </AddUxEventButton>
         </li>
       </ul>
-      <section class="ux-event">
+      <section
+        :id="uxEvents.length + 1"
+        class="ux-event"
+      >
         <h3 class="header">
           {{ $t('UxTimeline.actualUx') }}
         </h3>

@@ -22,14 +22,24 @@
         fill="transparent"
         stroke="black"
       />
-      <circle
+      <a
         v-for="(drawableUxEvent, key) in drawableUxEvents"
         :key="key"
-        :cx="drawableUxEvent[0]"
-        :cy="drawableUxEvent[1]"
-        r="2"
-        fill="black"
-      />
+        :xlink:href="`#${key}`"
+      >
+        <circle
+          :cx="drawableUxEvent[0]"
+          :cy="drawableUxEvent[1]"
+          r="10"
+          fill="transparent"
+        />
+        <circle
+          :cx="drawableUxEvent[0]"
+          :cy="drawableUxEvent[1]"
+          r="2"
+          fill="black"
+        />
+      </a>
     </svg>
   </div>
 </template>
