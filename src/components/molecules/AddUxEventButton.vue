@@ -62,7 +62,7 @@ export default class AddUxEventButton extends Vue {
     $button-height: (1rem * 1.25 + 0.5rem * 2) / 2
     content: ""
     border-top: $button-height solid transparent
-    border-right: 1.5rem solid theme('colors.blue.600')
+    border-right: 1rem solid theme('colors.blue.600')
     border-bottom: $button-height solid transparent
 
   > .button
@@ -70,7 +70,7 @@ export default class AddUxEventButton extends Vue {
 
   &:hover
     &::before
-      border-right: 1.5rem solid theme('colors.blue.700')
+      border-right: 1rem solid theme('colors.blue.700')
 
     > .button
       @apply bg-blue-700
@@ -79,7 +79,7 @@ export default class AddUxEventButton extends Vue {
     @apply cursor-not-allowed
 
     &::before
-      border-right: 1.5rem solid theme('colors.gray.400')
+      border-right: 1rem solid theme('colors.gray.400')
 
     > .button
       @apply bg-gray-400
