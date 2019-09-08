@@ -56,7 +56,8 @@ import {
   addHours,
   addDays,
   addMonths,
-  addYears
+  addYears,
+  startOfDay
 } from 'date-fns'
 
 @Component
@@ -80,9 +81,13 @@ export default class RelativeDateInput extends Vue {
   }
 
   get newDate (): Date {
-    const { isJumpForward, targetDate, targetNumber } = this
+    const { isJumpForward, targetUnit, targetDate, targetNumber, jumpDate } = this
     const sign = isJumpForward ? 1 : -1
-    return this.jumpDate(targetDate, targetNumber * sign)
+    let date = jumpDate(targetDate, targetNumber * sign)
+    if (targetUnit !== 'minute' && targetUnit !== 'hour') {
+      date = startOfDay(date)
+    }
+    return date
   }
 
   mounted () {
