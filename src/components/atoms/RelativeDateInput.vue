@@ -1,27 +1,50 @@
 <template>
   <span class="relative-date-input">
-    <slot />
-    <span v-show="isJumpForward"> から </span>
-    <span v-show="!isJumpForward"> より </span>
-    <span class="whitespace-no-wrap">
-      <input
-        v-model="targetNumber"
-        type="number"
-        class="form w-16"
+    <i18n
+      tag="span"
+      path="RelativeDateInput.path"
+      class="inner"
+    >
+      <slot slot="event" />
+      <span
+        v-show="isJumpForward"
+        slot="eventAdverb"
+      >{{ $t('RelativeDateInput.from') }}</span>
+      <span
+        v-show="!isJumpForward"
+        slot="eventAdverb"
+      >{{ $t('RelativeDateInput.since') }}</span>
+      <span
+        slot="duration"
+        class="whitespace-no-wrap"
       >
-      <select
-        v-model="targetUnit"
-        class="ml-2 form appearance-none text-center"
-      >
-        <option value="minute">{{ $tc('minute', targetNumber, { n: '' }) }}</option>
-        <option value="hour">{{ $tc('hour', targetNumber, { n: '' }) }}</option>
-        <option value="day">{{ $tc('day', targetNumber, { n: '' }) }}</option>
-        <option value="month">{{ $tc('month', targetNumber, { n: '' }) }}</option>
-        <option value="year">{{ $tc('year', targetNumber, { n: '' }) }}</option>
-      </select>
-      <span v-show="isJumpForward"> 後</span>
-      <span v-show="!isJumpForward"> 前</span>
-    </span>
+        <input
+          v-model="targetNumber"
+          type="number"
+          class="mr-2 form w-16"
+        >
+        <select
+          v-model="targetUnit"
+          class="form appearance-none text-center"
+        >
+          <option value="minute">{{ $tc('Relative.minute', targetNumber, { n: '' }) }}</option>
+          <option value="hour">{{ $tc('Relative.hour', targetNumber, { n: '' }) }}</option>
+          <option value="day">{{ $tc('Relative.day', targetNumber, { n: '' }) }}</option>
+          <option value="month">{{ $tc('Relative.month', targetNumber, { n: '' }) }}</option>
+          <option value="year">{{ $tc('Relative.year', targetNumber, { n: '' }) }}</option>
+        </select>
+      </span>
+      <span
+        v-show="isJumpForward"
+        slot="durationAdverb"
+        class="whitespace-no-wrap"
+      >{{ $t('RelativeDateInput.after') }}</span>
+      <span
+        v-show="!isJumpForward"
+        slot="durationAdverb"
+        class="whitespace-no-wrap"
+      >{{ $t('RelativeDateInput.ago') }}</span>
+    </i18n>
   </span>
 </template>
 
@@ -79,4 +102,10 @@ export default class RelativeDateInput extends Vue {
 </script>
 
 <style scoped lang="sass">
+.relative-date-input
+  > .inner
+    @apply -mt-2 inline-block
+
+    > *
+      @apply mt-2 inline-block
 </style>

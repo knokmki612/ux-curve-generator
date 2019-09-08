@@ -1,23 +1,51 @@
 {
-  "title": "UXカーブジェネレーター",
-  "add": "追加",
-  "create": "作成",
-  "delete": "削除",
-  "cancel": "キャンセル",
-  "expectedUx": "期待",
-  "actualUx": "現在",
-  "date": "日時",
-  "score": "満足度 (±100)",
-  "description": "説明",
-  "newEvent": "新しいエピソード",
-  "embedCode": "埋め込みコード",
-  "copyToClipboard": "クリップボードにコピー",
-  "spaceIfNeeded": "",
-  "relativeTime": "{time}間",
-  "timeWith": "と",
-  "year": "{n}年",
-  "month": "{n}ヶ月",
-  "day": "{n}日",
-  "hour": "{n}時間",
-  "minute": "{n}分"
+  "App": {
+    "title": "UXカーブジェネレーター"
+  },
+  "UxTimeline": {
+    "expectedUx": "期待",
+    "actualUx": "現在"
+  },
+  "UxEvent": {
+    "newEvent": "新しいエピソード",
+    "date": "日時",
+    "score": "満足度 (±100)",
+    "description": "説明",
+    "add": "追加",
+    "create": "作成",
+    "delete": "削除",
+    "cancel": "キャンセル"
+  },
+  "AddUxEventButton": {
+    "add": "追加"
+  },
+  "EmbedCode": {
+    "title": "埋め込みコード",
+    "copyToClipboard": "クリップボードにコピー"
+  },
+  "Relative": {
+    "year": "{n}年",
+    "month": "{n}ヶ月",
+    "day": "{n}日",
+    "hour": "{n}時間",
+    "minute": "{n}分"
+  },
+  "RelativeDateInput": {
+    "path": "{event} {eventAdverb} {duration} {durationAdverb}",
+    "previousEvent": "前のエピソード",
+    "nextEvent": "次のエピソード",
+    "after": "後",
+    "ago": "前",
+    "from": "から",
+    "since": "より"
+  },
+  "RelativeDateString": {
+    "path": "{time}間",
+    "timeWith": "と",
+    "spaceIfNeeded": ""
+  },
+  "DateInput": {
+    "relative": "相対",
+    "absolute": "絶対"
+  }
 }

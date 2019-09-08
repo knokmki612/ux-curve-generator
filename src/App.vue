@@ -2,7 +2,7 @@
   <div id="app">
     <article class="max-w-3xl lg:max-w-8xl mx-auto my-4 px-4">
       <h1 class="text-center text-4xl">
-        {{ $t("title") }}
+        {{ $t("App.title") }}
       </h1>
       <div class="lg:flex lg:items-start lg:flex-row">
         <div class="sticky-outer mt-4 lg:mr-4 lg:flex-1">

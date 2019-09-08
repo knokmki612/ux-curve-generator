@@ -1,11 +1,17 @@
 <template>
   <span class="absolute-date-input">
-    <input
-      :value="formatDate(value)"
-      class="form"
-      type="date"
-      @input="input"
-    >
+    <span class="inner">
+      <input
+        :value="formatDate(value)"
+        class="mr-2 form"
+        type="date"
+        @input="input"
+      >
+      <input
+        class="form"
+        type="time"
+      >
+    </span>
   </span>
 </template>
 
@@ -30,6 +36,9 @@ export default class AbsoluteDateInput extends Vue {
 
 <style scoped lang="sass">
 .absolute-date-input
-  > * ~ *
-    @apply ml-2
+  > .inner
+    @apply -mt-2 inline-block
+
+    > *
+      @apply mt-2
 </style>

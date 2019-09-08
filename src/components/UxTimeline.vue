@@ -4,10 +4,10 @@
     <div class="timeline">
       <section class="ux-event">
         <h3 class="header">
-          {{ $t('expectedUx') }}
+          {{ $t('UxTimeline.expectedUx') }}
         </h3>
         <h4 class="header -small">
-          {{ $t('score') }}
+          {{ $t('UxEvent.score') }}
         </h4>
         <input
           :value="expectedUx.score"
@@ -18,7 +18,7 @@
           @input="updateExpectedUx({ score: $event.target.value })"
         >
         <h4 class="header -small">
-          {{ $t('description') }}
+          {{ $t('UxEvent.description') }}
         </h4>
         <textarea
           :value="expectedUx.description"
@@ -45,7 +45,7 @@
               {{ key + 1 }}.
             </h3>
             <h4 class="header -small">
-              {{ $t('date') }}
+              {{ $t('UxEvent.date') }}
             </h4>
             <AbsoluteDateInput
               :value="uxEvent.date"
@@ -55,7 +55,7 @@
                 key, value: { date: $event } })"
             />
             <h4 class="header -small">
-              {{ $t('score') }}
+              {{ $t('UxEvent.score') }}
             </h4>
             <input
               :value="uxEvent.score"
@@ -68,7 +68,7 @@
               })"
             >
             <h4 class="header -small">
-              {{ $t('description') }}
+              {{ $t('UxEvent.description') }}
             </h4>
             <textarea
               :value="uxEvent.description"
@@ -83,7 +83,7 @@
               :disabled="isNewUxEventShown"
               @click="deleteUxEvent({ key })"
             >
-              {{ $t('delete') }}
+              {{ $t('UxEvent.delete') }}
             </button>
           </section>
           <AddUxEventButton
@@ -91,7 +91,7 @@
             @click="showNewUxEvent"
             @finish="hideNewUxEvent"
           >
-            <RelativeTimeString
+            <RelativeDateString
               class="ml-2"
               v-bind="relativeDateStringProps(key)"
             />
@@ -100,10 +100,10 @@
       </ul>
       <section class="ux-event">
         <h3 class="header">
-          {{ $t('actualUx') }}
+          {{ $t('UxTimeline.actualUx') }}
         </h3>
         <h4 class="header -small">
-          {{ $t('score') }}
+          {{ $t('UxEvent.score') }}
         </h4>
         <input
           :value="actualUx.score"
@@ -114,7 +114,7 @@
           @input="updateActualUx({ score: $event.target.value })"
         >
         <h4 class="header -small">
-          {{ $t('description') }}
+          {{ $t('UxEvent.description') }}
         </h4>
         <textarea
           :value="actualUx.description"
@@ -132,13 +132,13 @@ import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from 'molecules/AddUxEventButton.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
-import RelativeTimeString from 'atoms/RelativeTimeString.vue'
+import RelativeDateString from 'atoms/RelativeDateString.vue'
 
 @Component({
   components: {
     AddUxEventButton,
     AbsoluteDateInput,
-    RelativeTimeString
+    RelativeDateString
   },
   computed: {
     ...mapState(['expectedUx', 'actualUx', 'uxEvents'])

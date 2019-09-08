@@ -1,23 +1,51 @@
 {
-  "title": "UX Curve Generator",
-  "add": "Add",
-  "create": "Create",
-  "delete": "Delete",
-  "cancel": "Cancel",
-  "expectedUx": "Expected",
-  "actualUx": "At Present",
-  "date": "Date",
-  "score": "Score of satisfaction (±100)",
-  "description": "Description",
-  "newEvent": "New Episode",
-  "embedCode": "Embed code",
-  "copyToClipboard": "Copy to clipboard",
-  "spaceIfNeeded": " ",
-  "relativeTime": "Between {time}",
-  "timeWith": "",
-  "year": "{n} Year | {n} Years",
-  "month": "{n} Month | {n} Months",
-  "day": "{n} Day | {n} Days",
-  "hour": "{n} Hour | {n} Hours",
-  "minute": "{n} Minute | {n} Minutes"
+  "App": {
+    "title": "UX Curve Generator"
+  },
+  "UxTimeline": {
+    "expectedUx": "Expected",
+    "actualUx": "At Present"
+  },
+  "UxEvent": {
+    "newEvent": "New Episode",
+    "date": "Date",
+    "score": "Score of satisfaction (±100)",
+    "description": "Description",
+    "add": "Add",
+    "create": "Create",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "AddUxEventButton": {
+    "add": "Add"
+  },
+  "EmbedCode": {
+    "title": "Embed code",
+    "copyToClipboard": "Copy to clipboard"
+  },
+  "Relative": {
+    "year": "{n} Year | {n} Years",
+    "month": "{n} Month | {n} Months",
+    "day": "{n} Day | {n} Days",
+    "hour": "{n} Hour | {n} Hours",
+    "minute": "{n} Minute | {n} Minutes"
+  },
+  "RelativeDateInput": {
+    "path": "{duration} {durationAdverb} {eventAdverb} {event}",
+    "previousEvent": "Previous Episode",
+    "nextEvent": "Next Episode",
+    "after": "after",
+    "ago": "ago",
+    "from": "from",
+    "since": "since"
+  },
+  "RelativeDateString": {
+    "path": "Between {time}",
+    "timeWith": "",
+    "spaceIfNeeded": " "
+  },
+  "DateInput": {
+    "relative": "Relative",
+    "absolute": "Absolute"
+  }
 }

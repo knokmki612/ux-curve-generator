@@ -1,7 +1,7 @@
 <template>
   <section class="embed-code">
     <h3 class="header">
-      {{ $t('embedCode') }}
+      {{ $t('EmbedCode.title') }}
     </h3>
     <textarea
       class="code"
@@ -14,7 +14,7 @@
       class="copy-button button -blue"
       data-clipboard-target=".code"
     >
-      {{ $t('copyToClipboard') }}
+      {{ $t('EmbedCode.copyToClipboard') }}
     </button>
   </section>
 </template>

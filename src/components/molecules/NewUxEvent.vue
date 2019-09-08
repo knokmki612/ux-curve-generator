@@ -1,17 +1,17 @@
 <template>
   <section class="new-ux-event ux-event">
     <h3 class="header">
-      {{ $t('newEvent') }}
+      {{ $t('UxEvent.newEvent') }}
     </h3>
     <h4 class="header -small">
-      {{ $t('date') }}
+      {{ $t('UxEvent.date') }}
     </h4>
     <DateInput
       v-model="newUxEvent.date"
       v-bind="dateInputProps"
     />
     <h4 class="header -small">
-      {{ $t('score') }}
+      {{ $t('UxEvent.score') }}
     </h4>
     <input
       v-model="newUxEvent.score"
@@ -21,7 +21,7 @@
       class="form -score"
     >
     <h4 class="header -small">
-      {{ $t('description') }}
+      {{ $t('UxEvent.description') }}
     </h4>
     <textarea
       v-model="newUxEvent.description"
@@ -33,14 +33,14 @@
       :disabled="!isNewUxEventReady"
       @click="finish"
     >
-      {{ $t('create') }}
+      {{ $t('UxEvent.create') }}
     </button>
     <button
       type="button"
       class="button -red"
       @click="$emit('finish')"
     >
-      {{ $t('cancel') }}
+      {{ $t('UxEvent.cancel') }}
     </button>
   </section>
 </template>

@@ -1,28 +1,28 @@
 <template>
   <i18n
     tag="span"
-    path="relativeTime"
-    class="relative-time-string"
+    path="RelativeDateString.path"
+    class="relative-date-string"
   >
     <span slot="time">
       <template
         v-if="years"
-      >{{ $tc('year', years) }}{{ $t('spaceIfNeeded') }}</template>
+      >{{ $tc('Relative.year', years) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
         v-if="months"
-      >{{ $tc('month', months) }}{{ $t('spaceIfNeeded') }}</template>
+      >{{ $tc('Relative.month', months) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
         v-if="days"
-      >{{ $tc('day', days) }}{{ $t('spaceIfNeeded') }}</template>
+      >{{ $tc('Relative.day', days) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
         v-if="hours && isLessThanADay"
-      >{{ $tc('hour', hours) }}{{ $t('spaceIfNeeded') }}</template>
+      >{{ $tc('Relative.hour', hours) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
         v-if="hours && minutes"
-      >{{ $t('timeWith') }}</template>
+      >{{ $t('RelativeDateString.timeWith') }}</template>
       <template
         v-if="minutes && isLessThanADay"
-      >{{ $tc('minute', minutes) }}{{ $t('spaceIfNeeded') }}</template>
+      >{{ $tc('Relative.minute', minutes) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
     </span>
   </i18n>
 </template>
@@ -43,7 +43,7 @@ import {
 } from 'date-fns'
 
 @Component
-export default class RelativeTimeString extends Vue {
+export default class RelativeDateString extends Vue {
   @Prop(Date) readonly targetDate!: Date
   @Prop(Date) readonly nextDate!: Date
   years: number = 0

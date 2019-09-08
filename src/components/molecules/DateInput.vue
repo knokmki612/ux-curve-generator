@@ -2,7 +2,7 @@
   <div class="date-input">
     <BaseTab
       v-model="inputType"
-      :tab-items="['相対', '絶対']"
+      :tab-items="[$t('DateInput.relative'), $t('DateInput.absolute')]"
     />
     <RelativeDateInput
       v-show="inputType === 0"
@@ -15,13 +15,16 @@
         class="form appearance-none"
       >
         <option value="forward">
-          前のエピソード
+          {{ $t('RelativeDateInput.previousEvent') }}
         </option>
         <option value="backward">
-          次のエピソード
+          {{ $t('RelativeDateInput.nextEvent') }}
         </option>
       </select>
-      <span v-else>次のエピソード</span>
+      <span
+        v-else
+        class="whitespace-no-wrap"
+      >{{ $t('RelativeDateInput.nextEvent') }}</span>
     </RelativeDateInput>
     <AbsoluteDateInput
       v-show="inputType === 1"
@@ -90,13 +93,9 @@ export default class DateInput extends Vue {
 </script>
 
 <style scoped lang="sass">
-.date-input
-  > * ~ *
-    @apply mt-2
-
 .relative-date-input,
 .absolute-date-input
-  @apply block
+  @apply mt-2 block
 
-  min-height: 2.5rem
+  min-height: 3rem
 </style>
