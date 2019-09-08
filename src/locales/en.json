@@ -9,7 +9,7 @@
   "UxEvent": {
     "newEvent": "New Episode",
     "date": "Date",
-    "score": "Score of satisfaction (±100)",
+    "score": "Score of Satisfaction (±100)",
     "description": "Description",
     "add": "Add",
     "create": "Create",
@@ -21,7 +21,7 @@
   },
   "EmbedCode": {
     "title": "Embed code",
-    "copyToClipboard": "Copy to clipboard"
+    "copyToClipboard": "Copy to Clipboard"
   },
   "Relative": {
     "year": "{n} Year | {n} Years",
