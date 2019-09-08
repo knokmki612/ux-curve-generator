@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
 import { FixedUxEvent, UxEvent } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
@@ -55,6 +55,8 @@ export default class DateInput extends Vue {
   targetJumpDirection: string = this.prevUxEvent === undefined
     ? 'backward'
     : 'forward'
+  absoluteDate: Date = this.value
+  relativeDate: Date = this.value
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
@@ -79,6 +81,18 @@ export default class DateInput extends Vue {
 
   set newDate (value: Date) {
     this.input(value)
+  }
+
+  @Watch('inputType')
+  onTabChanged (inputType: number): void {
+    if (inputType === 0) {
+      this.absoluteDate = this.newDate
+      this.newDate = this.relativeDate
+    }
+    if (inputType === 1) {
+      this.relativeDate = this.newDate
+      this.newDate = this.absoluteDate
+    }
   }
 
   @Emit()
