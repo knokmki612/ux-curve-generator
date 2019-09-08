@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { UxEvent } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateInput from 'atoms/RelativeDateInput.vue'

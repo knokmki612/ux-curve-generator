@@ -56,7 +56,7 @@ import { scaleLinear, scaleTime } from 'd3-scale'
 })
 export default class UxCurve extends Vue {
   expectedUx!: FixedUxEvent
-  actualUx!: FixedUxEvent
+  actualUx!: UxEvent
   uxEvents!: Array<UxEvent>
   offset: { viewBox: number, scale: number } = { viewBox: 2, scale: 20 }
   viewBox: [number, number] = [400, 200]

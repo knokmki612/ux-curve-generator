@@ -57,7 +57,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { UxEvent } from '@/types'
 import DateInput from 'molecules/DateInput.vue'
 import { isValid } from 'date-fns'
 

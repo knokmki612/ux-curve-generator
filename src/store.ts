@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { isAfter } from 'date-fns'
-import {  FixedUxEvent, UxEvent } from './types'
+import { FixedUxEvent, UxEvent } from './types'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     expectedUx: { score: 0, description: '' } as FixedUxEvent,
-    actualUx: { score: 0, description: '' } as FixedUxEvent,
+    actualUx: { score: 0, date: new Date(), description: '' } as UxEvent,
     uxEvents: [] as Array<UxEvent>
   },
   mutations: {

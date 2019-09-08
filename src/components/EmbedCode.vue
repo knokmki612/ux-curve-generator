@@ -32,7 +32,7 @@ import ClipboardJS from 'clipboard'
 })
 export default class EmbedCode extends Vue {
   expectedUx!: FixedUxEvent
-  actualUx!: FixedUxEvent
+  actualUx!: UxEvent
   uxEvents!: Array<UxEvent>
   clipboard!: ClipboardJS
 

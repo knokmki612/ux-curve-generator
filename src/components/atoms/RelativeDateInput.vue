@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { UxEvent } from '@/types'
 import {
   addMinutes,
   addHours,

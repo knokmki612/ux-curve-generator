@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { UxEvent } from '@/types'
 import NewUxEvent from 'molecules/NewUxEvent.vue'
 
 @Component({
@@ -31,7 +31,7 @@ import NewUxEvent from 'molecules/NewUxEvent.vue'
 export default class AddUxEventButton extends Vue {
   @Prop(Boolean) readonly isButtonEnabled: boolean | undefined
   @Prop(Object) readonly uxEvent: UxEvent | undefined
-  @Prop(Object) readonly nextUxEvent: UxEvent | FixedUxEvent | undefined
+  @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   isButtonShown: boolean = true
 
   get newUxEventProps (): object {
