@@ -18,7 +18,10 @@
         v-if="hours && isLessThanADay"
       >{{ $tc('Relative.hour', hours) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
-        v-if="minutes && isLessThanADay"
+        v-if="hours && minutes && isLessThanADay"
+      >{{ $tc('Relative.minute', minutes) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
+      <template
+        v-if="!hours && isLessThanADay"
       >{{ $tc('Relative.minute', minutes) }}{{ $t('RelativeDateString.spaceIfNeeded') }}</template>
       <template
         v-if="!hours || !isLessThanADay"

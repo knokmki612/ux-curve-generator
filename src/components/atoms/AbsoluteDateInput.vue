@@ -5,11 +5,13 @@
         v-model="date"
         class="mr-2 form"
         type="date"
+        :max="maxDate"
       >
       <input
         v-model="time"
         class="form"
         type="time"
+        :max="maxTime"
       >
     </span>
   </span>
@@ -17,19 +19,43 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
-import { format, parse } from 'date-fns'
+import { mapState } from 'vuex'
+import { UxEvent } from '@/types'
+import { format, parse, isAfter } from 'date-fns'
 
-@Component
+@Component({
+  computed: {
+    ...mapState(['actualUx'])
+  }
+})
 export default class AbsoluteDateInput extends Vue {
   @Prop([Date, Object]) readonly value!: Date | object
+  actualUx!: UxEvent
+
+  get maxDate (): string {
+    return format(this.actualUx.date, 'YYYY-MM-DD')
+  }
+
+  get maxTime (): string {
+    return format(this.actualUx.date, 'HH:mm')
+  }
 
   get date (): string {
     return format(this.newDate, 'YYYY-MM-DD')
   }
 
   set date (value: string) {
-    const { time } = this
-    this.newDate = parse(`${value}T${time}`)
+    let newDate
+    const { actualUx, date, time } = this
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(value)) {
+      newDate = parse(`${date}T${time}`)
+    } else {
+      newDate = parse(`${value}T${time}`)
+    }
+    if (isAfter(newDate, actualUx.date)) {
+      newDate = parse(`${format(actualUx.date, 'YYYY-MM-DD')}T${time}`)
+    }
+    this.newDate = newDate
   }
 
   get time (): string {
@@ -37,10 +63,17 @@ export default class AbsoluteDateInput extends Vue {
   }
 
   set time (value: string) {
-    const { date } = this
-    if (/[0-9]{2}:[0-9]/.test(value)) {
-      this.newDate = parse(`${date}T${value}`)
+    let newDate
+    const { actualUx, date } = this
+    if (!/[0-9]{2}:[0-9]{2}/.test(value)) {
+      newDate = parse(`${date}`)
+    } else {
+      newDate = parse(`${date}T${value}`)
     }
+    if (isAfter(newDate, actualUx.date)) {
+      newDate = parse(`${date}T${format(actualUx.date, 'HH:mm')}`)
+    }
+    this.newDate = newDate
   }
 
   get newDate (): Date {
