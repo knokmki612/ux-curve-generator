@@ -22,7 +22,7 @@
             @input="updateExpectedUx({ score: $event.target.value })"
           >
           <input
-            v-model="expectedUx.score"
+            :value="expectedUx.score"
             type="range"
             min="-100"
             max="100"
@@ -85,7 +85,7 @@
                 })"
               >
               <input
-                v-model="uxEvent.score"
+                :value="uxEvent.score"
                 type="range"
                 min="-100"
                 max="100"
@@ -146,7 +146,7 @@
             @input="updateActualUx({ score: $event.target.value })"
           >
           <input
-            v-model="actualUx.score"
+            :value="actualUx.score"
             type="range"
             min="-100"
             max="100"
