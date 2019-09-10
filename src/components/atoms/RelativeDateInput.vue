@@ -79,6 +79,11 @@ import {
   startOfMinute
 } from 'date-fns'
 
+type Unit = {
+  key: string,
+  add: (date: Date, amount: number) => Date,
+  diff: (dateLeft: Date, dateRight: Date) => number
+}
 @Component({
   computed: {
     ...mapState(['actualUx'])
@@ -93,45 +98,39 @@ export default class RelativeDateInput extends Vue {
     ? 'forward'
     : 'backward'
   targetNumber: number = 1
-  targetUnit: { key: string, jump: (date: Date, amount: number) => Date } = this.initialUnit
+  targetUnit: Unit = this.initialUnit
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
     return targetJumpDirection === 'forward'
   }
 
-  get units (): Array<{
-    key: string,
-    jump: (date: Date, amount: number) => Date
-    }> {
+  get units (): Array<Unit> {
     return [
       {
         key: 'minute',
-        jump: addMinutes
+        add: addMinutes
       },
       {
         key: 'hour',
-        jump: addHours
+        add: addHours
       },
       {
         key: 'day',
-        jump: addDays
+        add: addDays
       },
       {
         key: 'month',
-        jump: addMonths
+        add: addMonths
       },
       {
         key: 'year',
-        jump: addYears
+        add: addYears
       }
     ]
   }
 
-  get initialUnit (): {
-    key: string,
-    jump: (date: Date, amount: number) => Date
-    } {
+  get initialUnit (): Unit {
     const { units } = this
     units.splice(3) // 'month', 'year'を取り除く
     return units.reverse()[0]
@@ -149,7 +148,7 @@ export default class RelativeDateInput extends Vue {
   get newDate (): Date {
     const { isJumpForward, targetUnit, targetDate, targetNumber } = this
     const sign = isJumpForward ? 1 : -1
-    let date = targetUnit.jump(targetDate, targetNumber * sign)
+    let date = targetUnit.add(targetDate, targetNumber * sign)
     if (targetUnit.key !== 'minute' && targetUnit.key !== 'hour') {
       date = startOfDay(date)
     } else {
