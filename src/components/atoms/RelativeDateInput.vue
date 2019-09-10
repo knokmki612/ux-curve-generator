@@ -104,7 +104,7 @@ export default class RelativeDateInput extends Vue {
     ? 'forward'
     : 'backward'
   targetNumber: number = 1
-  targetUnit: Unit = this.initialUnit
+  targetUnit: Unit = this.units[3]
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
@@ -139,12 +139,6 @@ export default class RelativeDateInput extends Vue {
         diff: differenceInYears
       }
     ]
-  }
-
-  get initialUnit (): Unit {
-    const { units } = this
-    units.splice(3) // 'month', 'year'を取り除く
-    return units.reverse()[0]
   }
 
   get targetDate (): Date {
