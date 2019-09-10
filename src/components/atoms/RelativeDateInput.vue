@@ -75,7 +75,13 @@ import {
   addDays,
   addMonths,
   addYears,
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays,
+  differenceInMonths,
+  differenceInYears,
   startOfDay,
+  isAfter,
   startOfMinute
 } from 'date-fns'
 
@@ -109,23 +115,28 @@ export default class RelativeDateInput extends Vue {
     return [
       {
         key: 'minute',
-        add: addMinutes
+        add: addMinutes,
+        diff: differenceInMinutes
       },
       {
         key: 'hour',
-        add: addHours
+        add: addHours,
+        diff: differenceInHours
       },
       {
         key: 'day',
-        add: addDays
+        add: addDays,
+        diff: differenceInDays
       },
       {
         key: 'month',
-        add: addMonths
+        add: addMonths,
+        diff: differenceInMonths
       },
       {
         key: 'year',
-        add: addYears
+        add: addYears,
+        diff: differenceInYears
       }
     ]
   }
@@ -146,19 +157,28 @@ export default class RelativeDateInput extends Vue {
   }
 
   get newDate (): Date {
-    const { isJumpForward, targetUnit, targetDate, targetNumber } = this
+    const { isJumpForward, targetUnit, targetDate, targetNumber, actualUx } = this
     const sign = isJumpForward ? 1 : -1
-    let date = targetUnit.add(targetDate, targetNumber * sign)
+    let date = targetUnit.add(targetDate, this.targetNumber * sign)
     if (targetUnit.key !== 'minute' && targetUnit.key !== 'hour') {
       date = startOfDay(date)
     } else {
       date = startOfMinute(date)
+    }
+    if (isJumpForward && isAfter(date, actualUx.date)) {
+      this.targetNumber = targetUnit.diff(actualUx.date, targetDate)
+      date = targetUnit.add(targetDate, this.targetNumber * sign)
     }
     return date
   }
 
   mounted () {
     this.input(this.newDate)
+  }
+
+  @Watch('targetJumpDirection')
+  onTargetJumpDirectionChanged (): void {
+    this.targetNumber = 1
   }
 
   @Watch('newDate')
