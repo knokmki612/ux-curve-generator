@@ -5,7 +5,24 @@
       path="RelativeDateInput.path"
       class="inner"
     >
-      <slot slot="event" />
+      <select
+        v-if="prevUxEvent"
+        slot="event"
+        v-model="targetJumpDirection"
+        class="form appearance-none"
+      >
+        <option value="forward">
+          {{ $t('RelativeDateInput.previousEvent') }}
+        </option>
+        <option value="backward">
+          {{ $t('RelativeDateInput.nextEvent') }}
+        </option>
+      </select>
+      <span
+        v-else
+        slot="event"
+        class="whitespace-no-wrap"
+      >{{ $t('RelativeDateInput.nextEvent') }}</span>
       <span
         v-show="isJumpForward"
         slot="eventAdverb"
@@ -50,6 +67,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
+import { mapState } from 'vuex'
 import { UxEvent } from '@/types'
 import {
   addMinutes,
@@ -61,13 +79,26 @@ import {
   startOfMinute
 } from 'date-fns'
 
-@Component
+@Component({
+  computed: {
+    ...mapState(['actualUx'])
+  }
+})
 export default class RelativeDateInput extends Vue {
-  @Prop(Boolean) readonly isJumpForward!: boolean
-  @Prop(Date) readonly targetDate!: Date
+  @Prop(Object) readonly prevUxEvent: UxEvent | undefined
+  @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop([Date, Object]) readonly value!: Date | object
+  actualUx!: UxEvent
+  targetJumpDirection: string = this.isUxEvent(this.prevUxEvent)
+    ? 'forward'
+    : 'backward'
   targetNumber: number = 1
   targetUnit: string = 'day'
+
+  get isJumpForward (): boolean {
+    const { targetJumpDirection } = this
+    return targetJumpDirection === 'forward'
+  }
 
   get jumpDate (): (date: Date, amount: number) => Date {
     const { targetUnit } = this
@@ -79,6 +110,15 @@ export default class RelativeDateInput extends Vue {
       case 'year': return addYears
       default: return addDays
     }
+  }
+
+  get targetDate (): Date {
+    const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent, actualUx } = this
+    return isJumpForward && isUxEvent(prevUxEvent)
+      ? prevUxEvent.date
+      : isUxEvent(nextUxEvent)
+        ? nextUxEvent.date
+        : actualUx.date
   }
 
   get newDate (): Date {
@@ -105,6 +145,10 @@ export default class RelativeDateInput extends Vue {
   @Emit()
   input (value: Date): Date {
     return value
+  }
+
+  isUxEvent (uxEvent: UxEvent | undefined): uxEvent is UxEvent {
+    return uxEvent !== undefined
   }
 }
 </script>
