@@ -198,7 +198,11 @@ export default class UxTimeline extends Vue {
   }
 
   addUxEventButtonProps (key: number): object {
-    const props: any = {
+    const props: {
+      isButtonEnabled: boolean,
+      uxEvent?: UxEvent,
+      nextUxEvent?: UxEvent
+    } = {
       isButtonEnabled: !this.isNewUxEventShown
     }
     if (!this.isUxEventsEmpty) {
