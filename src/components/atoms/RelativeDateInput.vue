@@ -44,11 +44,11 @@
           v-model="targetUnit"
           class="form appearance-none text-center"
         >
-          <option value="minute">{{ $tc('Relative.minute', targetNumber, { n: '' }) }}</option>
-          <option value="hour">{{ $tc('Relative.hour', targetNumber, { n: '' }) }}</option>
-          <option value="day">{{ $tc('Relative.day', targetNumber, { n: '' }) }}</option>
-          <option value="month">{{ $tc('Relative.month', targetNumber, { n: '' }) }}</option>
-          <option value="year">{{ $tc('Relative.year', targetNumber, { n: '' }) }}</option>
+          <option
+            v-for="unit in units"
+            :key="unit.key"
+            :value="unit"
+          >{{ $tc(`Relative.${unit.key}`, targetNumber, { n: '' }) }}</option>
         </select>
       </span>
       <span
@@ -93,23 +93,48 @@ export default class RelativeDateInput extends Vue {
     ? 'forward'
     : 'backward'
   targetNumber: number = 1
-  targetUnit: string = 'day'
+  targetUnit: { key: string, jump: (date: Date, amount: number) => Date } = this.initialUnit
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
     return targetJumpDirection === 'forward'
   }
 
-  get jumpDate (): (date: Date, amount: number) => Date {
-    const { targetUnit } = this
-    switch (targetUnit) {
-      case 'minute': return addMinutes
-      case 'hour': return addHours
-      case 'day': return addDays
-      case 'month': return addMonths
-      case 'year': return addYears
-      default: return addDays
-    }
+  get units (): Array<{
+    key: string,
+    jump: (date: Date, amount: number) => Date
+    }> {
+    return [
+      {
+        key: 'minute',
+        jump: addMinutes
+      },
+      {
+        key: 'hour',
+        jump: addHours
+      },
+      {
+        key: 'day',
+        jump: addDays
+      },
+      {
+        key: 'month',
+        jump: addMonths
+      },
+      {
+        key: 'year',
+        jump: addYears
+      }
+    ]
+  }
+
+  get initialUnit (): {
+    key: string,
+    jump: (date: Date, amount: number) => Date
+    } {
+    const { units } = this
+    units.splice(3) // 'month', 'year'を取り除く
+    return units.reverse()[0]
   }
 
   get targetDate (): Date {
@@ -122,10 +147,10 @@ export default class RelativeDateInput extends Vue {
   }
 
   get newDate (): Date {
-    const { isJumpForward, targetUnit, targetDate, targetNumber, jumpDate } = this
+    const { isJumpForward, targetUnit, targetDate, targetNumber } = this
     const sign = isJumpForward ? 1 : -1
-    let date = jumpDate(targetDate, targetNumber * sign)
-    if (targetUnit !== 'minute' && targetUnit !== 'hour') {
+    let date = targetUnit.jump(targetDate, targetNumber * sign)
+    if (targetUnit.key !== 'minute' && targetUnit.key !== 'hour') {
       date = startOfDay(date)
     } else {
       date = startOfMinute(date)
