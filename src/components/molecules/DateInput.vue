@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
-import { mapState } from 'vuex'
 import { UxEvent } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
