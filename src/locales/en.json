@@ -1,6 +1,8 @@
 {
   "App": {
-    "title": "UX Curve Generator"
+    "title": "{uxCurve} {generator}",
+    "uxCurve": "UX Curve",
+    "generator": "Generator"
   },
   "UxTimeline": {
     "expectedUx": "Expected",
@@ -35,7 +37,7 @@
     "previousEvent": "Previous Episode",
     "nextEvent": "Next Episode",
     "atPresent": "At Present",
-    "after": "after",
+    "later": "later",
     "ago": "ago",
     "from": "from",
     "since": "since"

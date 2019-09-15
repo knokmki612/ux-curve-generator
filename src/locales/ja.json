@@ -1,6 +1,8 @@
 {
   "App": {
-    "title": "UXカーブジェネレーター"
+    "title": "{uxCurve}{generator}",
+    "uxCurve": "UXカーブ",
+    "generator": "ジェネレーター"
   },
   "UxTimeline": {
     "expectedUx": "期待",
@@ -35,7 +37,7 @@
     "previousEvent": "前のエピソード",
     "nextEvent": "次のエピソード",
     "atPresent": "現在",
-    "after": "後",
+    "later": "後",
     "ago": "前",
     "from": "から",
     "since": "より"

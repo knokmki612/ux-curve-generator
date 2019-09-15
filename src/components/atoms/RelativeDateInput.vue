@@ -55,7 +55,7 @@
         v-show="isJumpForward"
         slot="durationAdverb"
         class="whitespace-no-wrap"
-      >{{ $t('RelativeDateInput.after') }}</span>
+      >{{ $t('RelativeDateInput.later') }}</span>
       <span
         v-show="!isJumpForward"
         slot="durationAdverb"
