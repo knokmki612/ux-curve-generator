@@ -43,14 +43,15 @@ export class ActualUx extends VuexModule {
   actualUx: UxEvent = {
     score: 0,
     description: '',
-    get date() { return new Date().toISOString() }
+    date: new Date().toISOString()
   }
 
   @Mutation
   updateActualUx(payload: UxEventFragment) {
     this.actualUx = Object.assign(
       this.actualUx,
-      filter(payload)
+      filter(payload),
+      { date: new Date().toISOString() }
     )
   }
 }
