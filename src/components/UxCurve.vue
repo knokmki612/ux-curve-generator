@@ -53,7 +53,9 @@ import { scaleLinear, scaleTime } from 'd3-scale'
 
 @Component({
   computed: {
-    ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
+    ...mapState('ExpectedUx', ['expectedUx']),
+    ...mapState('ActualUx', ['actualUx']),
+    ...mapState('UxEvents', ['uxEvents'])
   }
 })
 export default class UxCurve extends Vue {

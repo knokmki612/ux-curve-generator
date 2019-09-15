@@ -94,10 +94,11 @@ type Unit = {
 
 @Component({
   computed: {
-    ...mapState(['actualUx', 'lastChosenUnitKey'])
+    ...mapState('ActualUx', ['actualUx']),
+    ...mapState('LastChosenUnitKey', ['lastChosenUnitKey'])
   },
   methods: {
-    ...mapMutations(['updateUnitKey'])
+    ...mapMutations('LastChosenUnitKey', ['updateUnitKey'])
   }
 })
 export default class RelativeDateInput extends Vue {

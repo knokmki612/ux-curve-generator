@@ -64,7 +64,7 @@ import { isValid } from 'date-fns'
 @Component({
   components: { DateInput },
   methods: {
-    ...mapMutations(['addUxEvent'])
+    ...mapMutations('UxEvents', ['addUxEvent'])
   }
 })
 export default class NewUxEvent extends Vue {

@@ -27,7 +27,9 @@ import ClipboardJS from 'clipboard'
 
 @Component({
   computed: {
-    ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
+    ...mapState('ExpectedUx', ['expectedUx']),
+    ...mapState('ActualUx', ['actualUx']),
+    ...mapState('UxEvents', ['uxEvents'])
   }
 })
 export default class EmbedCode extends Vue {

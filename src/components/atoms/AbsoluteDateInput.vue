@@ -25,7 +25,7 @@ import { format, parse, isAfter } from 'date-fns'
 
 @Component({
   computed: {
-    ...mapState(['actualUx'])
+    ...mapState('ActualUx', ['actualUx'])
   }
 })
 export default class AbsoluteDateInput extends Vue {

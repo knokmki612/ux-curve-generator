@@ -182,10 +182,14 @@ import RelativeDateString from 'atoms/RelativeDateString.vue'
     RelativeDateString
   },
   computed: {
-    ...mapState(['expectedUx', 'actualUx', 'uxEvents'])
+    ...mapState('ExpectedUx', ['expectedUx']),
+    ...mapState('ActualUx', ['actualUx']),
+    ...mapState('UxEvents', ['uxEvents'])
   },
   methods: {
-    ...mapMutations(['updateExpectedUx', 'updateActualUx', 'updateUxEvent', 'deleteUxEvent'])
+    ...mapMutations('ExpectedUx', ['updateExpectedUx']),
+    ...mapMutations('ActualUx', ['updateActualUx']),
+    ...mapMutations('UxEvent', ['updateUxEvent', 'deleteUxEvent'])
   }
 })
 export default class UxTimeline extends Vue {

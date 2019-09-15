@@ -22,7 +22,7 @@ function filter(value: UxEventFragment): UxEventFragment {
   }
 }
 
-@Module
+@Module({ namespaced: true })
 export class ExpectedUx extends VuexModule {
   expectedUx: FixedUxEvent = {
     score: 0,
@@ -38,7 +38,7 @@ export class ExpectedUx extends VuexModule {
   }
 }
 
-@Module
+@Module({ namespaced: true })
 export class ActualUx extends VuexModule {
   actualUx: UxEvent = {
     score: 0,
@@ -55,7 +55,7 @@ export class ActualUx extends VuexModule {
   }
 }
 
-@Module
+@Module({ namespaced: true })
 export class UxEvents extends VuexModule {
   uxEvents: Array<UxEvent> = []
 
@@ -87,7 +87,7 @@ export class UxEvents extends VuexModule {
   }
 }
 
-@Module
+@Module({ namespaced: true })
 export class LastChosenUnitKey extends VuexModule {
   lastChosenUnitKey: string = 'year'
 
