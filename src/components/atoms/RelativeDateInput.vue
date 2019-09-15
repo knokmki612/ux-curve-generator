@@ -104,7 +104,7 @@ type Unit = {
 export default class RelativeDateInput extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
-  @Prop([Date, Object]) readonly value!: Date | object
+  @Prop(String) readonly value!: string
   actualUx!: UxEvent
   lastChosenUnitKey!: string
   updateUnitKey!: (payload: string) => void
@@ -158,7 +158,7 @@ export default class RelativeDateInput extends Vue {
 
   get availableUnits (): Array<Unit> {
     const { isJumpForward, units, actualUx, targetDate } = this
-    return units.filter(unit => !isJumpForward || unit.diff(actualUx.date, targetDate) > 1)
+    return units.filter(unit => !isJumpForward || unit.diff(new Date(actualUx.date), targetDate) > 1)
   }
 
   get initialUnit (): Unit {
@@ -172,10 +172,10 @@ export default class RelativeDateInput extends Vue {
   get targetDate (): Date {
     const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent, actualUx } = this
     return isJumpForward && isUxEvent(prevUxEvent)
-      ? prevUxEvent.date
+      ? new Date(prevUxEvent.date)
       : isUxEvent(nextUxEvent)
-        ? nextUxEvent.date
-        : actualUx.date
+        ? new Date(nextUxEvent.date)
+        : new Date(actualUx.date)
   }
 
   get newDate (): Date {
@@ -188,7 +188,7 @@ export default class RelativeDateInput extends Vue {
       date = startOfMinute(date)
     }
     if (isJumpForward && isAfter(date, actualUx.date)) {
-      this.targetNumber = targetUnit.diff(actualUx.date, targetDate)
+      this.targetNumber = targetUnit.diff(new Date(actualUx.date), targetDate)
       date = targetUnit.add(targetDate, this.targetNumber * sign)
     }
     return date
@@ -215,8 +215,8 @@ export default class RelativeDateInput extends Vue {
   }
 
   @Emit()
-  input (value: Date): Date {
-    return value
+  input (value: Date): string {
+    return value.toISOString()
   }
 
   isUxEvent (uxEvent: UxEvent | undefined): uxEvent is UxEvent {

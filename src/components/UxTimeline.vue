@@ -221,10 +221,10 @@ export default class UxTimeline extends Vue {
   relativeDateStringProps (key: number): object {
     const { uxEvents, actualUx } = this
     return {
-      targetDate: uxEvents[key].date,
+      targetDate: new Date(uxEvents[key].date),
       nextDate: uxEvents.length > key + 1
-        ? uxEvents[key + 1].date
-        : actualUx.date
+        ? new Date(uxEvents[key + 1].date)
+        : new Date(actualUx.date)
     }
   }
 

@@ -33,10 +33,10 @@ import RelativeDateInput from 'atoms/RelativeDateInput.vue'
 export default class DateInput extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
-  @Prop([Date, Object]) readonly value!: Date | object
+  @Prop(String) readonly value!: string
   inputType: number = 0
-  absoluteDate: Date = this.value as Date
-  relativeDate: Date = this.value as Date
+  absoluteDate: string = this.value
+  relativeDate: string = this.value
 
   get relativeDateInputProps (): object {
     const { prevUxEvent, nextUxEvent } = this
@@ -46,11 +46,11 @@ export default class DateInput extends Vue {
     }
   }
 
-  get newDate (): Date {
-    return this.value as Date
+  get newDate (): string {
+    return this.value
   }
 
-  set newDate (value: Date) {
+  set newDate (value: string) {
     this.input(value)
   }
 
@@ -67,7 +67,7 @@ export default class DateInput extends Vue {
   }
 
   @Emit()
-  input (value: Date): Date {
+  input (value: string): string {
     return value
   }
 }

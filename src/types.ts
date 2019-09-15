@@ -4,5 +4,5 @@ export type FixedUxEvent = {
 }
 
 export type UxEvent = FixedUxEvent & {
-  date: Date
+  date: string
 }

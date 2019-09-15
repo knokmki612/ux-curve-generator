@@ -82,11 +82,11 @@ export default class NewUxEvent extends Vue {
   }
 
   get isNewUxEventReady (): boolean {
-    return this.newUxEvent.date instanceof Date && isValid(this.newUxEvent.date)
+    return isValid(new Date(this.newUxEvent.date))
   }
 
   createUxEvent (): UxEvent {
-    return { date: {} as Date, score: 0, description: '' }
+    return { score: 0, description: '', date: '' }
   }
 
   @Emit()
