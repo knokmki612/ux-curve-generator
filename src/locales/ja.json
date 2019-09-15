@@ -34,6 +34,7 @@
     "path": "{event} {eventAdverb} {duration} {durationAdverb}",
     "previousEvent": "前のエピソード",
     "nextEvent": "次のエピソード",
+    "atPresent": "現在",
     "after": "後",
     "ago": "前",
     "from": "から",

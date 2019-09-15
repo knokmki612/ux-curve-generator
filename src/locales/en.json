@@ -34,6 +34,7 @@
     "path": "{duration} {durationAdverb} {eventAdverb} {event}",
     "previousEvent": "Previous Episode",
     "nextEvent": "Next Episode",
+    "atPresent": "At Present",
     "after": "after",
     "ago": "ago",
     "from": "from",

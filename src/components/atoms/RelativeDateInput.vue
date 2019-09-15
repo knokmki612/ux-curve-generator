@@ -9,20 +9,20 @@
         v-if="prevUxEvent"
         slot="event"
         v-model="targetJumpDirection"
-        class="form appearance-none"
+        class="form appearance-none text-center"
       >
         <option value="forward">
           {{ $t('RelativeDateInput.previousEvent') }}
         </option>
         <option value="backward">
-          {{ $t('RelativeDateInput.nextEvent') }}
+          {{ nextEventString }}
         </option>
       </select>
       <span
         v-else
         slot="event"
         class="whitespace-no-wrap"
-      >{{ $t('RelativeDateInput.nextEvent') }}</span>
+      >{{ nextEventString }}</span>
       <span
         v-show="isJumpForward"
         slot="eventAdverb"
@@ -68,6 +68,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
+import { TranslateResult } from 'vue-i18n'
 import { UxEvent } from '@/types'
 import {
   addMinutes,
@@ -111,6 +112,13 @@ export default class RelativeDateInput extends Vue {
     : 'backward'
   targetNumber: number = 1
   targetUnit: Unit = this.units[0]
+
+  get nextEventString (): TranslateResult {
+    const { isUxEvent, nextUxEvent, $i18n } = this
+    return isUxEvent(nextUxEvent)
+      ? $i18n.t('RelativeDateInput.nextEvent')
+      : $i18n.t('RelativeDateInput.atPresent')
+  }
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
