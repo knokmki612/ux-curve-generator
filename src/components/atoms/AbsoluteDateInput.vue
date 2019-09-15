@@ -29,7 +29,7 @@ import { format, parse, isAfter } from 'date-fns'
   }
 })
 export default class AbsoluteDateInput extends Vue {
-  @Prop([Date, Object]) readonly value!: Date | object
+  @Prop(String) readonly value!: string
   actualUx!: UxEvent
 
   get maxDate (): string {
@@ -77,7 +77,7 @@ export default class AbsoluteDateInput extends Vue {
   }
 
   get newDate (): Date {
-    return this.value as Date
+    return new Date(this.value)
   }
 
   set newDate (value: Date) {
@@ -85,8 +85,8 @@ export default class AbsoluteDateInput extends Vue {
   }
 
   @Emit()
-  input (value: Date): Date {
-    return value
+  input (value: Date): string {
+    return value.toISOString()
   }
 }
 </script>

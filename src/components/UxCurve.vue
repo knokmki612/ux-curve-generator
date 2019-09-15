@@ -75,13 +75,13 @@ export default class UxCurve extends Vue {
     if (this.uxEvents.length > 0) {
       const x = scaleTime()
         .domain([
-          this.uxEvents[0].date,
-          this.actualUx.date
+          new Date(this.uxEvents[0].date),
+          new Date(this.actualUx.date)
         ])
         .range([this.offset.scale, this.viewBox[0]])
 
       drawableUxEvents = this.uxEvents.map(uxEvent => {
-        return [x(uxEvent.date), y(uxEvent.score)] as [number, number]
+        return [x(new Date(uxEvent.date)), y(uxEvent.score)] as [number, number]
       })
     }
 

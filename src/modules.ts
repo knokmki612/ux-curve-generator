@@ -6,7 +6,7 @@ import { FixedUxEvent, UxEvent } from './types'
 type UxEventFragment = {
   score?: string | number
   description?: string
-  date?: Date
+  date?: string
 }
 
 function filter(value: UxEventFragment): UxEventFragment {
@@ -43,14 +43,15 @@ export class ActualUx extends VuexModule {
   actualUx: UxEvent = {
     score: 0,
     description: '',
-    get date() { return new Date() }
+    date: new Date().toISOString()
   }
 
   @Mutation
   updateActualUx(payload: UxEventFragment) {
     this.actualUx = Object.assign(
       this.actualUx,
-      filter(payload)
+      filter(payload),
+      { date: new Date().toISOString() }
     )
   }
 }
@@ -63,7 +64,7 @@ export class UxEvents extends VuexModule {
   addUxEvent(payload: UxEvent) {
     this.uxEvents.push(payload)
     this.uxEvents.sort((a, b) => {
-      return (isAfter(a.date, b.date)) ? 1 : -1
+      return (isAfter(new Date(a.date), new Date(b.date))) ? 1 : -1
     })
   }
 
@@ -76,7 +77,7 @@ export class UxEvents extends VuexModule {
     )
     this.uxEvents.splice(key, 1 , uxEvent)
     this.uxEvents.sort((a, b) => {
-      return (isAfter(a.date, b.date)) ? 1 : -1
+      return (isAfter(new Date(a.date), new Date(b.date))) ? 1 : -1
     })
   }
 
