@@ -45,7 +45,7 @@
           class="form appearance-none text-center"
         >
           <option
-            v-for="unit in units"
+            v-for="unit in availableUnits"
             :key="unit.key"
             :value="unit"
           >{{ $tc(`Relative.${unit.key}`, targetNumber, { n: '' }) }}</option>
@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { UxEvent } from '@/types'
 import {
   addMinutes,
@@ -86,13 +86,17 @@ import {
 } from 'date-fns'
 
 type Unit = {
-  key: string,
-  add: (date: Date, amount: number) => Date,
+  key: string
+  add: (date: Date, amount: number) => Date
   diff: (dateLeft: Date, dateRight: Date) => number
 }
+
 @Component({
   computed: {
-    ...mapState(['actualUx'])
+    ...mapState(['actualUx', 'lastChosenUnitKey'])
+  },
+  methods: {
+    ...mapMutations(['updateUnitKey'])
   }
 })
 export default class RelativeDateInput extends Vue {
@@ -100,11 +104,13 @@ export default class RelativeDateInput extends Vue {
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop([Date, Object]) readonly value!: Date | object
   actualUx!: UxEvent
+  lastChosenUnitKey!: string
+  updateUnitKey!: (payload: string) => void
   targetJumpDirection: string = this.isUxEvent(this.prevUxEvent)
     ? 'forward'
     : 'backward'
   targetNumber: number = 1
-  targetUnit: Unit = this.units[3]
+  targetUnit: Unit = this.units[0]
 
   get isJumpForward (): boolean {
     const { targetJumpDirection } = this
@@ -141,6 +147,19 @@ export default class RelativeDateInput extends Vue {
     ]
   }
 
+  get availableUnits (): Array<Unit> {
+    const { isJumpForward, units, actualUx, targetDate } = this
+    return units.filter(unit => !isJumpForward || unit.diff(actualUx.date, targetDate) > 1)
+  }
+
+  get initialUnit (): Unit {
+    const { availableUnits, lastChosenUnitKey } = this
+    const lastChosenUnit = availableUnits.find(unit => unit.key === lastChosenUnitKey)
+    const isUnit = (unit: Unit | undefined): unit is Unit => unit !== undefined
+    if (isUnit(lastChosenUnit)) return lastChosenUnit
+    else return availableUnits[availableUnits.length - 1]
+  }
+
   get targetDate (): Date {
     const { isJumpForward, isUxEvent, prevUxEvent, nextUxEvent, actualUx } = this
     return isJumpForward && isUxEvent(prevUxEvent)
@@ -168,11 +187,17 @@ export default class RelativeDateInput extends Vue {
 
   mounted () {
     this.input(this.newDate)
+    this.targetUnit = this.initialUnit
   }
 
   @Watch('targetJumpDirection')
   onTargetJumpDirectionChanged (): void {
     this.targetNumber = 1
+  }
+
+  @Watch('targetUnit')
+  onTargetUnitUpdated (): void {
+    this.updateUnitKey(this.targetUnit.key)
   }
 
   @Watch('newDate')

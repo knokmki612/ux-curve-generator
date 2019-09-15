@@ -29,7 +29,8 @@ export default new Vuex.Store({
     expectedUx: { score: 0, description: '' } as FixedUxEvent,
     actualUx: { score: 0, description: '',
       get date() { return new Date() } } as UxEvent,
-    uxEvents: [] as Array<UxEvent>
+    uxEvents: [] as Array<UxEvent>,
+    lastChosenUnitKey: 'year'
   },
   mutations: {
     updateExpectedUx(state, payload: UxEventFragment) {
@@ -64,6 +65,9 @@ export default new Vuex.Store({
     deleteUxEvent(state, payload: { key: number }) {
       const { key } = payload
       state.uxEvents.splice(key, 1)
+    },
+    updateUnitKey(state, payload: string) {
+      state.lastChosenUnitKey = payload
     }
   },
   actions: {
