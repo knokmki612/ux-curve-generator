@@ -189,7 +189,7 @@ import RelativeDateString from 'atoms/RelativeDateString.vue'
   methods: {
     ...mapMutations('ExpectedUx', ['updateExpectedUx']),
     ...mapMutations('ActualUx', ['updateActualUx']),
-    ...mapMutations('UxEvent', ['updateUxEvent', 'deleteUxEvent'])
+    ...mapMutations('UxEvents', ['updateUxEvent', 'deleteUxEvent'])
   }
 })
 export default class UxTimeline extends Vue {
