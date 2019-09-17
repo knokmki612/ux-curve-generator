@@ -44,7 +44,7 @@ export default class EmbedCode extends Vue {
       expectedUx,
       uxEvents,
       actualUx
-    }, null, '  ')
+    })
   }
 
   mounted () {
