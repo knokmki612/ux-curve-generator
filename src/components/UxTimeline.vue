@@ -169,8 +169,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { mapState, mapMutations } from 'vuex'
-import { UxEvent } from '@/types'
+import { mapMutations } from 'vuex'
+import { FixedUxEvent, UxEvent } from '@/types'
 import AddUxEventButton from 'molecules/AddUxEventButton.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateString from 'atoms/RelativeDateString.vue'
@@ -181,11 +181,6 @@ import RelativeDateString from 'atoms/RelativeDateString.vue'
     AbsoluteDateInput,
     RelativeDateString
   },
-  computed: {
-    ...mapState('ExpectedUx', ['expectedUx']),
-    ...mapState('ActualUx', ['actualUx']),
-    ...mapState('UxEvents', ['uxEvents'])
-  },
   methods: {
     ...mapMutations('ExpectedUx', ['updateExpectedUx']),
     ...mapMutations('ActualUx', ['updateActualUx']),
@@ -193,8 +188,9 @@ import RelativeDateString from 'atoms/RelativeDateString.vue'
   }
 })
 export default class UxTimeline extends Vue {
-  uxEvents!: Array<UxEvent>
-  actualUx!: UxEvent
+  @Prop(Object) readonly expectedUx!: FixedUxEvent
+  @Prop(Object) readonly actualUx!: UxEvent
+  @Prop(Array) readonly uxEvents!: Array<UxEvent>
   isNewUxEventShown: boolean = false
 
   get isUxEventsEmpty (): boolean {

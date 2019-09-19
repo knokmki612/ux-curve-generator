@@ -21,21 +21,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { mapState } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import ClipboardJS from 'clipboard'
 
-@Component({
-  computed: {
-    ...mapState('ExpectedUx', ['expectedUx']),
-    ...mapState('ActualUx', ['actualUx']),
-    ...mapState('UxEvents', ['uxEvents'])
-  }
-})
+@Component
 export default class EmbedCode extends Vue {
-  expectedUx!: FixedUxEvent
-  actualUx!: UxEvent
-  uxEvents!: Array<UxEvent>
+  @Prop(Object) readonly expectedUx!: FixedUxEvent
+  @Prop(Object) readonly actualUx!: UxEvent
+  @Prop(Array) readonly uxEvents!: Array<UxEvent>
   clipboard!: ClipboardJS
 
   get embedCode (): string {
