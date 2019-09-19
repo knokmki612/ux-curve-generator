@@ -1,5 +1,3 @@
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const glob = require('glob-all')
 const path = require('path')
 
 class TailwindExtractor {
@@ -11,31 +9,17 @@ class TailwindExtractor {
 module.exports = {
   lintOnSave: false,
 
-  configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      return {
-        plugins: [
-          new PurgecssPlugin({
-            paths: glob.sync([
-              './public/*.html',
-              './src/**/*.vue'
-            ]),
-            extractors: [
-              {
-                extractor: TailwindExtractor,
-                extensions: ['html', 'js', 'php', 'vue']
-              }
-            ]
-          })
-        ]
-      }
-    }
-  },
-
   chainWebpack: config => {
     config.resolve.alias
       .set('atoms', path.resolve('src/components/atoms'))
       .set('molecules', path.resolve('src/components/molecules'))
+    if (process.env.VUE_CLI_BUILD_TARGET === 'wc') {
+      config.module.rule('vue').use('vue-loader').loader('vue-loader')
+        .tap(options => {
+          options.shadowMode = true
+          return options
+        })
+    }
   },
 
   pluginOptions: {
