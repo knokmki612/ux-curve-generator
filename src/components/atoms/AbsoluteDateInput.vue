@@ -30,7 +30,7 @@ import { format, parse, isAfter } from 'date-fns'
 })
 export default class AbsoluteDateInput extends Vue {
   @Prop(String) readonly value!: string
-  actualUx!: UxEvent
+  readonly actualUx!: UxEvent
 
   get maxDate (): string {
     return format(this.actualUx.date, 'YYYY-MM-DD')

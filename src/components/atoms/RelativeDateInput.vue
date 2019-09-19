@@ -105,8 +105,8 @@ export default class RelativeDateInput extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop(String) readonly value!: string
-  actualUx!: UxEvent
-  lastChosenUnitKey!: string
+  readonly actualUx!: UxEvent
+  readonly lastChosenUnitKey!: string
   updateUnitKey!: (payload: string) => void
   targetJumpDirection: string = this.isUxEvent(this.prevUxEvent)
     ? 'forward'

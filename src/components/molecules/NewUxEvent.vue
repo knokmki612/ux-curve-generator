@@ -70,8 +70,8 @@ import { isValid } from 'date-fns'
 export default class NewUxEvent extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
+  addUxEvent!: (payload: UxEvent) => void
   newUxEvent: UxEvent = this.createUxEvent()
-  private addUxEvent!: (payload: UxEvent) => void
 
   get dateInputProps (): object {
     const { prevUxEvent, nextUxEvent } = this
