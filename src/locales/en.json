@@ -8,6 +8,9 @@
     "expectedUx": "Expected",
     "actualUx": "At Present"
   },
+  "UxTimelineView": {
+    "uxEvent": "First Episode | Episode {n}"
+  },
   "UxEvent": {
     "newEvent": "New Episode",
     "date": "Date",
