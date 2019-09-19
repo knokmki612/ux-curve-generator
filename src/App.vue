@@ -16,9 +16,12 @@
       </i18n>
       <div class="lg:flex lg:items-start lg:flex-row">
         <div class="sticky-outer mt-4 lg:mr-4 lg:flex-1">
-          <UxCurve v-bind="props" />
+          <UxCurve
+            has-link
+            v-bind="props"
+          />
         </div>
-        <UxTimeline
+        <UxTimelineInput
           class="mt-4 w-full lg:max-w-xs xl:max-w-sm"
           v-bind="props"
         />
@@ -36,13 +39,13 @@ import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import UxCurve from './components/UxCurve.vue'
-import UxTimeline from './components/UxTimeline.vue'
+import UxTimelineInput from './components/UxTimelineInput.vue'
 import EmbedCode from './components/EmbedCode.vue'
 
 @Component({
   components: {
     UxCurve,
-    UxTimeline,
+    UxTimelineInput,
     EmbedCode
   },
   computed: {
@@ -70,7 +73,7 @@ export default class App extends Vue {
 <style scoped lang="sass">
 .sticky-outer
   @apply sticky z-10
-  top: 1rem
+  top: theme('width.4')
 </style>
 
 <style scoped lang="scss">
