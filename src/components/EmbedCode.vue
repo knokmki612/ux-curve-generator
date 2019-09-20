@@ -32,6 +32,12 @@ export default class EmbedCode extends Vue {
   clipboard!: ClipboardJS
 
   get embedCode (): string {
+    const { ux } = this
+    // eslint-disable-next-line no-useless-escape
+    return `<ux-curve-generator ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
+  }
+
+  get ux (): string {
     const { expectedUx, actualUx, uxEvents } = this
     return JSON.stringify({
       expectedUx,

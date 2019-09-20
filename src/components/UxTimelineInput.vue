@@ -1,5 +1,5 @@
 <template>
-  <div class="ux-timeline">
+  <div class="ux-timeline-input">
     <div class="line" />
     <div class="timeline">
       <section
@@ -235,7 +235,7 @@ export default class UxTimeline extends Vue {
 </script>
 
 <style scoped lang="sass">
-.ux-timeline
+.ux-timeline-input
   @apply flex
 
   > .line

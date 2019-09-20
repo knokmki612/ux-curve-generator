@@ -22,24 +22,36 @@
         fill="transparent"
         stroke="black"
       />
-      <a
-        v-for="(drawableUxEvent, key) in drawableUxEvents"
-        :key="key"
-        :xlink:href="`#${key}`"
-      >
+      <g v-if="hasLink">
+        <a
+          v-for="(drawableUxEvent, key) in drawableUxEvents"
+          :key="key"
+          :xlink:href="`#${key}`"
+        >
+          <circle
+            :cx="drawableUxEvent[0]"
+            :cy="drawableUxEvent[1]"
+            r="10"
+            fill="transparent"
+          />
+          <circle
+            :cx="drawableUxEvent[0]"
+            :cy="drawableUxEvent[1]"
+            r="2"
+            fill="black"
+          />
+        </a>
+      </g>
+      <g v-else>
         <circle
-          :cx="drawableUxEvent[0]"
-          :cy="drawableUxEvent[1]"
-          r="10"
-          fill="transparent"
-        />
-        <circle
+          v-for="(drawableUxEvent, key) in drawableUxEvents"
+          :key="key"
           :cx="drawableUxEvent[0]"
           :cy="drawableUxEvent[1]"
           r="2"
           fill="black"
         />
-      </a>
+      </g>
     </svg>
   </div>
 </template>
@@ -55,6 +67,7 @@ export default class UxCurve extends Vue {
   @Prop(Object) readonly expectedUx!: FixedUxEvent
   @Prop(Object) readonly actualUx!: UxEvent
   @Prop(Array) readonly uxEvents!: Array<UxEvent>
+  @Prop(Boolean) readonly hasLink!: boolean
   offset: { viewBox: number, scale: number } = { viewBox: 2, scale: 20 }
   viewBox: [number, number] = [400, 200]
 
