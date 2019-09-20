@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <article class="rounded shadow bg-white max-w-3xl mx-auto p-4">
+    <article class="rounded shadow bg-white max-w-3xl mx-auto p-2">
       <i18n
         tag="h1"
         path="App.title"
@@ -72,4 +72,14 @@ export default class UxCurveGenerator extends Vue {
 .sticky-outer
   @apply sticky z-10
   top: theme('width.4')
+</style>
+
+<style scoped lang="scss">
+@media not all and (min-width: theme('screens.lg')) {
+  @media (orientation: landscape) and (max-height: theme('screens.md')) {
+    .sticky-outer {
+      @apply relative inset-0 z-auto;
+    }
+  }
+}
 </style>
