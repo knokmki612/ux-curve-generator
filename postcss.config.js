@@ -5,10 +5,10 @@ class TailwindExtractor {
   }
 }
 
-module.exports = context => ({
+module.exports = ({ env }) => ({
   plugins: {
     tailwindcss: {},
-    '@fullhuman/postcss-purgecss': context.env === 'production'
+    '@fullhuman/postcss-purgecss': env === 'production'
       ? {
         content: ['./public/**/*.html', './src/**/*.vue'],
         extractors: [
