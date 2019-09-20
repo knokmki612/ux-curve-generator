@@ -21,9 +21,10 @@
           <h4 class="header -small">
             {{ $t('UxEvent.description') }}
           </h4>
-          <p class="form">
-            {{ expectedUx.description }}
-          </p>
+          <p
+            class="form whitespace-pre-wrap"
+            v-text="expectedUx.description"
+          />
         </div>
       </section>
       <ul
@@ -62,9 +63,10 @@
               <h4 class="header -small">
                 {{ $t('UxEvent.description') }}
               </h4>
-              <p class="form">
-                {{ uxEvent.description }}
-              </p>
+              <p
+                class="form whitespace-pre-wrap"
+                v-text="uxEvent.description"
+              />
             </div>
           </section>
           <RelativeDateString
@@ -100,9 +102,10 @@
           <h4 class="header -small">
             {{ $t('UxEvent.description') }}
           </h4>
-          <p class="form">
-            {{ actualUx.description }}
-          </p>
+          <p
+            class="form whitespace-pre-wrap"
+            v-text="actualUx.description"
+          />
         </div>
       </section>
     </div>
