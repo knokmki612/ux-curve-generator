@@ -3,6 +3,11 @@
     "title": "UXカーブ{generator}",
     "generator": "ジェネレーター"
   },
+  "UxCurveTitle": {
+    "title": "{subject} の{uxCurve}",
+    "uxCurve": "UXカーブ",
+    "uxCurveGenerator": "UXカーブジェネレーター"
+  },
   "UxTimeline": {
     "expectedUx": "期待",
     "actualUx": "現在"

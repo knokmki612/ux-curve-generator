@@ -23,6 +23,16 @@ function filter(value: UxEventFragment): UxEventFragment {
 }
 
 @Module({ namespaced: true })
+export class Subject extends VuexModule {
+  subject: string = ''
+
+  @Mutation
+  updateSubject(payload: string) {
+    this.subject = payload
+  }
+}
+
+@Module({ namespaced: true })
 export class ExpectedUx extends VuexModule {
   expectedUx: FixedUxEvent = {
     score: 0,

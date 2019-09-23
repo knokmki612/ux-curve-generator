@@ -1,41 +1,39 @@
 <template>
-  <div id="app">
-    <article class="rounded shadow bg-white max-w-3xl mx-auto p-2">
-      <i18n
-        tag="h1"
-        path="App.title"
-        class="text-center text-4xl"
-      >
-        <span
-          slot="uxCurve"
-        >{{ $t('App.uxCurve') }}</span>
-        <span
-          slot="generator"
-          class="whitespace-no-wrap"
-        >{{ $t('App.generator') }}</span>
-      </i18n>
-      <UxCurve
-        class="sticky-outer mt-4"
-        v-bind="props"
-      />
-      <UxTimelineView
-        class="mt-4"
-        v-bind="props"
-      />
-    </article>
-  </div>
+  <article class="rounded shadow bg-white max-w-3xl mx-auto p-2">
+    <UxCurveTitle
+      :subject="subject"
+      readonly
+    >
+      <p class="text-right">
+        <a
+          class="initial"
+          href="https://ux-curve-generator.netlify.com"
+        >{{ $t('UxCurveTitle.uxCurveGenerator') }}</a>で作成
+      </p>
+    </UxCurveTitle>
+    <UxCurve
+      class="sticky-outer mt-4"
+      v-bind="props"
+    />
+    <UxTimelineView
+      class="mt-4"
+      v-bind="props"
+    />
+  </article>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { FixedUxEvent, UxEvent } from '@/types'
 import i18n from './i18n'
+import UxCurveTitle from './components/UxCurveTitle.vue'
 import UxCurve from './components/UxCurve.vue'
 import UxTimelineView from './components/UxTimelineView.vue'
 
 @Component({
   i18n,
   components: {
+    UxCurveTitle,
     UxCurve,
     UxTimelineView
   }
@@ -43,10 +41,16 @@ import UxTimelineView from './components/UxTimelineView.vue'
 export default class UxCurveGenerator extends Vue {
   @Prop(String) readonly ux!: string | undefined
 
-  get props (): { expectedUx: FixedUxEvent, uxEvents: Array<UxEvent>, actualUx: UxEvent } {
+  get deserializedData (): {
+    subject: string,
+    expectedUx: FixedUxEvent,
+    uxEvents: Array<UxEvent>,
+    actualUx: UxEvent
+    } {
     const { ux } = this
     if (ux === undefined) {
       return {
+        subject: '',
         expectedUx: {
           score: 0,
           description: ''
@@ -60,6 +64,20 @@ export default class UxCurveGenerator extends Vue {
       }
     }
     return JSON.parse(ux)
+  }
+
+  get props (): {
+    expectedUx: FixedUxEvent,
+    uxEvents: Array<UxEvent>,
+    actualUx: UxEvent
+    } {
+    const { expectedUx, uxEvents, actualUx } = this.deserializedData
+    return { expectedUx, uxEvents, actualUx }
+  }
+
+  get subject (): string {
+    const { subject } = this.deserializedData
+    return subject
   }
 }
 </script>

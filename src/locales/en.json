@@ -3,6 +3,11 @@
     "title": "UX Curve {generator}",
     "generator": "Generator"
   },
+  "UxCurveTitle": {
+    "title": "{uxCurve} of {subject}",
+    "uxCurve": "UX Curve",
+    "uxCurveGenerator": "UX Curve Generator"
+  },
   "UxTimeline": {
     "expectedUx": "Expected",
     "actualUx": "At Present"

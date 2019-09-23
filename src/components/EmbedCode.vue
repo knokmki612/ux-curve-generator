@@ -26,6 +26,7 @@ import ClipboardJS from 'clipboard'
 
 @Component
 export default class EmbedCode extends Vue {
+  @Prop(String) readonly subject!: string
   @Prop(Object) readonly expectedUx!: FixedUxEvent
   @Prop(Object) readonly actualUx!: UxEvent
   @Prop(Array) readonly uxEvents!: Array<UxEvent>
@@ -38,8 +39,9 @@ export default class EmbedCode extends Vue {
   }
 
   get ux (): string {
-    const { expectedUx, actualUx, uxEvents } = this
+    const { subject, expectedUx, actualUx, uxEvents } = this
     return JSON.stringify({
+      subject,
       expectedUx,
       uxEvents,
       actualUx

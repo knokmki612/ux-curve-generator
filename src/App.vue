@@ -11,6 +11,10 @@
           class="whitespace-no-wrap"
         >{{ $t('App.generator') }}</span>
       </i18n>
+      <UxCurveTitle
+        class="mt-4"
+        :subject="subject"
+      />
       <div class="lg:flex lg:items-start lg:flex-row">
         <div class="sticky-outer mt-4 lg:mr-4 lg:flex-1">
           <UxCurve
@@ -25,7 +29,7 @@
       </div>
       <EmbedCode
         class="mt-4"
-        v-bind="props"
+        v-bind="embedCodeProps"
       />
     </article>
   </div>
@@ -35,23 +39,27 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
+import UxCurveTitle from './components/UxCurveTitle.vue'
 import UxCurve from './components/UxCurve.vue'
 import UxTimelineInput from './components/UxTimelineInput.vue'
 import EmbedCode from './components/EmbedCode.vue'
 
 @Component({
   components: {
+    UxCurveTitle,
     UxCurve,
     UxTimelineInput,
     EmbedCode
   },
   computed: {
+    ...mapState('Subject', ['subject']),
     ...mapState('ExpectedUx', ['expectedUx']),
     ...mapState('ActualUx', ['actualUx']),
     ...mapState('UxEvents', ['uxEvents'])
   }
 })
 export default class App extends Vue {
+  readonly subject!: string
   readonly expectedUx!: FixedUxEvent
   readonly actualUx!: UxEvent
   readonly uxEvents!: Array<UxEvent>
@@ -59,6 +67,16 @@ export default class App extends Vue {
   get props (): object {
     const { expectedUx, uxEvents, actualUx } = this
     return {
+      expectedUx,
+      uxEvents,
+      actualUx
+    }
+  }
+
+  get embedCodeProps (): object {
+    const { subject, expectedUx, uxEvents, actualUx } = this
+    return {
+      subject,
       expectedUx,
       uxEvents,
       actualUx
