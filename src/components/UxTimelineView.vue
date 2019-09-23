@@ -2,10 +2,7 @@
   <div class="ux-timeline-view">
     <div class="line" />
     <div class="timeline">
-      <section
-        id="0"
-        class="ux-event"
-      >
+      <section class="ux-event">
         <h3 class="header">
           {{ $t('UxTimeline.expectedUx') }}
         </h3>
@@ -36,10 +33,7 @@
           :key="key"
           class="inner"
         >
-          <section
-            :id="key + 1"
-            class="ux-event"
-          >
+          <section class="ux-event">
             <div class="inner">
               <h3 class="header">
                 {{ $tc('UxTimelineView.uxEvent', key + 1) }}
@@ -75,10 +69,7 @@
           />
         </li>
       </ul>
-      <section
-        :id="uxEvents.length + 1"
-        class="ux-event"
-      >
+      <section class="ux-event">
         <div class="inner">
           <h3 class="header">
             {{ $t('UxTimeline.actualUx') }}
