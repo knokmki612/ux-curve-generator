@@ -1,7 +1,6 @@
 {
   "App": {
-    "title": "{uxCurve} {generator}",
-    "uxCurve": "UX Curve",
+    "title": "UX Curve {generator}",
     "generator": "Generator"
   },
   "UxTimeline": {

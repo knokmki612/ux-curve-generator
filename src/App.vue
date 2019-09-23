@@ -7,9 +7,6 @@
         class="text-center text-4xl"
       >
         <span
-          slot="uxCurve"
-        >{{ $t('App.uxCurve') }}</span>
-        <span
           slot="generator"
           class="whitespace-no-wrap"
         >{{ $t('App.generator') }}</span>
