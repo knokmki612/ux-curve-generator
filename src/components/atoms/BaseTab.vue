@@ -47,10 +47,10 @@ export default class BaseTab extends Vue {
       @apply bg-gray-500
 
     &.-active
-      @apply text-white font-bold bg-blue-600
+      @apply text-white font-bold bg-blue-700
 
       &:hover
-        @apply bg-blue-700
+        @apply bg-blue-800
 
     &:first-child
       @apply rounded-l

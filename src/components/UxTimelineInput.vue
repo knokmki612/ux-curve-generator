@@ -249,7 +249,7 @@ export default class UxTimeline extends Vue {
   @apply flex
 
   > .line
-    @apply rounded-l bg-blue-600
+    @apply rounded-l bg-blue-700
     min-width: theme('width.2')
 
   > .timeline
