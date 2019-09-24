@@ -8,6 +8,7 @@
       readonly
       rows="10"
       :value="embedCode"
+      :aria-label="$t('EmbedCode.label')"
     />
     <button
       type="button"

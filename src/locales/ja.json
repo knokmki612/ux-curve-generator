@@ -6,20 +6,23 @@
   "UxCurveTitle": {
     "title": "{subject} の{uxCurve}",
     "uxCurve": "UXカーブ",
+    "subjectLabel": "UXカーブを描く対象の名前",
+    "advertisement": "{uxCurveGenerator}で作成",
     "uxCurveGenerator": "UXカーブジェネレーター"
   },
   "UxTimeline": {
     "expectedUx": "期待",
-    "actualUx": "現在"
-  },
-  "UxTimelineView": {
+    "actualUx": "現在",
     "uxEvent": "最初のエピソード | {n}番目のエピソード"
   },
   "UxEvent": {
     "newEvent": "新しいエピソード",
     "date": "日時",
     "score": "満足度 (±100)",
+    "scoreNumberLabel": "満足の度合いを数値で入力",
+    "scoreRangeLabel": "満足の度合いをスライダーで入力",
     "description": "説明",
+    "descriptionLabel": "入力した満足度に対応するその時の気持ち",
     "add": "追加",
     "create": "作成",
     "delete": "削除",
@@ -30,7 +33,12 @@
   },
   "EmbedCode": {
     "title": "埋め込みコード",
-    "copyToClipboard": "クリップボードにコピー"
+    "copyToClipboard": "クリップボードにコピー",
+    "label": "作成したUXカーブをウェブページに埋め込むウィジェット"
+  },
+  "AbsoluteDateInput": {
+    "dateLabel": "日付",
+    "timeLabel": "時刻"
   },
   "Relative": {
     "year": "{n}年",
@@ -47,7 +55,8 @@
     "later": "後",
     "ago": "前",
     "from": "から",
-    "since": "より"
+    "since": "より",
+    "targetNumberLabel": "起点となる日時からの離れ度合い"
   },
   "RelativeDateString": {
     "path": "{time}",

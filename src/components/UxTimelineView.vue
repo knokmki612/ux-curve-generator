@@ -36,7 +36,7 @@
           <section class="ux-event">
             <div class="inner">
               <h3 class="header">
-                {{ $tc('UxTimelineView.uxEvent', key + 1) }}
+                {{ $tc('UxTimeline.uxEvent', key + 1) }}
               </h3>
               <time
                 class="block header -small"

@@ -38,6 +38,7 @@
         <input
           v-model="targetNumber"
           type="number"
+          :aria-label="$t('RelativeDateInput.targetNumberLabel')"
           class="mr-2 form w-16"
         >
         <select

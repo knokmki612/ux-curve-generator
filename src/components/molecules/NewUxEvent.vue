@@ -19,6 +19,7 @@
         type="number"
         min="-100"
         max="100"
+        :aria-label="$t('UxEvent.scoreNumberLabel')"
         class="form w-16"
       >
       <input
@@ -26,6 +27,7 @@
         type="range"
         min="-100"
         max="100"
+        :aria-label="$t('UxEvent.scoreRangeLabel')"
         class="rounded ml-2 flex-1"
       >
     </div>
@@ -34,6 +36,7 @@
     </h4>
     <textarea
       v-model="newUxEvent.description"
+      :aria-label="$t('UxEvent.descriptionLabel')"
       class="form w-full"
     />
     <button

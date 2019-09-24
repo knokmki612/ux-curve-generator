@@ -15,6 +15,7 @@
       <input
         v-else
         slot="subject"
+        :aria-label="$t('UxCurveTitle.subjectLabel')"
         class="form max-w-full lg:w-1/2 text-xl text-center"
         :value="subject"
         @input="updateSubject($event.target.value)"

@@ -18,6 +18,7 @@
             type="number"
             min="-100"
             max="100"
+            :aria-label="$t('UxEvent.scoreNumberLabel')"
             class="form w-16"
             @input="updateExpectedUx({ score: $event.target.value })"
           >
@@ -26,6 +27,7 @@
             type="range"
             min="-100"
             max="100"
+            :aria-label="$t('UxEvent.scoreRangeLabel')"
             class="rounded ml-2 w-full"
             @input="updateExpectedUx({ score: $event.target.value })"
           >
@@ -36,6 +38,7 @@
         <textarea
           :value="expectedUx.description"
           class="form w-full"
+          :aria-label="$t('UxEvent.descriptionLabel')"
           @input="updateExpectedUx({ description: $event.target.value })"
         />
       </section>
@@ -50,11 +53,12 @@
       >
         <li
           v-for="(uxEvent, key) in uxEvents"
+          :id="key + 1"
           :key="key"
+          :aria-label="$tc('UxTimeline.uxEvent', key + 1)"
           class="inner"
         >
           <section
-            :id="key + 1"
             class="ux-event"
           >
             <h3 class="header">
@@ -79,6 +83,7 @@
                 type="number"
                 min="-100"
                 max="100"
+                :aria-label="$t('UxEvent.scoreNumberLabel')"
                 class="form w-16"
                 @input="updateUxEvent({
                   key, value: { score: $event.target.value }
@@ -89,6 +94,7 @@
                 type="range"
                 min="-100"
                 max="100"
+                :aria-label="$t('UxEvent.scoreRangeLabel')"
                 class="rounded ml-2 w-full"
                 @input="updateUxEvent({
                   key, value: { score: $event.target.value }
@@ -100,6 +106,7 @@
             </h4>
             <textarea
               :value="uxEvent.description"
+              :aria-label="$t('UxEvent.descriptionLabel')"
               class="form w-full"
               @input="updateUxEvent({
                 key, value: { description: $event.target.value }
@@ -142,6 +149,7 @@
             type="number"
             min="-100"
             max="100"
+            :aria-label="$t('UxEvent.scoreNumberLabel')"
             class="form w-16"
             @input="updateActualUx({ score: $event.target.value })"
           >
@@ -150,6 +158,7 @@
             type="range"
             min="-100"
             max="100"
+            :aria-label="$t('UxEvent.scoreRangeLabel')"
             class="rounded ml-2 w-full"
             @input="updateActualUx({ score: $event.target.value })"
           >
@@ -159,6 +168,7 @@
         </h4>
         <textarea
           :value="actualUx.description"
+          :aria-label="$t('UxEvent.descriptionLabel')"
           class="form w-full"
           @input="updateActualUx({ description: $event.target.value })"
         />

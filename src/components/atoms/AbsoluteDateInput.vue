@@ -6,12 +6,14 @@
         class="mr-2 form"
         type="date"
         :max="maxDate"
+        :aria-label="$t('AbsoluteDateInput.dateLabel')"
       >
       <input
         v-model="time"
         class="form"
         type="time"
         :max="maxTime"
+        :aria-label="$t('AbsoluteDateInput.timeLabel')"
       >
     </span>
   </span>

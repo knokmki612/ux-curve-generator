@@ -6,20 +6,23 @@
   "UxCurveTitle": {
     "title": "{uxCurve} of {subject}",
     "uxCurve": "UX Curve",
-    "uxCurveGenerator": "UX Curve Generator"
+    "advertisement": "Create on {uxCurveGenerator}",
+    "uxCurveGenerator": "UX Curve Generator",
+    "subjectLabel": "Name of the subject to draw the UX curve"
   },
   "UxTimeline": {
     "expectedUx": "Expected",
-    "actualUx": "At Present"
-  },
-  "UxTimelineView": {
+    "actualUx": "At Present",
     "uxEvent": "First Episode | Episode {n}"
   },
   "UxEvent": {
     "newEvent": "New Episode",
     "date": "Date",
     "score": "Score of Satisfaction (±100)",
+    "scoreNumberLabel": "Express the satisfaction by input a number",
+    "scoreRangeLabel": "Express the satisfaction by slider",
     "description": "Description",
+    "descriptionLabel": "Your feeling at that time that corresponds to the score of satisfaction",
     "add": "Add",
     "create": "Create",
     "delete": "Delete",
@@ -30,14 +33,20 @@
   },
   "EmbedCode": {
     "title": "Embed code",
-    "copyToClipboard": "Copy to Clipboard"
+    "copyToClipboard": "Copy to Clipboard",
+    "label": "Widget of made UX curve that embeds to webpage"
+  },
+  "AbsoluteDateInput": {
+    "dateLabel": "Date",
+    "timeLabel": "Times of day"
   },
   "Relative": {
     "year": "{n} Year | {n} Years",
     "month": "{n} Month | {n} Months",
     "day": "{n} Day | {n} Days",
     "hour": "{n} Hour | {n} Hours",
-    "minute": "{n} Minute | {n} Minutes"
+    "minute": "{n} Minute | {n} Minutes",
+    "targetNumberLabel": "Jumping range from the date which a starting point"
   },
   "RelativeDateInput": {
     "path": "{duration} {durationAdverb} {eventAdverb} {event}",
