@@ -36,7 +36,7 @@ export default class EmbedCode extends Vue {
   get embedCode (): string {
     const { ux } = this
     // eslint-disable-next-line no-useless-escape
-    return `<ux-curve-generator ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
+    return `<ux-curve-generator href="${location.origin}" ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
   }
 
   get ux (): string {

@@ -4,12 +4,19 @@
       :subject="subject"
       readonly
     >
-      <p class="text-right">
+      <i18n
+        tag="p"
+        path="UxCurveTitle.advertisement"
+        class="text-right mt-1"
+      >
         <a
-          class="initial"
-          href="https://ux-curve-generator.netlify.com"
-        >{{ $t('UxCurveTitle.uxCurveGenerator') }}</a>で作成
-      </p>
+          slot="uxCurveGenerator"
+          class="text-link"
+          :href="href"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ $t('UxCurveTitle.uxCurveGenerator') }}</a>
+      </i18n>
     </UxCurveTitle>
     <UxCurve
       class="sticky-outer mt-4"
@@ -40,6 +47,7 @@ import UxTimelineView from './components/UxTimelineView.vue'
 })
 export default class UxCurveGenerator extends Vue {
   @Prop(String) readonly ux!: string | undefined
+  @Prop(String) readonly href!: string
 
   get deserializedData (): {
     subject: string,

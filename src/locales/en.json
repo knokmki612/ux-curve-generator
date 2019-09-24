@@ -6,9 +6,9 @@
   "UxCurveTitle": {
     "title": "{uxCurve} of {subject}",
     "uxCurve": "UX Curve",
+    "subjectLabel": "Name of the subject to draw the UX curve",
     "advertisement": "Create on {uxCurveGenerator}",
-    "uxCurveGenerator": "UX Curve Generator",
-    "subjectLabel": "Name of the subject to draw the UX curve"
+    "uxCurveGenerator": "UX Curve Generator"
   },
   "UxTimeline": {
     "expectedUx": "Expected",
@@ -45,8 +45,7 @@
     "month": "{n} Month | {n} Months",
     "day": "{n} Day | {n} Days",
     "hour": "{n} Hour | {n} Hours",
-    "minute": "{n} Minute | {n} Minutes",
-    "targetNumberLabel": "Jumping range from the date which a starting point"
+    "minute": "{n} Minute | {n} Minutes"
   },
   "RelativeDateInput": {
     "path": "{duration} {durationAdverb} {eventAdverb} {event}",
@@ -56,7 +55,8 @@
     "later": "later",
     "ago": "ago",
     "from": "from",
-    "since": "since"
+    "since": "since",
+    "targetNumberLabel": "Jumping range from the date which a starting point"
   },
   "RelativeDateString": {
     "path": "Between {time}",
