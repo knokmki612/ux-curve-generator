@@ -1,7 +1,9 @@
 {
   "App": {
     "title": "UXカーブ{generator}",
-    "generator": "ジェネレーター"
+    "generator": "ジェネレーター",
+    "howToUse": "使い方",
+    "howToUseLink": "ja/how-to-use.html"
   },
   "UxCurveTitle": {
     "title": "{subject} の{uxCurve}",

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>ux-curve-generator - How to use</title>
+  </head>
+  <body class="bg-gray-300 p-2">
+    <article class="rounded shadow bg-white max-w-3xl mx-auto p-4">
+      <h1 class="text-4xl">How to use UX Curve Generator</h1>
+      <h2 class="mt-10 text-3xl">What is UX Curve?</h2>
+      <p class="mt-1"><a class="text-link" href="https://doi.org/10.1016/j.intcom.2011.06.005">UX Curve</a> is one of the UX(User Experience) evaluation methods. This method has the advantage to able to evaluating long-term UX that due to express as a curve line that a transition of user experience by a thing or a service.</p>
+      <h2 class="mt-10 text-3xl">Change points of UX Curve in UX Curve Generator</h2>
+      <p class="mt-1">UX Curve Generator modifies the detail from UX Curve. The changes were impacted from <a class="text-link" href="https://doi.org/10.1007/978-3-319-39510-4_31">UX Graph</a> which is a variant of UX Curve.</p>
+      <ul class="mt-2 pl-6 list-disc">
+        <li class="mt-1">Uses only a score of satisfaction as a subjective index</li>
+        <li class="mt-1">Put the evaluation of before use and entire in addition to an episode</li>
+      </ul>
+      <h2 class="mt-10 text-3xl">User Interfaces of UX Curve Generator</h2>
+      <h3 class="mt-8 text-2xl">Title</h3>
+      <p class="mt-1">Subject of the drawing UX curve.</p>
+      <h3 class="mt-8 text-2xl">UX Curve</h3>
+      <p class="mt-1">Drawn UX Curve. When updated "Episode" or "Expected" or "Actual", UX Curve will automatically redraw.</p>
+      <h3 class="mt-8 text-2xl">Episode</h3>
+      <p class="mt-1">Put the event or the impression relates to the subject of drawing UX Curve. items describe as follows.</p>
+      <h4 class="mt-4 font-bold">Date</h4>
+      <p class="mt-1">Specify when the episode occurred.  can put relatively from previous/next episode or put a strict date.</p>
+      <h4 class="mt-4 font-bold">Score of Satisfaction</h4>
+      <p class="mt-1">Put the score of satisfaction based on occurred event or impression. 0 means neutral, 100 means most satisfied, -100 means most unsatisfied.</p>
+      <h4 class="mt-4 font-bold">Description</h4>
+      <p class="mt-1">Put the description of occurred event or impression.</p>
+      <h3 class="mt-8 text-2xl">Expected</h3>
+      <p class="mt-1">Put the impression of before use. items are the same as "Episode" except no date.</p>
+      <h3 class="mt-8 text-2xl">Actual</h3>
+      <p class="mt-1">Put the entire period impression. items are the same as "Episode" except no date.</p>
+      <h3 class="mt-8 text-2xl">Embed Code</h3>
+      <p class="mt-1">Displays the widget code that saves and views the UX Curve. It can embed to HTML.</p>
+      <p class="mt-10 text-center">
+        <a class="text-link" href="<%= BASE_URL %>">Go back</a>
+      </p>
+    </article>
+  </body>
+</html>

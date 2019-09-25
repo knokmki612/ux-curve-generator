@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <article class="max-w-3xl lg:max-w-8xl mx-auto my-4 px-4">
+    <article class="max-w-3xl lg:max-w-8xl mx-auto my-2 px-2">
       <i18n
         tag="h1"
         path="App.title"
@@ -11,6 +11,12 @@
           class="whitespace-no-wrap"
         >{{ $t('App.generator') }}</span>
       </i18n>
+      <p class="mt-1 text-center">
+        <a
+          class="text-link"
+          :href="$t('App.howToUseLink')"
+        >{{ $t('App.howToUse') }}</a>
+      </p>
       <UxCurveTitle
         class="mt-4"
         :subject="subject"

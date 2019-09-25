@@ -1,13 +1,25 @@
 const path = require('path')
 
-class TailwindExtractor {
-  static extract (content) {
-    return content.match(/[A-Za-z0-9-_:/]+/g) || []
-  }
-}
-
 module.exports = {
   lintOnSave: false,
+
+  pages: {
+    app: {
+      entry: 'src/main.ts',
+      template: 'public/index.html',
+      filename: 'index.html'
+    },
+    helpJa: {
+      entry: 'src/assets/tailwind.sass',
+      template: 'public/ja/how-to-use.html',
+      filename: 'ja/how-to-use.html'
+    },
+    help: {
+      entry: 'src/assets/tailwind.sass',
+      template: 'public/en/how-to-use.html',
+      filename: 'en/how-to-use.html'
+    }
+  },
 
   chainWebpack: config => {
     config.resolve.alias

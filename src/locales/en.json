@@ -1,7 +1,9 @@
 {
   "App": {
     "title": "UX Curve {generator}",
-    "generator": "Generator"
+    "generator": "Generator",
+    "howToUse": "How to use",
+    "howToUseLink": "en/how-to-use.html"
   },
   "UxCurveTitle": {
     "title": "{uxCurve} of {subject}",

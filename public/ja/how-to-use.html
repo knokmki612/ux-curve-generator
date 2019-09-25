@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>ux-curve-generator - 使い方</title>
+  </head>
+  <body class="bg-gray-300 p-2">
+    <article class="rounded shadow bg-white max-w-3xl mx-auto p-4">
+      <h1 class="text-4xl">UXカーブジェネレーターの使い方</h1>
+      <h2 class="mt-10 text-3xl">UXカーブとは</h2>
+      <p class="mt-1"><a class="text-link" href="https://doi.org/10.1016/j.intcom.2011.06.005">UXカーブ</a>はUX(ユーザ体験)を評価する手法のひとつです。ユーザが物やサービスを利用した際における、いくつかの指標の変化を線の曲線として表現することで、ユーザ体験の長期的な推移を可視化できるという特徴があります。</p>
+      <h2 class="mt-10 text-3xl">UXカーブジェネレーターにおけるUXカーブの扱い</h2>
+      <p class="mt-1">UXカーブジェネレーターでは、オリジナルのUXカーブの手法の一部を次のように変更しています。変更はUXカーブの変法である<a class="text-link" href="https://doi.org/10.1007/978-3-319-39510-4_31">UXグラフ</a>の影響をうけています。</p>
+      <ul class="mt-2 pl-6 list-disc">
+        <li class="mt-1">指標は満足度のみとする</li>
+        <li class="mt-1">利用中の出来事のほかに、利用前と全体的な評価を入力する</li>
+      </ul>
+      <h2 class="mt-10 text-3xl">UXカーブジェネレーターのユーザインタフェース</h2>
+      <p></p>
+      <h3 class="mt-8 text-2xl">タイトル</h3>
+      <p class="mt-1">UXカーブを描く対象の名前を入力します。</p>
+      <h3 class="mt-8 text-2xl">UXカーブ</h3>
+      <p class="mt-1">描画されたUXカーブです。エピソード、期待、現在を入力すると、自動的にUXカーブが変化します。</p>
+      <h3 class="mt-8 text-2xl">エピソード</h3>
+      <p class="mt-1">UXカーブを描く対象について、利用する際に起きた出来事や得た印象を入力します。次の項目を入力します。</p>
+      <h4 class="mt-4 font-bold">日時</h4>
+      <p class="mt-1">いつのエピソードかを前後のエピソードからの相対的な時間か、日時で入力します。
+      <h4 class="mt-4 font-bold">満足度</h4>
+      <p class="mt-1">起きた出来事や得た印象を踏まえて、その時点でどの程度満足感が得られていたかを数値で入力します。0が可もなく不可もなく、100が最高、-100が最低を意味します。</p>
+      <h4 class="mt-4 font-bold">説明</h4>
+      <p class="mt-1">起きた出来事や得た印象と、その満足度を説明する文章を入力します。</p>
+      <h3 class="mt-8 text-2xl">期待</h3>
+      <p class="mt-1">UXカーブを描く対象について、利用する前に想像していたことや、持っていた印象を入力します。入力する項目は、日時がないことを除いてエピソードと同じです。</p>
+      <h3 class="mt-8 text-2xl">現在</h3>
+      <p class="mt-1">UXカーブを描く対象について、すべてのエピソードや期待をふりかえって、今持っている印象を入力します。入力する項目は、日時がないことを除いてエピソードと同じです。</p>
+      <h3 class="mt-8 text-2xl">埋め込みコード</h3>
+      <p class="mt-1">描いたUXカーブの保存と閲覧ができるよう、HTMLに埋め込むことができるウィジェットのコードが表示されます。</p>
+      <p class="mt-10 text-center">
+        <a class="text-link" href="<%= BASE_URL %>">戻る</a>
+      </p>
+    </article>
+  </body>
+</html>
