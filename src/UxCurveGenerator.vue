@@ -1,5 +1,5 @@
 <template>
-  <article class="rounded shadow bg-white max-w-3xl mx-auto p-2">
+  <article class="rounded shadow bg-white max-w-3xl p-2">
     <UxCurveTitle
       :subject="subject"
       readonly
