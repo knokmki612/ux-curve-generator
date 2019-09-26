@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "main": "dist/ux-curve-generator.js",
   "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knokmki612/ux-curve-generator.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
