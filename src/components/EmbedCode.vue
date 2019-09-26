@@ -34,9 +34,9 @@ export default class EmbedCode extends Vue {
   clipboard!: ClipboardJS
 
   get embedCode (): string {
-    const { ux } = this
+    const { ux, href, $i18n } = this
     // eslint-disable-next-line no-useless-escape
-    return `<ux-curve-generator href="${location.origin}" ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
+    return `<ux-curve-generator href="${href}" ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><a href="${href}">${$i18n.t('UxCurveTitle.uxCurveGenerator')}</a><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
   }
 
   get ux (): string {
@@ -47,6 +47,10 @@ export default class EmbedCode extends Vue {
       uxEvents,
       actualUx
     })
+  }
+
+  get href (): string {
+    return `${location.origin}${location.pathname}`
   }
 
   mounted () {
