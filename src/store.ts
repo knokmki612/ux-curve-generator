@@ -4,12 +4,15 @@ import VuexPersist from 'vuex-persist'
 import { Subject, ExpectedUx, ActualUx, UxEvents, LastChosenUnitKey } from './modules'
 
 const vuexLocal = new VuexPersist({
-  reducer: (state: any) => ({
-    subject: state.subject,
-    expectedUx: state.expectedUx,
-    actualUx: state.actualUx,
-    uxEvents: state.uxEvents
-  })
+  reducer: (state: any) => {
+    const { Subject, ExpectedUx, ActualUx, UxEvents } = state
+    return {
+      Subject,
+      ExpectedUx,
+      ActualUx,
+      UxEvents
+    }
+  }
 })
 
 Vue.use(Vuex)
