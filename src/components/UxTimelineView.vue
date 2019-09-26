@@ -72,7 +72,7 @@
       <section class="ux-event">
         <div class="inner">
           <h3 class="header">
-            {{ $t('UxTimeline.actualUx') }}
+            {{ $t('UxTimelineView.actualUx') }}
           </h3>
           <time
             class="block header -small"
