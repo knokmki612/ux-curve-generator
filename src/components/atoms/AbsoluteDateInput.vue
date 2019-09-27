@@ -6,6 +6,7 @@
         class="mr-2 form"
         type="date"
         :max="maxDate"
+        :disabled="disabled"
         :aria-label="$t('AbsoluteDateInput.dateLabel')"
       >
       <input
@@ -13,6 +14,7 @@
         class="form"
         type="time"
         :max="maxTime"
+        :disabled="disabled"
         :aria-label="$t('AbsoluteDateInput.timeLabel')"
       >
     </span>
@@ -32,6 +34,7 @@ import { format, parse, isAfter } from 'date-fns'
 })
 export default class AbsoluteDateInput extends Vue {
   @Prop(String) readonly value!: string
+  @Prop(Boolean) readonly disabled!: boolean
   readonly actualUx!: UxEvent
 
   get maxDate (): string {
