@@ -82,9 +82,10 @@ import {
   differenceInDays,
   differenceInMonths,
   differenceInYears,
-  startOfDay,
   isAfter,
-  startOfMinute
+  isValid,
+  startOfMinute,
+  startOfDay
 } from 'date-fns'
 
 type Unit = {
@@ -188,7 +189,7 @@ export default class RelativeDateInput extends Vue {
     } else {
       date = startOfMinute(date)
     }
-    if (isJumpForward && isAfter(date, actualUx.date)) {
+    if (isJumpForward && isAfter(date, new Date(actualUx.date))) {
       this.targetNumber = targetUnit.diff(new Date(actualUx.date), targetDate)
       date = targetUnit.add(targetDate, this.targetNumber * sign)
     }
@@ -212,7 +213,11 @@ export default class RelativeDateInput extends Vue {
 
   @Watch('newDate')
   onNewDateUpdated (value: Date): void {
-    this.input(value)
+    if (!isValid(value)) {
+      this.targetNumber = 1
+    } else {
+      this.input(value)
+    }
   }
 
   @Emit()

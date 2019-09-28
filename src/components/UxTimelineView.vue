@@ -42,7 +42,7 @@
                 class="block header -small"
                 :datetime="uxEvent.date"
               >
-                {{ dateFormat(uxEvent.date) }}
+                {{ formatDate(uxEvent.date) }}
               </time>
             </div>
             <div class="inner">
@@ -78,7 +78,7 @@
             class="block header -small"
             :datetime="actualUx.date"
           >
-            {{ dateFormat(actualUx.date) }}
+            {{ formatDate(actualUx.date) }}
           </time>
         </div>
         <div class="inner">
@@ -123,7 +123,7 @@ export default class UxTimelineView extends Vue {
     return this.uxEvents.length === 0
   }
 
-  dateFormat (date: string): string {
+  formatDate (date: string): string {
     if (getHours(date) || getMinutes(date)) {
       return format(new Date(date), 'YYYY/MM/DD HH:mm:ss')
     }

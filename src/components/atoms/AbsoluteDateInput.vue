@@ -2,20 +2,24 @@
   <span class="absolute-date-input">
     <span class="inner">
       <input
-        v-model="date"
+        :value="date"
         class="mr-2 form"
         type="date"
         :max="maxDate"
         :disabled="disabled"
         :aria-label="$t('AbsoluteDateInput.dateLabel')"
+        @input="date = new String(updateDate($event))"
+        @blur="datetime = updateDatetime(date, time)"
       >
       <input
-        v-model="time"
+        :value="time"
         class="form"
         type="time"
         :max="maxTime"
         :disabled="disabled"
         :aria-label="$t('AbsoluteDateInput.timeLabel')"
+        @input="time = new String(updateTime($event))"
+        @blur="datetime = updateDatetime(date, time)"
       >
     </span>
   </span>
@@ -25,7 +29,7 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapState } from 'vuex'
 import { UxEvent } from '@/types'
-import { format, parse, isAfter } from 'date-fns'
+import { format, isValid, isAfter } from 'date-fns'
 
 @Component({
   computed: {
@@ -36,61 +40,77 @@ export default class AbsoluteDateInput extends Vue {
   @Prop(String) readonly value!: string
   @Prop(Boolean) readonly disabled!: boolean
   readonly actualUx!: UxEvent
+  date: string = this.formatDate(this.datetime)
+  time: string = this.formatTime(this.datetime)
 
   get maxDate (): string {
-    return format(this.actualUx.date, 'YYYY-MM-DD')
+    return this.formatDate(new Date(this.actualUx.date))
   }
 
   get maxTime (): string {
-    return format(this.actualUx.date, 'HH:mm')
+    return this.formatTime(new Date(this.actualUx.date))
   }
 
-  get date (): string {
-    return format(this.newDate, 'YYYY-MM-DD')
-  }
-
-  set date (value: string) {
-    let newDate
-    const { actualUx, date, time } = this
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(value)) {
-      newDate = parse(`${date}T${time}`)
-    } else {
-      newDate = parse(`${value}T${time}`)
-    }
-    if (isAfter(newDate, actualUx.date)) {
-      newDate = parse(`${format(actualUx.date, 'YYYY-MM-DD')}T${time}`)
-    }
-    this.newDate = newDate
-  }
-
-  get time (): string {
-    return format(this.newDate, 'HH:mm')
-  }
-
-  set time (value: string) {
-    let newDate
-    const { actualUx, date } = this
-    if (!/[0-9]{2}:[0-9]{2}/.test(value)) {
-      newDate = parse(`${date}`)
-    } else {
-      newDate = parse(`${date}T${value}`)
-    }
-    if (isAfter(newDate, actualUx.date)) {
-      newDate = parse(`${date}T${format(actualUx.date, 'HH:mm')}`)
-    }
-    this.newDate = newDate
-  }
-
-  get newDate (): Date {
+  get datetime (): Date {
     return new Date(this.value)
   }
 
-  set newDate (value: Date) {
+  set datetime (value: Date) {
     this.input(value)
+  }
+
+  formatDate (date: Date): string {
+    return isValid(date) ? format(date, 'YYYY-MM-DD') : ''
+  }
+
+  formatTime (date: Date): string {
+    return isValid(date) ? format(date, 'HH:mm') : '00:00'
+  }
+
+  isValidDate (date: string): boolean {
+    return /[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(date)
+  }
+
+  isValidTime (time: string): boolean {
+    return /[0-9]{2}:[0-9]{2}/.test(time)
+  }
+
+  updateDate ({ target: { value: date } }: { target: { value: string } }): string {
+    const { datetime, actualUx, isValidDate, formatDate, formatTime } = this
+    if (!isValidDate(date)) {
+      return formatDate(datetime)
+    }
+    if (isAfter(new Date(`${date}T${this.time}`), new Date(actualUx.date))) {
+      this.time = formatTime(new Date(actualUx.date))
+      return formatDate(new Date(actualUx.date))
+    }
+    return date
+  }
+
+  updateTime ({ target: { value: time } }: { target: { value: string } }): string {
+    const { datetime, actualUx, isValidTime, formatTime } = this
+    if (!isValidTime(time)) {
+      return formatTime(datetime)
+    }
+    if (isAfter(new Date(`${this.date}T${time}`), new Date(actualUx.date))) {
+      return formatTime(new Date(actualUx.date))
+    }
+    return time
+  }
+
+  updateDatetime (date: string, time: string): Date {
+    const { value, actualUx, isValidDate } = this
+    if (!isValidDate(date)) {
+      return new Date('')
+    }
+    return new Date(`${date}T${time}`)
   }
 
   @Emit()
   input (value: Date): string {
+    if (!isValid(value)) {
+      return ''
+    }
     return value.toISOString()
   }
 }
