@@ -124,10 +124,10 @@ export default class UxTimelineView extends Vue {
   }
 
   formatDate (date: string): string {
-    if (getHours(date) || getMinutes(date)) {
-      return format(new Date(date), 'YYYY/MM/DD HH:mm:ss')
+    if (getHours(new Date(date)) || getMinutes(new Date(date))) {
+      return format(new Date(date), 'yyyy/MM/dd HH:mm:ss')
     }
-    return format(new Date(date), 'YYYY/MM/DD')
+    return format(new Date(date), 'yyyy/MM/dd')
   }
 
   relativeDateStringProps (key: number): object {

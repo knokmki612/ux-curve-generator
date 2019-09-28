@@ -60,7 +60,7 @@ export default class AbsoluteDateInput extends Vue {
   }
 
   formatDate (date: Date): string {
-    return isValid(date) ? format(date, 'YYYY-MM-DD') : ''
+    return isValid(date) ? format(date, 'yyyy-MM-dd') : ''
   }
 
   formatTime (date: Date): string {
