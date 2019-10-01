@@ -23,6 +23,17 @@ function filter(value: UxEventFragment): UxEventFragment {
 }
 
 @Module({ namespaced: true })
+export class Duration extends VuexModule {
+  start: string = new Date().toISOString()
+  end: string = ''
+
+  @Mutation
+  updateEnd() {
+    this.end = new Date().toISOString()
+  }
+}
+
+@Module({ namespaced: true })
 export class Subject extends VuexModule {
   subject: string = ''
 

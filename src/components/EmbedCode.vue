@@ -21,22 +21,33 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { mapState, mapMutations } from 'vuex'
 import { FixedUxEvent, UxEvent } from '@/types'
 import ClipboardJS from 'clipboard'
 
-@Component
+@Component({
+  computed: {
+    ...mapState('Duration', ['start', 'end'])
+  },
+  methods: {
+    ...mapMutations('Duration', ['updateEnd'])
+  }
+})
 export default class EmbedCode extends Vue {
   @Prop(String) readonly subject!: string
   @Prop(Object) readonly expectedUx!: FixedUxEvent
   @Prop(Object) readonly actualUx!: UxEvent
   @Prop(Array) readonly uxEvents!: Array<UxEvent>
+  start!: string
+  end!: string
+  updateEnd!: () => void
   clipboard!: ClipboardJS
 
   get embedCode (): string {
-    const { ux, href, $i18n } = this
+    const { ux, duration, href, $i18n } = this
     // eslint-disable-next-line no-useless-escape
-    return `<ux-curve-generator href="${href}" ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><a href="${href}">${$i18n.t('UxCurveTitle.uxCurveGenerator')}</a><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
+    return `<ux-curve-generator href="${href}" duration='${duration}' ux='${ux}'><\/ux-curve-generator><script src="https://unpkg.com/vue"><a href="${href}">${$i18n.t('UxCurveTitle.uxCurveGenerator')}</a><\/script><script src="https://unpkg.com/ux-curve-generator"><\/script>`
   }
 
   get ux (): string {
@@ -49,12 +60,25 @@ export default class EmbedCode extends Vue {
     })
   }
 
+  get duration (): string {
+    const { start, end } = this
+    return JSON.stringify({
+      start,
+      end
+    })
+  }
+
   get href (): string {
     return `${location.origin}${location.pathname}`
   }
 
   mounted () {
     this.clipboard = new ClipboardJS('.copy-button')
+  }
+
+  @Watch('ux')
+  onUxChanged (): void {
+    this.updateEnd()
   }
 }
 </script>
