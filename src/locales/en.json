@@ -12,6 +12,14 @@
     "advertisement": "Create on {uxCurveGenerator}",
     "uxCurveGenerator": "UX Curve Generator"
   },
+  "UxCurveMessage": {
+    "title": "Before drawing UX curve...",
+    "subjectIsRequired": "Please input title",
+    "expectedUxDescriptionIsRequired": "Please input description in \"Expected\"",
+    "actualUxDescriptionIsRequired": "Please input description in \"Actual\"",
+    "3UxEventsAreRequired": "Please add {n} more episode | Please add {n} more episodes",
+    "allUxEventsDescriptionAreRequired": "Please input description in all episodes"
+  },
   "UxTimeline": {
     "expectedUx": "Expected",
     "actualUx": "At Present",

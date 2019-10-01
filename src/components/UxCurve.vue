@@ -1,6 +1,9 @@
 <template>
   <div class="ux-curve">
-    <svg :viewBox="`-${offset.viewBox} -${offset.viewBox} ${viewBox[0] + offset.viewBox * 2} ${viewBox[1] + offset.viewBox * 2}`">
+    <svg
+      v-if="isReadyToDraw"
+      :viewBox="`-${offset.viewBox} -${offset.viewBox} ${viewBox[0] + offset.viewBox * 2} ${viewBox[1] + offset.viewBox * 2}`"
+    >
       <line
         x1="0"
         :y1="viewBox[1] / 2"
@@ -53,17 +56,35 @@
         />
       </g>
     </svg>
+    <div
+      v-else
+    >
+      <h2 class="text-3xl">
+        {{ $t('UxCurveMessage.title') }}
+      </h2>
+      <ul class="list-disc mt-6 pl-4 leading-normal">
+        <li
+          v-for="(message, key) in messages"
+          :key="key"
+          class="text-xl"
+        >
+          {{ message }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { TranslateResult } from 'vue-i18n'
 import { FixedUxEvent, UxEvent } from '@/types'
 import { line, curveMonotoneX } from 'd3-shape'
 import { scaleLinear, scaleTime } from 'd3-scale'
 
 @Component
 export default class UxCurve extends Vue {
+  @Prop(String) readonly subject!: string
   @Prop(Object) readonly expectedUx!: FixedUxEvent
   @Prop(Object) readonly actualUx!: UxEvent
   @Prop(Array) readonly uxEvents!: Array<UxEvent>
@@ -103,6 +124,32 @@ export default class UxCurve extends Vue {
       .y(d => d[1])
       .curve(curveMonotoneX)
     return curve(this.drawableUxEvents)
+  }
+
+  get messages (): Array<TranslateResult> {
+    const { subject, expectedUx, actualUx, uxEvents, $i18n } = this
+    return [
+      ...subject.length === 0
+        ? [$i18n.t('UxCurveMessage.subjectIsRequired')]
+        : [],
+      ...expectedUx.description.length === 0
+        ? [$i18n.t('UxCurveMessage.expectedUxDescriptionIsRequired')]
+        : [],
+      ...actualUx.description.length === 0
+        ? [$i18n.t('UxCurveMessage.actualUxDescriptionIsRequired')]
+        : [],
+      ...uxEvents.length < 3
+        ? [$i18n.tc('UxCurveMessage.3UxEventsAreRequired', 3 - uxEvents.length)]
+        : [],
+      ...uxEvents.some(uxEvent => uxEvent.description.length === 0)
+        ? [$i18n.t('UxCurveMessage.allUxEventsDescriptionAreRequired')]
+        : []
+    ]
+  }
+
+  get isReadyToDraw (): boolean {
+    const { messages } = this
+    return messages.length === 0
   }
 }
 </script>

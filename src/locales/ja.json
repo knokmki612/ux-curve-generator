@@ -12,6 +12,14 @@
     "advertisement": "{uxCurveGenerator}で作成",
     "uxCurveGenerator": "UXカーブジェネレーター"
   },
+  "UxCurveMessage": {
+    "title": "UXカーブを描く前に・・・",
+    "subjectIsRequired": "タイトルを入力してください",
+    "expectedUxDescriptionIsRequired": "\"期待\"の説明を入力してください",
+    "actualUxDescriptionIsRequired": "\"現在\"の説明を入力してください",
+    "3UxEventsAreRequired": "あと{n}つエピソードを追加してください",
+    "allUxEventsDescriptionAreRequired": "すべてのエピソードで説明を入力してください"
+  },
   "UxTimeline": {
     "expectedUx": "期待",
     "actualUx": "現在",

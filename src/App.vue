@@ -35,7 +35,7 @@
       </div>
       <EmbedCode
         class="mt-4"
-        v-bind="embedCodeProps"
+        v-bind="props"
       />
     </article>
   </div>
@@ -71,15 +71,6 @@ export default class App extends Vue {
   readonly uxEvents!: Array<UxEvent>
 
   get props (): object {
-    const { expectedUx, uxEvents, actualUx } = this
-    return {
-      expectedUx,
-      uxEvents,
-      actualUx
-    }
-  }
-
-  get embedCodeProps (): object {
     const { subject, expectedUx, uxEvents, actualUx } = this
     return {
       subject,
