@@ -17,6 +17,9 @@
     "actualUx": "At Present",
     "uxEvent": "First Episode | Episode {n}"
   },
+  "UxTimelineInput": {
+    "uxEvent": "Episode {n}"
+  },
   "UxTimelineView": {
     "actualUx": "Latest"
   },
