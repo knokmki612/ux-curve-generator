@@ -62,7 +62,7 @@
             class="ux-event"
           >
             <h3 class="header">
-              {{ key + 1 }}.
+              {{ $tc('UxTimelineInput.uxEvent', key + 1) }}
             </h3>
             <h4 class="header -small">
               {{ $t('UxEvent.date') }}
