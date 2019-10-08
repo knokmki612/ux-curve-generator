@@ -38,6 +38,7 @@
         <input
           v-model="targetNumber"
           type="number"
+          :max="maxTargetNumber"
           :aria-label="$t('RelativeDateInput.targetNumberLabel')"
           class="mr-2 form w-16"
         >
@@ -160,7 +161,7 @@ export default class RelativeDateInput extends Vue {
 
   get availableUnits (): Array<Unit> {
     const { isJumpForward, units, actualUx, targetDate } = this
-    return units.filter(unit => !isJumpForward || unit.diff(new Date(actualUx.date), targetDate) > 1)
+    return units.filter(unit => !isJumpForward || unit.diff(new Date(actualUx.date), targetDate) > 0)
   }
 
   get initialUnit (): Unit {
@@ -169,6 +170,11 @@ export default class RelativeDateInput extends Vue {
     const isUnit = (unit: Unit | undefined): unit is Unit => unit !== undefined
     if (isUnit(lastChosenUnit)) return lastChosenUnit
     else return availableUnits[availableUnits.length - 1]
+  }
+
+  get maxTargetNumber (): number {
+    const { targetUnit, actualUx, targetDate } = this
+    return targetUnit.diff(new Date(actualUx.date), targetDate)
   }
 
   get targetDate (): Date {
