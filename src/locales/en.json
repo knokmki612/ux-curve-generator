@@ -17,7 +17,7 @@
     "subjectIsRequired": "Please input title",
     "expectedUxDescriptionIsRequired": "Please input description in \"Expected\"",
     "actualUxDescriptionIsRequired": "Please input description in \"Actual\"",
-    "3UxEventsAreRequired": "Please add {n} more episode | Please add {n} more episodes",
+    "3UxEventsAreRequired": "Please add {n} more episode through click \"Add\" button | Please add {n} more episodes through click \"Add\" button",
     "allUxEventsDescriptionAreRequired": "Please input description in all episodes"
   },
   "UxTimeline": {

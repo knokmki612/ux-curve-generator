@@ -17,7 +17,7 @@
     "subjectIsRequired": "タイトルを入力してください",
     "expectedUxDescriptionIsRequired": "\"期待\"の説明を入力してください",
     "actualUxDescriptionIsRequired": "\"現在\"の説明を入力してください",
-    "3UxEventsAreRequired": "あと{n}つエピソードを追加してください",
+    "3UxEventsAreRequired": "「追加」ボタンをクリックしてあと{n}つエピソードを入力してください",
     "allUxEventsDescriptionAreRequired": "すべてのエピソードで説明を入力してください"
   },
   "UxTimeline": {
