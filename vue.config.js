@@ -9,7 +9,7 @@ module.exports = {
       template: 'public/index.html',
       filename: 'index.html'
     },
-    helpJa: {
+    'help-ja': {
       entry: 'src/assets/tailwind.sass',
       template: 'public/ja/how-to-use.html',
       filename: 'ja/how-to-use.html'
