@@ -172,8 +172,11 @@ export default class RelativeDateInput extends Vue {
     else return availableUnits[availableUnits.length - 1]
   }
 
-  get maxTargetNumber (): number {
-    const { targetUnit, actualUx, targetDate } = this
+  get maxTargetNumber (): number | boolean {
+    const { isJumpForward, targetUnit, actualUx, targetDate } = this
+    if (!isJumpForward) {
+      return false
+    }
     return targetUnit.diff(new Date(actualUx.date), targetDate)
   }
 
