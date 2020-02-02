@@ -114,6 +114,7 @@ export default class RelativeDateInput extends Vue {
   targetJumpDirection: string = this.isUxEvent(this.prevUxEvent)
     ? 'forward'
     : 'backward'
+
   targetNumber: number = 1
   targetUnit: Unit = this.units[0]
 
