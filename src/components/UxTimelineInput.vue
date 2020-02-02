@@ -201,7 +201,7 @@ export default class UxTimeline extends Vue {
   @Prop(Object) readonly expectedUx!: FixedUxEvent
   @Prop(Object) readonly actualUx!: UxEvent
   @Prop(Array) readonly uxEvents!: Array<UxEvent>
-  isNewUxEventShown: boolean = false
+  isNewUxEventShown = false
 
   get isUxEventsEmpty (): boolean {
     return this.uxEvents.length === 0

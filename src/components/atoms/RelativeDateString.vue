@@ -41,19 +41,18 @@ import {
   subYears,
   subMonths,
   subDays,
-  subHours,
-  subMinutes
+  subHours
 } from 'date-fns'
 
 @Component
 export default class RelativeDateString extends Vue {
   @Prop(Date) readonly targetDate!: Date
   @Prop(Date) readonly nextDate!: Date
-  years: number = 0
-  months: number = 0
-  days: number = 0
-  hours: number = 0
-  minutes: number = 0
+  years = 0
+  months = 0
+  days = 0
+  hours = 0
+  minutes = 0
 
   get isLessThanADay (): boolean {
     const { years, months, days } = this

@@ -90,8 +90,8 @@ import {
 } from 'date-fns'
 
 type Unit = {
-  key: string
-  add: (date: Date, amount: number) => Date
+  key: string,
+  add: (date: Date, amount: number) => Date,
   diff: (dateLeft: Date, dateRight: Date) => number
 }
 
@@ -115,7 +115,7 @@ export default class RelativeDateInput extends Vue {
     ? 'forward'
     : 'backward'
 
-  targetNumber: number = 1
+  targetNumber = 1
   targetUnit: Unit = this.units[0]
 
   get nextEventString (): TranslateResult {
@@ -191,7 +191,7 @@ export default class RelativeDateInput extends Vue {
   }
 
   get newDate (): Date {
-    const { isJumpForward, targetUnit, targetDate, targetNumber, actualUx } = this
+    const { isJumpForward, targetUnit, targetDate, actualUx } = this
     const sign = isJumpForward ? 1 : -1
     let date = targetUnit.add(targetDate, this.targetNumber * sign)
     if (targetUnit.key !== 'minute' && targetUnit.key !== 'hour') {

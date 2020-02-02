@@ -32,7 +32,7 @@ export default class AddUxEventButton extends Vue {
   @Prop(Boolean) readonly isButtonEnabled: boolean | undefined
   @Prop(Object) readonly uxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
-  isButtonShown: boolean = true
+  isButtonShown = true
 
   get newUxEventProps (): object {
     const { uxEvent, nextUxEvent } = this

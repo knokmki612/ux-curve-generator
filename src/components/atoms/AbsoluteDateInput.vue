@@ -99,7 +99,7 @@ export default class AbsoluteDateInput extends Vue {
   }
 
   updateDatetime (date: string, time: string): Date {
-    const { value, actualUx, isValidDate } = this
+    const { isValidDate } = this
     if (!isValidDate(date)) {
       return new Date('')
     }

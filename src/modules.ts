@@ -3,8 +3,8 @@ import { isAfter } from 'date-fns'
 import { FixedUxEvent, UxEvent } from './types'
 
 type UxEventFragment = {
-  score?: string | number
-  description?: string
+  score?: string | number,
+  description?: string,
   date?: string
 }
 
@@ -23,7 +23,7 @@ function filter (value: UxEventFragment): UxEventFragment {
 
 @Module({ namespaced: true })
 export class Subject extends VuexModule {
-  subject: string = ''
+  subject = ''
 
   @Mutation
   updateSubject (payload: string) {
@@ -99,7 +99,7 @@ export class UxEvents extends VuexModule {
 
 @Module({ namespaced: true })
 export class LastChosenUnitKey extends VuexModule {
-  lastChosenUnitKey: string = 'year'
+  lastChosenUnitKey = 'year'
 
   @Mutation
   updateUnitKey (payload: string) {

@@ -4,7 +4,7 @@ import VuexPersist from 'vuex-persist'
 import { Subject, ExpectedUx, ActualUx, UxEvents, LastChosenUnitKey } from './modules'
 
 const vuexLocal = new VuexPersist({
-  reducer: (state: any) => {
+  reducer: (state: unknown) => {
     const { Subject, ExpectedUx, ActualUx, UxEvents } = state
     return {
       Subject,

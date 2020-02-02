@@ -34,7 +34,7 @@ export default class DateInput extends Vue {
   @Prop(Object) readonly prevUxEvent: UxEvent | undefined
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   @Prop(String) readonly value!: string
-  inputType: number = 0
+  inputType = 0
   absoluteDate: string = this.value
   relativeDate: string = this.value
 

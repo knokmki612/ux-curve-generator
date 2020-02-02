@@ -1,5 +1,5 @@
 export type FixedUxEvent = {
-  score: number
+  score: number,
   description: string
 }
 
