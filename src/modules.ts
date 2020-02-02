@@ -2,14 +2,13 @@ import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 import { isAfter } from 'date-fns'
 import { FixedUxEvent, UxEvent } from './types'
 
-
 type UxEventFragment = {
   score?: string | number
   description?: string
   date?: string
 }
 
-function filter(value: UxEventFragment): UxEventFragment {
+function filter (value: UxEventFragment): UxEventFragment {
   const isString = (score: string | number | undefined): score is string =>
     typeof score === 'string'
   if (!isString(value.score)) return value
@@ -17,8 +16,8 @@ function filter(value: UxEventFragment): UxEventFragment {
   return {
     score: isNaN(score) ? 0
       : score > 100 ? 100
-      : score < -100 ? -100
-      : score
+        : score < -100 ? -100
+          : score
   }
 }
 
@@ -27,7 +26,7 @@ export class Subject extends VuexModule {
   subject: string = ''
 
   @Mutation
-  updateSubject(payload: string) {
+  updateSubject (payload: string) {
     this.subject = payload
   }
 }
@@ -40,7 +39,7 @@ export class ExpectedUx extends VuexModule {
   }
 
   @Mutation
-  updateExpectedUx(payload: UxEventFragment) {
+  updateExpectedUx (payload: UxEventFragment) {
     this.expectedUx = Object.assign(
       this.expectedUx,
       filter(payload)
@@ -57,7 +56,7 @@ export class ActualUx extends VuexModule {
   }
 
   @Mutation
-  updateActualUx(payload: UxEventFragment) {
+  updateActualUx (payload: UxEventFragment) {
     this.actualUx = Object.assign(
       this.actualUx,
       filter(payload),
@@ -71,7 +70,7 @@ export class UxEvents extends VuexModule {
   uxEvents: Array<UxEvent> = []
 
   @Mutation
-  addUxEvent(payload: UxEvent) {
+  addUxEvent (payload: UxEvent) {
     this.uxEvents.push(payload)
     this.uxEvents.sort((a, b) => {
       return (isAfter(new Date(a.date), new Date(b.date))) ? 1 : -1
@@ -79,20 +78,20 @@ export class UxEvents extends VuexModule {
   }
 
   @Mutation
-  updateUxEvent(payload: { key: number, value: UxEventFragment }) {
+  updateUxEvent (payload: { key: number, value: UxEventFragment }) {
     const { key, value } = payload
     const uxEvent: UxEvent = Object.assign(
       this.uxEvents[key],
       filter(value)
     )
-    this.uxEvents.splice(key, 1 , uxEvent)
+    this.uxEvents.splice(key, 1, uxEvent)
     this.uxEvents.sort((a, b) => {
       return (isAfter(new Date(a.date), new Date(b.date))) ? 1 : -1
     })
   }
 
   @Mutation
-  deleteUxEvent(payload: { key: number }) {
+  deleteUxEvent (payload: { key: number }) {
     const { key } = payload
     this.uxEvents.splice(key, 1)
   }
@@ -103,7 +102,7 @@ export class LastChosenUnitKey extends VuexModule {
   lastChosenUnitKey: string = 'year'
 
   @Mutation
-  updateUnitKey(payload: string) {
+  updateUnitKey (payload: string) {
     this.lastChosenUnitKey = payload
   }
 }
