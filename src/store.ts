@@ -3,8 +3,16 @@ import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
 import { Subject, ExpectedUx, ActualUx, UxEvents, LastChosenUnitKey } from './modules'
 
+interface Modules {
+  Subject: object,
+  ExpectedUx: object,
+  ActualUx: object,
+  UxEvents: object,
+  LastChosenUnitKey: object
+}
+
 const vuexLocal = new VuexPersist({
-  reducer: (state: unknown) => {
+  reducer: (state: Modules) => {
     const { Subject, ExpectedUx, ActualUx, UxEvents } = state
     return {
       Subject,
