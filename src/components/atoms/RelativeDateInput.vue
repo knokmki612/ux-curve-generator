@@ -206,7 +206,7 @@ export default class RelativeDateInput extends Vue {
     return date
   }
 
-  mounted () {
+  mounted (): void {
     this.input(this.newDate)
     this.targetUnit = this.initialUnit
   }

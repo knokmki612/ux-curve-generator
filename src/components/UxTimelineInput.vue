@@ -180,10 +180,16 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { FixedUxEvent, UxEvent, RelativeDateStringProps } from '@/types'
 import AddUxEventButton from 'molecules/AddUxEventButton.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateString from 'atoms/RelativeDateString.vue'
+
+type UxEventButtonProps = {
+  isButtonEnabled: boolean,
+  uxEvent?: UxEvent,
+  nextUxEvent?: UxEvent
+}
 
 @Component({
   components: {
@@ -207,12 +213,8 @@ export default class UxTimeline extends Vue {
     return this.uxEvents.length === 0
   }
 
-  addUxEventButtonProps (key: number): object {
-    const props: {
-      isButtonEnabled: boolean,
-      uxEvent?: UxEvent,
-      nextUxEvent?: UxEvent
-    } = {
+  addUxEventButtonProps (key: number): UxEventButtonProps {
+    const props: UxEventButtonProps = {
       isButtonEnabled: !this.isNewUxEventShown
     }
     if (!this.isUxEventsEmpty) {
@@ -224,7 +226,7 @@ export default class UxTimeline extends Vue {
     return props
   }
 
-  relativeDateStringProps (key: number): object {
+  relativeDateStringProps (key: number): RelativeDateStringProps {
     const { uxEvents, actualUx } = this
     return {
       targetDate: new Date(uxEvents[key].date),

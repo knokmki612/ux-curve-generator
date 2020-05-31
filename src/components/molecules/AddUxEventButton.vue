@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
-import { UxEvent } from '@/types'
+import { UxEvent, RelativeDateInputProps } from '@/types'
 import NewUxEvent from 'molecules/NewUxEvent.vue'
 
 @Component({
@@ -34,7 +34,7 @@ export default class AddUxEventButton extends Vue {
   @Prop(Object) readonly nextUxEvent: UxEvent | undefined
   isButtonShown = true
 
-  get newUxEventProps (): object {
+  get newUxEventProps (): RelativeDateInputProps {
     const { uxEvent, nextUxEvent } = this
     return {
       prevUxEvent: uxEvent,

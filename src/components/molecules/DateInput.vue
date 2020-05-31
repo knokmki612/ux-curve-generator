@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator'
-import { UxEvent } from '@/types'
+import { UxEvent, RelativeDateInputProps } from '@/types'
 import BaseTab from 'atoms/BaseTab.vue'
 import AbsoluteDateInput from 'atoms/AbsoluteDateInput.vue'
 import RelativeDateInput from 'atoms/RelativeDateInput.vue'
@@ -38,7 +38,7 @@ export default class DateInput extends Vue {
   absoluteDate: string = this.value
   relativeDate: string = this.value
 
-  get relativeDateInputProps (): object {
+  get relativeDateInputProps (): RelativeDateInputProps {
     const { prevUxEvent, nextUxEvent } = this
     return {
       prevUxEvent,

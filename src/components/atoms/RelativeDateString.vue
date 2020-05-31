@@ -59,7 +59,7 @@ export default class RelativeDateString extends Vue {
     return years === 0 && months === 0 && days === 0
   }
 
-  mounted () {
+  mounted (): void {
     this.relativeDate(this.nextDate)
   }
 
