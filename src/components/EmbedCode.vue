@@ -53,7 +53,7 @@ export default class EmbedCode extends Vue {
     return `${location.origin}${location.pathname}`
   }
 
-  mounted () {
+  mounted (): void {
     this.clipboard = new ClipboardJS('.copy-button')
   }
 }

@@ -60,7 +60,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator'
 import { mapMutations } from 'vuex'
-import { UxEvent } from '@/types'
+import { UxEvent, RelativeDateInputProps } from '@/types'
 import DateInput from 'molecules/DateInput.vue'
 import { isValid } from 'date-fns'
 
@@ -76,7 +76,7 @@ export default class NewUxEvent extends Vue {
   addUxEvent!: (payload: UxEvent) => void
   newUxEvent: UxEvent = this.createUxEvent()
 
-  get dateInputProps (): object {
+  get dateInputProps (): RelativeDateInputProps {
     const { prevUxEvent, nextUxEvent } = this
     return {
       prevUxEvent,

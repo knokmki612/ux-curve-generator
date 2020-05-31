@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { FixedUxEvent, UxEvent } from '@/types'
+import { FixedUxEvent, UxEvent, RelativeDateStringProps } from '@/types'
 import RelativeDateString from 'atoms/RelativeDateString.vue'
 import { format, getHours, getMinutes } from 'date-fns'
 
@@ -130,7 +130,7 @@ export default class UxTimelineView extends Vue {
     return format(new Date(date), 'yyyy/MM/dd')
   }
 
-  relativeDateStringProps (key: number): object {
+  relativeDateStringProps (key: number): RelativeDateStringProps {
     const { uxEvents, actualUx } = this
     return {
       targetDate: new Date(uxEvents[key].date),

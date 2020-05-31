@@ -26,7 +26,7 @@ export class Subject extends VuexModule {
   subject = ''
 
   @Mutation
-  updateSubject (payload: string) {
+  updateSubject (payload: string): void {
     this.subject = payload
   }
 }
@@ -39,7 +39,7 @@ export class ExpectedUx extends VuexModule {
   }
 
   @Mutation
-  updateExpectedUx (payload: UxEventFragment) {
+  updateExpectedUx (payload: UxEventFragment): void {
     this.expectedUx = Object.assign(
       this.expectedUx,
       filter(payload)
@@ -56,7 +56,7 @@ export class ActualUx extends VuexModule {
   }
 
   @Mutation
-  updateActualUx (payload: UxEventFragment) {
+  updateActualUx (payload: UxEventFragment): void {
     this.actualUx = Object.assign(
       this.actualUx,
       filter(payload),
@@ -70,7 +70,7 @@ export class UxEvents extends VuexModule {
   uxEvents: Array<UxEvent> = []
 
   @Mutation
-  addUxEvent (payload: UxEvent) {
+  addUxEvent (payload: UxEvent): void {
     this.uxEvents.push(payload)
     this.uxEvents.sort((a, b) => {
       return (isAfter(new Date(a.date), new Date(b.date))) ? 1 : -1
@@ -78,7 +78,7 @@ export class UxEvents extends VuexModule {
   }
 
   @Mutation
-  updateUxEvent (payload: { key: number, value: UxEventFragment }) {
+  updateUxEvent (payload: { key: number, value: UxEventFragment }): void {
     const { key, value } = payload
     const uxEvent: UxEvent = Object.assign(
       this.uxEvents[key],
@@ -91,7 +91,7 @@ export class UxEvents extends VuexModule {
   }
 
   @Mutation
-  deleteUxEvent (payload: { key: number }) {
+  deleteUxEvent (payload: { key: number }): void {
     const { key } = payload
     this.uxEvents.splice(key, 1)
   }
@@ -102,7 +102,7 @@ export class LastChosenUnitKey extends VuexModule {
   lastChosenUnitKey = 'year'
 
   @Mutation
-  updateUnitKey (payload: string) {
+  updateUnitKey (payload: string): void {
     this.lastChosenUnitKey = payload
   }
 }
